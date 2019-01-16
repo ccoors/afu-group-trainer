@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "0.2.0",
+  "description": "The backend for afu-group-trainer",
+  "main": "main.js",
+  "scripts": {
+    "backend": "node main.js",
+    "test": "mocha tests"
+  },
+  "author": "Christian Friedrich Coors (DL5LQ) <me@dl5lq.de>",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "uuid": "^3.3.2",
+    "ws": "^6.1.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0"
+  }
+}

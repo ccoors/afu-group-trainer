@@ -1,0 +1,44 @@
+body {
+    font: 12px Helvetica, Arial, sans-serif;
+    height: 20%;
+    margin-bottom: 5cm;
+
+    background-color: #CCCCCC;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+}
+
+footer div {
+    flex: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+.pointer, a, .linkButton {
+    cursor: pointer;
+}
+
+.correctAnswer {
+    text-align: center;
+    font-size: 200%;
+}
+
+/*sigh*/
+.linkButton {
+    background-color: transparent;
+    border: none;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    color: rgb(65, 131, 196);
+    font: inherit;
+    font-weight: bold;
+}
