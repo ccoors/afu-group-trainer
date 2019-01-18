@@ -4,15 +4,15 @@ Diese Software soll das gemeinsame Lernen für die AFU-Prüfung ermöglichen. Di
 ## Autor und Kontakt
 Christian Friedrich Coors, Rufzeichen DL5LQ, me@dl5lq.de
 
-Fragen, Anmerkungen, Kommentare, Erfahrungen und Pull Requests sind gerne gesehen. Accountanfragen für die "offizielle" Instanz auf https://agt.dl5lq.de/ werden gerne beantwortet.
+Fragen, Anmerkungen, Kommentare, Erfahrungen und Pull Requests sind gerne gesehen. Accountanfragen für die „offizielle“ Instanz auf https://agt.dl5lq.de/ werden gerne beantwortet.
 
 ## Einschränkungen
 Die bisher größte Einschränkung ist, dass der Fragenkatalog Technik A momentan noch nicht fertig ist. Dieser wird voraussichtlich zum nächsten Klasse A-Kurs in Bremen fertig.
 
 ## Technische Hintergründe
-Front- und Backend sind in JavaScript geschrieben. Das Backend wird mit Node ausgeführt, das Frontend basiert auf dem React-Framework und wird in "normales" HTML/JS/CSS übersetzt. Front- und Backend kommunizieren über einen WebSocket, also eine ständig offene TCP-Verbindung. Dadurch wird eine Kommunikation aller Teilnehmer mit geringer Latenz ermöglicht.
+Front- und Backend sind in JavaScript geschrieben. Das Backend wird mit Node ausgeführt, das Frontend basiert auf dem React-Framework und wird in „normales“ HTML/JS/CSS übersetzt. Front- und Backend kommunizieren über einen WebSocket, also eine ständig offene TCP-Verbindung. Dadurch wird eine Kommunikation aller Teilnehmer mit geringer Latenz ermöglicht.
 
-Die Software ist absichtlich sehr datensparsam designt: Alle Teilnehmer sind nicht ohne weitere Informationen identifizierbar. Insbesondere wird keine Statistik über richtig und falsch beantwortete Fragen erstellt. Sobald ein Teilnehmer die Seite verlässt und die Verbindung geschlossen wird "vergisst" das Backend alle Daten über diesen Teilnehmer. Es werden keine Cookies gesetzt oder sonstige persistente Daten auf den Endgerät des Teilnehmers gespeichert, die ihn identifizierbar machen.
+Die Software ist absichtlich sehr datensparsam designt: Alle Teilnehmer sind nicht ohne weitere Informationen identifizierbar. Insbesondere wird keine Statistik über richtig und falsch beantwortete Fragen erstellt. Sobald ein Teilnehmer die Seite verlässt und die Verbindung geschlossen wird „vergisst“ das Backend alle Daten über diesen Teilnehmer. Es werden keine Cookies gesetzt oder sonstige persistente Daten auf den Endgerät des Teilnehmers gespeichert, die ihn identifizierbar machen.
 
 Es wurden noch keine systematischen Lasttests durchgeführt. Theoretisch sollte das System gut skalieren und auch mit vielen Teilnehmern noch performant funktionieren, da über den WebSocket bis auf ein Mal die Fragendatenbank für den Dozenten nur sehr kleine Nachrichten verschickt werden und das Backend keine besonders rechenintensiven Aufgaben durchführt. Trotzdem ist ein Lasttest geplant.
 
@@ -32,7 +32,7 @@ Im Ordner `backend` muss die `main.js`-Datei angepasst werden. Zwischen den Zeil
 Anschließend im Ordner `backend` `npm install` ausführen, was die notwendigen Dependencies installiert. Das Backend kann dann mit `npm run backend` gestartet werden. Es sollte auf dem Server als Dienst eingerichtet werden.
 
 ### Frontend
-Das Frontend ist in [React](https://reactjs.org/) mit [create-react-app](https://facebook.github.io/create-react-app/) und einigen Dependencies entwickelt worden. Das Frontend kann lokal gebaut und auf einem normalen Webserver gehostet/deployt werden.
+Das Frontend ist in [React](https://reactjs.org/) mit [create-react-app](https://facebook.github.io/create-react-app/) und einigen Dependencies entwickelt worden. Das Frontend kann lokal gebaut und auf einen normalen Webserver gehostet/deployt werden.
 
 Im Ordner `frontend/src` ist die Datei `index.js` anzupassen. Hier gibt es diese Konfigurationsparameter:
 
@@ -42,6 +42,7 @@ Im Ordner `frontend/src` ist die Datei `index.js` anzupassen. Hier gibt es diese
 - `footerLink`: Eine React-Komponente, die in den Footer der Seite eingebaut wird. Hier kann etwa ein Link auf ein eigenes Impressum und eigene Datenschutzbestimmungen gesetzt werden.
 - `release`: Wenn aktiv, wird der Benutzer vor dem Verlassen der Seite gewarnt.
 
-**Die Parameter `mathJaxProvider` und `footerLink` müssen für eine eigene Installation angepasst werden! Ich betreibe kein CDN und mein Impressum und meine Datenschutzbestimmungen gelten ausschließlich auf von mir verwalteten Domains!**
+**Die Parameter `mathJaxProvider` und `footerLink` müssen für eine eigene Installation angepasst werden! Ich betreibe kein CDN und mein Impressum und meine Datenschutzbestimmungen gelten ausschließlich für die von mir verwalteten Domains!**
 
-Anschließend muss auch hier `npm install` ausgeführt werden. Abschließend kann das Frontend mit `yarn build` in den Ordner `frontend/build` gebaut werden. Dort landen die Dateien, die auf den Webserver kopiert werden sollen.
+Anschließend muss auch hier `npm install` ausgeführt werden. Dann kann das Frontend mit `yarn build` in den Ordner `frontend/build` gebaut werden. Dort landen die Dateien, die auf den Webserver kopiert werden sollen.
+

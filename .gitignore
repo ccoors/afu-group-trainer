@@ -436,3 +436,6 @@ typings/
 
 
 # End of https://www.gitignore.io/api/rust,linux,latex,kdevelop4,intellij+all
+
+frontend/resources/*.png
+frontend/resources/*.ico
