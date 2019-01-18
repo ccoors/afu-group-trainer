@@ -7,7 +7,7 @@ Christian Friedrich Coors, Rufzeichen DL5LQ, me@dl5lq.de
 Fragen, Anmerkungen, Kommentare, Erfahrungen und Pull Requests sind gerne gesehen. Accountanfragen für die "offizielle" Instanz auf https://agt.dl5lq.de/ werden gerne beantwortet.
 
 ## Einschränkungen
-Die bisher größte Einschränkung ist, dass der Fragenkatalog Technik A momentan noch nicht fertig ist. Dieser wird voraussichtlich zum nächsten Klasse A-Kurs in Bremen fertig. Weiterhin müssen Frontend und Backend unter der gleichen Domain erreichbar sein sowie zwingend beide gleichzeitig TLS (HTTPS und WSS) ein- oder ausgeschaltet haben. Alle weiteren aktuell relevanten Einschränkungen können in den Issues zu diesem Repository eingesehen werden.
+Die bisher größte Einschränkung ist, dass der Fragenkatalog Technik A momentan noch nicht fertig ist. Dieser wird voraussichtlich zum nächsten Klasse A-Kurs in Bremen fertig.
 
 ## Technische Hintergründe
 Front- und Backend sind in JavaScript geschrieben. Das Backend wird mit Node ausgeführt, das Frontend basiert auf dem React-Framework und wird in "normales" HTML/JS/CSS übersetzt. Front- und Backend kommunizieren über einen WebSocket, also eine ständig offene TCP-Verbindung. Dadurch wird eine Kommunikation aller Teilnehmer mit geringer Latenz ermöglicht.
@@ -39,8 +39,9 @@ Im Ordner `frontend/src` ist die Datei `index.js` anzupassen. Hier gibt es diese
 - `mathJaxProvider`: Der MathJaxProvider. Entweder eine eigene Installation eintragen oder auf etwas wie `https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML` abändern.
 - `webSocketPort`: Der Port, über den der WebSocket des Backends erreichbar ist, falls die automatische WebSocket-Erkennung verwendet wird. Ansonsten wird die Angabe aus dem Parameter `webSocketUrl` verwendet.
 - `webSocketUrl`: Die URL, unter der der WebSocket erreichbar ist. Falls dieser unter der gleichen Domain erreichbar ist, kann das Feld leer gelassen werden. Ein Beispiel für eine valide Eingabe wäre `ws://example.com:63605/`.
+- `footerLink`: Eine React-Komponente, die in den Footer der Seite eingebaut wird. Hier kann etwa ein Link auf ein eigenes Impressum und eigene Datenschutzbestimmungen gesetzt werden.
 - `release`: Wenn aktiv, wird der Benutzer vor dem Verlassen der Seite gewarnt.
 
-Momentan muss das Backend unter der gleichen Domain wie das Frontend erreichbar sein. Dies wird in einem späteren Ticket geändert.
+**Die Parameter `mathJaxProvider` und `footerLink` müssen für eine eigene Installation angepasst werden! Ich betreibe kein CDN und mein Impressum und meine Datenschutzbestimmungen gelten ausschließlich auf von mir verwalteten Domains!**
 
 Anschließend muss auch hier `npm install` ausgeführt werden. Abschließend kann das Frontend mit `yarn build` in den Ordner `frontend/build` gebaut werden. Dort landen die Dateien, die auf den Webserver kopiert werden sollen.

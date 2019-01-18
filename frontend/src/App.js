@@ -411,7 +411,7 @@ class App extends Component {
                                  onCreateRoom={this.createRoomRequest.bind(this)}
                                  roomMaster={this.state.roomMaster} questionProgress={this.state.questionProgress}/>
                     <div style={{height: "10em"}}/>
-                    <AppFooter version={"0.2.1"}/>
+                    <AppFooter version={"0.2.1"} footerLink={this.props.footerLink}/>
                 </MathJax.Provider>
             </div>
         );

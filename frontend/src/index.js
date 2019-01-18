@@ -2,13 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "semantic-ui-css/semantic.css";
 import "./index.css";
+import {List} from "semantic-ui-react";
 import App from "./App";
 
 // Config
 const mathJaxProvider = "https://www.ccoors.de/components/MathJax/MathJax.js?config=TeX-MML-AM_CHTML";
 const webSocketPort = 63605;
-const release = true;
 let webSocketUrl = "";
+const footerLink = <List.Item href='https://www.ccoors.de/impressum-datenschutz/' target="_blank"
+                              rel="noopener noreferrer">Impressum &amp; Datenschutz</List.Item>;
+const release = false;
 // End of config
 
 if (release) {
@@ -22,5 +25,5 @@ if (!webSocketUrl) {
     webSocketUrl = protocol + window.location.hostname + ":" + webSocketPort + "/";
 }
 
-ReactDOM.render(<App socketUrl={webSocketUrl} mathJaxProvider={mathJaxProvider}
+ReactDOM.render(<App socketUrl={webSocketUrl} mathJaxProvider={mathJaxProvider} footerLink={footerLink}
                      color="green"/>, document.getElementById("root"));
