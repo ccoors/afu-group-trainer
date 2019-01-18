@@ -4,7 +4,7 @@ import AppFooter from "./footer";
 import MainContent from "./main_content";
 import MathJax from "react-mathjax";
 import {ltrim} from "./util";
-import { Responsive, Segment } from "semantic-ui-react";
+import {Responsive} from "semantic-ui-react";
 
 const AppModes = Object.freeze({
     CONNECTING: 1,

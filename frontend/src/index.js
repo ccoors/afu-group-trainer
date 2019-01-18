@@ -4,11 +4,12 @@ import "semantic-ui-css/semantic.css";
 import "./index.css";
 import App from "./App";
 
+// Config
 const mathJaxProvider = "https://www.ccoors.de/components/MathJax/MathJax.js?config=TeX-MML-AM_CHTML";
 const webSocketPort = 63605;
 const release = true;
-
-let protocol = window.location.protocol.startsWith("https") ? "wss://" : "ws://";
+let webSocketUrl = "";
+// End of config
 
 if (release) {
     window.onbeforeunload = function () {
@@ -16,5 +17,10 @@ if (release) {
     };
 }
 
-ReactDOM.render(<App socketUrl={protocol + window.location.hostname + ":" + webSocketPort + "/"}
-                     mathJaxProvider={mathJaxProvider} color="green"/>, document.getElementById("root"));
+if (!webSocketUrl) {
+    let protocol = window.location.protocol.startsWith("https") ? "wss://" : "ws://";
+    webSocketUrl = protocol + window.location.hostname + ":" + webSocketPort + "/";
+}
+
+ReactDOM.render(<App socketUrl={webSocketUrl} mathJaxProvider={mathJaxProvider}
+                     color="green"/>, document.getElementById("root"));
