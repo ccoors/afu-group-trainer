@@ -11,7 +11,7 @@ const webSocketPort = 63605;
 let webSocketUrl = "";
 const footerLink = <List.Item href='https://www.ccoors.de/impressum-datenschutz/' target="_blank"
                               rel="noopener noreferrer">Impressum &amp; Datenschutz</List.Item>;
-const release = false;
+const release = true;
 // End of config
 
 if (release) {

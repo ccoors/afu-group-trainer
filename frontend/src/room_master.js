@@ -126,11 +126,16 @@ class RoomMaster extends React.Component {
         }
 
         if (this.props.roomMaster.mode === RoomMasterModes.IDLE) {
+            let databaseRendered = this.props.roomMaster.searchInput.length < 2 ?
+                this.renderDatabaseNormal() :
+                [<Header as="h2">Kategorien</Header>, this.searchDatabase(),
+                    <Header as="h2">Fragen</Header>, this.searchQuestions()];
+
             content = <div>
                 <Input fluid placeholder="Frage oder Kategorie" icon="search"
                        onChange={this.props.roomMaster.setSearchInput} value={this.props.roomMaster.searchInput}
                        style={{marginTop: "0.4em"}}/>
-                {this.props.roomMaster.searchInput.length < 2 ? this.renderDatabaseNormal() : [this.searchDatabase(), this.searchQuestions()]}
+                {databaseRendered}
             </div>;
         } else if (this.props.roomMaster.mode === RoomMasterModes.SETTINGS) {
             content = <Segment>

@@ -6,8 +6,8 @@ class AppFooter extends React.Component {
     render() {
         return (
             <footer>
-                <div style={{paddingLeft: "0.2cm", paddingRight: "0.2cm"}}>
-                    <List floated="right" horizontal size="small">
+                <div id="footerContainer">
+                    <List id="footerList" floated="right" horizontal size="small">
                         <List.Item>{this.props.version}</List.Item>
                         {this.props.footerLink}
                         <List.Item href={"https://gitea.ccoors.de/ccoors/afu-group-trainer"} target={"_blank"}
