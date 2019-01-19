@@ -1,6 +1,12 @@
 # Changelog
 
 ## Public versions
+### 0.3.0 (2019-01-19)
+- Configuration options in separate files
+- Headers in search results
+- KeepAlive packets for client
+- Various style fixes
+
 ### 0.2.1 (2019-01-16)
 - Fix TLS configuration
 - Improve responsive design

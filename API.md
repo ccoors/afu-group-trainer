@@ -1,4 +1,4 @@
-# afu-group-trainer WebSocket API 0.2.1
+# AFU group trainer WebSocket API 0.3.0
 
 ## From server
 
@@ -62,6 +62,9 @@
         
     Error:
         message: String
+    
+    KeepAlive:
+        next: Int
 
 ## From user
 

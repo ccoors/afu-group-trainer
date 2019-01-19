@@ -60,7 +60,8 @@ class App extends Component {
             questionProgress: {
                 remainingQuestions: 0,
                 initialQuestionLength: 0,
-            }
+            },
+            nextKeepAliveTimeout: null,
         };
 
         let app = this;
@@ -89,7 +90,9 @@ class App extends Component {
         };
 
         socket.onmessage = function (e) {
-            console.log("Received: " + e.data);
+            if (!app.props.release) {
+                console.log("Received: " + e.data);
+            }
             app.parseMessage(app, e.data);
         };
     }
@@ -190,6 +193,13 @@ class App extends Component {
             setSearchInput: this.setSearchInput.bind(this),
             backToIdle: this.setBackToIdle.bind(this),
         };
+    }
+
+    timeout() {
+        this.setState({
+            mode: AppModes.ERROR,
+            errorMessage: "Die Verbindung zum Server ist abgebrochen."
+        });
     }
 
     parseMessage(app, msg) {
@@ -299,11 +309,21 @@ class App extends Component {
                     membersTotal: data.AdminRoomStatus.total,
                 },
             })
+        } else if (data.KeepAlive) {
+            let next = data.KeepAlive.next;
+
+            if (this.state.nextKeepAliveTimeout) {
+                clearTimeout(this.state.nextKeepAliveTimeout);
+            }
+
+            this.setState({
+                nextKeepAliveTimeout: setTimeout(this.timeout.bind(this), next)
+            });
         } else {
             app.setState({
                 mode: AppModes.ERROR,
                 errorMessage: "Unbekannte Nachricht vom Server erhalten"
-            })
+            });
         }
     }
 
@@ -410,8 +430,8 @@ class App extends Component {
                                  questionDatabase={this.state.questionDatabase}
                                  onCreateRoom={this.createRoomRequest.bind(this)}
                                  roomMaster={this.state.roomMaster} questionProgress={this.state.questionProgress}/>
-                    <div style={{height: "10em"}}/>
-                    <AppFooter version={"0.2.1"} footerLink={this.props.footerLink}/>
+                    <div style={{height: "5em"}}/>
+                    <AppFooter version={"0.3.0"} footerLink={this.props.footerLink}/>
                 </MathJax.Provider>
             </div>
         );

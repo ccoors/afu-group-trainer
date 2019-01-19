@@ -60,6 +60,14 @@ let ServerManager = function (config) {
 
                 ws.isAlive = false;
                 ws.ping(noop);
+
+                if (ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({
+                        KeepAlive: {
+                            next: 2 * config.pingTest,
+                        }
+                    }));
+                }
             }.bind(this));
         }.bind(this), config.pingTest);
     }

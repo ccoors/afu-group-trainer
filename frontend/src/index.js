@@ -18,4 +18,5 @@ if (!config.webSocketUrl) {
 }
 
 ReactDOM.render(<App socketUrl={config.webSocketUrl} mathJaxProvider={config.mathJaxProvider}
-                     footerLink={config.footerLink} color="green"/>, document.getElementById("root"));
+                     footerLink={config.footerLink} release={config.release}
+                     color="blue"/>, document.getElementById("root"));

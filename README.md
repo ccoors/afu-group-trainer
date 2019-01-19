@@ -28,7 +28,7 @@ Im Ordner `backend` muss die `config.js`-Datei angepasst werden. Hier können ei
 - `config.websocketPort`: Hier den offenen TCP-Port eintragen
 - `config.tlsConfig`: Hier kann mit `useTLS` auf `true` die TLS-Verschlüsselung eingeschaltet werden. Wenn sie eingeschaltet ist, müssen die Variablen `cert` und `key` mit Dateinamen befüllt werden. Am Beispiel Uberspace mit Let's Encrypt wäre das `cert` auf `/home/BENUTZER/.config/letsencrypt/live/DOMAIN/cert.pem` und `key` auf `/home/BENUTZER/.config/letsencrypt/live/DOMAIN/privkey.pem`.
 - `config.users`: Ein Array von Objekten mit `username` und `password` Schlüsseln. Das sind die Dozenten-Logins.
-- `config.pingTest`: Der Intervall in Millisekunden, in denen über den WebSocket ein Ping-Paket geschickt wird. Wird verwendet, um kaputte Verbindungen zuverlässig zu trennen. Empfohlen wird ein Wert von 20 Sekunden (20000), maximal sollten 60 Sekunden (60000) eingetragen werden.
+- `config.pingTest`: Der Intervall in Millisekunden, in denen über den WebSocket ein Ping-Paket geschickt wird. Wird verwendet, um kaputte Verbindungen zuverlässig zu trennen. Empfohlen wird ein Wert von 20 Sekunden (20000), maximal sollten 60 Sekunden (60000) eingetragen werden. Ein zu kleiner Wert führt zu Problemen! Hier sollten als absolute Untergrenze 10 Sekunden (10000) eingetragen werden.
 - `config.debug`: Aktiviert Debugausgaben. Im Produktivsystem i.d.R. nicht erforderlich.
 - `config.questions`: Die Fragenkataloge, die geladen werden sollen. I.d.R. ist eine Anpassung nicht erforderlich.
 
