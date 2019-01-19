@@ -47,5 +47,7 @@ Im Ordner `frontend/src` ist die Datei `config.js` anzupassen. Hier gibt es dies
 
 **Der Parameter `footerLink` sollte für eine eigene Installation angepasst werden!**
 
+Dann muss in der Datei `frontend/package.json` noch der Parameter `homepage` auf die URL angepasst werden, unter der der AGT später verfügbar sein soll, damit die relativen Links richtig gesetzt werden.
+
 Anschließend muss auch hier `npm install` ausgeführt werden. Dann kann das Frontend mit `yarn build` in den Ordner `frontend/build` gebaut werden. Dort landen die Dateien, die auf den Webserver kopiert werden sollen.
 
