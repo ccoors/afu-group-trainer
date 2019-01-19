@@ -2,28 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "semantic-ui-css/semantic.css";
 import "./index.css";
-import {List} from "semantic-ui-react";
 import App from "./App";
 
-// Config
-const mathJaxProvider = "https://www.ccoors.de/components/MathJax/MathJax.js?config=TeX-MML-AM_CHTML";
-const webSocketPort = 63605;
-let webSocketUrl = "";
-const footerLink = <List.Item href='https://www.ccoors.de/impressum-datenschutz/' target="_blank"
-                              rel="noopener noreferrer">Impressum &amp; Datenschutz</List.Item>;
-const release = true;
-// End of config
+import config from "./config";
 
-if (release) {
+if (config.release) {
     window.onbeforeunload = function () {
         return "Achtung! Sie sind im Begriff, die Seite zu verlassen. In diesem Fall werden Sie aus dem Raum entfernt. Fortfahren?";
     };
 }
 
-if (!webSocketUrl) {
+if (!config.webSocketUrl) {
     let protocol = window.location.protocol.startsWith("https") ? "wss://" : "ws://";
-    webSocketUrl = protocol + window.location.hostname + ":" + webSocketPort + "/";
+    config.webSocketUrl = protocol + window.location.hostname + ":" + config.webSocketPort + "/";
 }
 
-ReactDOM.render(<App socketUrl={webSocketUrl} mathJaxProvider={mathJaxProvider} footerLink={footerLink}
-                     color="green"/>, document.getElementById("root"));
+ReactDOM.render(<App socketUrl={config.webSocketUrl} mathJaxProvider={config.mathJaxProvider}
+                     footerLink={config.footerLink} color="green"/>, document.getElementById("root"));

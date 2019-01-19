@@ -11,4 +11,4 @@ done
 exiftool -all= *.png
 rm *_original
 optipng *.png
-icotool -c -o $input.ico ${input}_16.png ${input}_32.png ${input}_64.png
+icotool -c -o $input.ico ${input}_16.png ${input}_32.png ${input}_48.png

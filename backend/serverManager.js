@@ -14,25 +14,25 @@ function heartbeat() {
     this.isAlive = true;
 }
 
-let ServerManager = function (port, tlsConfig, users, pingTest, debug) {
-    this.users = users;
+let ServerManager = function (config) {
+    this.users = config.users;
     if (!Array.isArray(this.users) || this.users.length === 0) {
         throw "No users configured!";
     }
 
-    if (tlsConfig.useTLS) {
+    if (config.tlsConfig.useTLS) {
         let server = new https.createServer({
-            cert: fs.readFileSync(tlsConfig.cert),
-            key: fs.readFileSync(tlsConfig.key)
+            cert: fs.readFileSync(config.tlsConfig.cert),
+            key: fs.readFileSync(config.tlsConfig.key)
         });
         this.wss = new WebSocket.Server({
             clientTracking: true,
             server: server
         });
-        server.listen(port);
+        server.listen(config.websocketPort);
     } else {
         this.wss = new WebSocket.Server({
-            port: port,
+            port: config.websocketPort,
             clientTracking: true,
         });
     }
@@ -43,7 +43,7 @@ let ServerManager = function (port, tlsConfig, users, pingTest, debug) {
         ws.on("pong", heartbeat);
 
         ws.on("message", function (data) {
-            this.onClientMessage(ws, data, debug);
+            this.onClientMessage(ws, data, config.debug);
         }.bind(this));
 
         ws.on("close", function connection() {
@@ -53,7 +53,7 @@ let ServerManager = function (port, tlsConfig, users, pingTest, debug) {
         this.callback();
     }.bind(this));
 
-    if (pingTest) {
+    if (config.pingTest) {
         this.pingInterval = setInterval(function ping() {
             this.wss.clients.forEach(function (ws) {
                 if (ws.isAlive === false) return ws.terminate();
@@ -61,12 +61,13 @@ let ServerManager = function (port, tlsConfig, users, pingTest, debug) {
                 ws.isAlive = false;
                 ws.ping(noop);
             }.bind(this));
-        }.bind(this), pingTest);
+        }.bind(this), config.pingTest);
     }
 
     this.questionManager = new qm.QuestionManager();
     this.roomManager = new rm.RoomManager(this.callback.bind(this), this.removeUserFromRoom.bind(this), this.sendRoomStatus.bind(this));
 
+    config.questions.forEach(file => this.loadQuestions(file));
 };
 
 ServerManager.prototype.broadcast = function (data) {
