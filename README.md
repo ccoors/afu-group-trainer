@@ -6,15 +6,32 @@ Christian Friedrich Coors, Rufzeichen DL5LQ, me@dl5lq.de
 
 Fragen, Anmerkungen, Kommentare, Erfahrungen und Pull Requests sind gerne gesehen. Accountanfragen für die „offizielle“ Instanz auf https://agt.dl5lq.de/ werden gerne beantwortet.
 
+## Screenshots
+![Login](screenshots/login.png)
+
+![Frage aus Benutzersicht](screenshots/question_user.png)
+
+![Frage aus Adminsicht](screenshots/question_admin.png)
+
+![Ergebnisse](screenshots/results.png)
+
+![Admin Interface](screenshots/admin_interface.png)
+
+![Ansicht unter Android](screenshots/android_1.png)
+
+![Ansicht unter Android als App auf dem Homebildschirm](screenshots/android_2.png)
+
 ## Einschränkungen
 Die bisher größte Einschränkung ist, dass der Fragenkatalog Technik A momentan noch nicht fertig ist. Dieser wird voraussichtlich zum nächsten Klasse A-Kurs in Bremen fertig.
 
 ## Technische Hintergründe
 Front- und Backend sind in JavaScript geschrieben. Das Backend wird mit Node ausgeführt, das Frontend basiert auf dem React-Framework und wird in „normales“ HTML/JS/CSS übersetzt. Front- und Backend kommunizieren über einen WebSocket, also eine ständig offene TCP-Verbindung. Dadurch wird eine Kommunikation aller Teilnehmer mit geringer Latenz ermöglicht.
 
+### Datenschutz
 Die Software ist absichtlich sehr datensparsam designt: Alle Teilnehmer sind nicht ohne weitere Informationen identifizierbar. Insbesondere wird keine Statistik über richtig und falsch beantwortete Fragen erstellt. Sobald ein Teilnehmer die Seite verlässt und die Verbindung geschlossen wird „vergisst“ das Backend alle Daten über diesen Teilnehmer. Es werden keine Cookies gesetzt oder sonstige persistente Daten auf den Endgerät des Teilnehmers gespeichert, die ihn identifizierbar machen.
 
-Es wurden noch keine systematischen Lasttests durchgeführt. Theoretisch sollte das System gut skalieren und auch mit vielen Teilnehmern noch performant funktionieren, da über den WebSocket bis auf ein Mal die Fragendatenbank für den Dozenten nur sehr kleine Nachrichten verschickt werden und das Backend keine besonders rechenintensiven Aufgaben durchführt. Trotzdem ist ein Lasttest geplant.
+### Performance
+Ein erster Lasttest unter Laborbedingungen verlief positiv. Realistisch können auf durchschnittlichen Systemen einige 100 Teilnehmer das System parallel benutzen, ohne dass es zu besonders störenden Performanceproblemen kommt. Die Ergebnisse sind erwartungskonform da über den WebSocket bis auf ein Mal die Fragendatenbank für den Dozenten nur sehr kleine Nachrichten verschickt werden und das Backend keine besonders rechenintensiven Aufgaben durchführt.
 
 ## Installation
 Die Software wird momentan aktiv weiterentwickelt. Eine eigene Installation kann daher nicht uneingeschränkt empfohlen werden, wenn man ständig die aktuelle Version verwenden möchte.
