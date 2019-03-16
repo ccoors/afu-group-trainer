@@ -10,7 +10,7 @@ import {
 
 import QuestionRenderer from "./question_renderer";
 import Results from "./results";
-import {generateEmptyQuestion} from "./util";
+import {generateEmptyQuestion} from "../util";
 import QuestionProgress from "./question_progress";
 
 class RoomStateRenderer extends React.Component {

@@ -12,7 +12,7 @@ import {
     Input,
 } from "semantic-ui-react";
 
-import {generateEmptyQuestion} from "./util";
+import {generateEmptyQuestion} from "../util";
 import QuestionRORenderer from "./question_renderer_ro"
 import Results from "./results";
 import QuestionProgress from "./question_progress";
@@ -165,7 +165,7 @@ class RoomMaster extends React.Component {
             </Segment>;
         } else if (this.props.roomMaster.mode === RoomMasterModes.RUNNING) {
             content = <div>
-                <p>Bisher wurde die Frage von {this.props.roomMaster.membersSelected} beantwortet.</p>
+                <p>Bisher wurde die Frage von {this.props.questionUserState.selected} beantwortet.</p>
                 <QuestionRORenderer
                     question={question}
                     correctAnswer={-1}/>
@@ -207,9 +207,9 @@ class RoomMaster extends React.Component {
                 </Button.Group>
             </div>;
         }
-        let title = "Raum " + this.props.roomName + " - Ausbildung";
-        if (this.props.roomMaster.membersTotal) {
-            title += " (" + this.props.roomMaster.membersTotal + " online)";
+        let title = "Raum " + this.props.roomName + " - Referentensicht";
+        if (this.props.questionUserState.total) {
+            title += " (" + this.props.questionUserState.total + " online)";
         }
 
         let topContent = this.props.roomMaster.mode < RoomMasterModes.RUNNING ?

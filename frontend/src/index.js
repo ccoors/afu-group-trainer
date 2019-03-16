@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import "semantic-ui-css/semantic.css";
 import "./index.css";
-import App from "./App";
+
+import App from "./components/App";
 
 import config from "./config";
 
@@ -17,6 +19,8 @@ if (!config.webSocketUrl) {
     config.webSocketUrl = protocol + window.location.hostname + ":" + config.webSocketPort + "/";
 }
 
+const rootElement = document.getElementById("root");
+
 ReactDOM.render(<App socketUrl={config.webSocketUrl} mathJaxProvider={config.mathJaxProvider}
                      footerLink={config.footerLink} release={config.release}
-                     color="blue"/>, document.getElementById("root"));
+                     color="blue"/>, rootElement);

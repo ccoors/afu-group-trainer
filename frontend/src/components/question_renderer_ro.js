@@ -5,7 +5,7 @@ import {
     Segment,
 } from "semantic-ui-react";
 
-import {stringToJSX} from "./util";
+import {stringToJSX} from "../util";
 
 class QuestionRORenderer extends React.Component {
     renderSegment(nr, answer, correct) {

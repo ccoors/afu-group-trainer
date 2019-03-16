@@ -54,8 +54,10 @@ class MainContent extends React.Component {
             case AppModes.ROOM_MASTER:
                 return (<RoomMaster roomName={this.props.roomName} questionDatabase={this.props.questionDatabase}
                                     leaveRoom={this.props.leaveRoom} color={this.props.color}
+                                    questionUserState={this.props.questionUserState}
                                     roomQuestion={this.props.roomQuestion} roomResults={this.props.roomResults}
-                                    roomMaster={this.props.roomMaster} questionProgress={this.props.questionProgress}/>);
+                                    roomMaster={this.props.roomMaster}
+                                    questionProgress={this.props.questionProgress}/>);
             case AppModes.FATAL_ERROR:
             default:
                 window.onbeforeunload = undefined;

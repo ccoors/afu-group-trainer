@@ -3,7 +3,7 @@ import AppHeader from "./header";
 import AppFooter from "./footer";
 import MainContent from "./main_content";
 import MathJax from "react-mathjax";
-import {ltrim} from "./util";
+import {ltrim} from "../util";
 import {Responsive} from "semantic-ui-react";
 
 const AppModes = Object.freeze({
@@ -53,6 +53,10 @@ class App extends Component {
             roomQuestion: {},
             roomResults: {},
             questionDatabase: {},
+            questionUserState: {
+                selected: 0,
+                total: 0,
+            },
             roomUUID: "",
             errorMessage: "",
             loggedIn: false,
@@ -181,8 +185,6 @@ class App extends Component {
             singleUUID: false,
             shuffleQuestions: true,
             showObsoleteQuestions: false,
-            membersSelected: 0,
-            membersTotal: 0,
             startQuestions: this.startQuestionsRequest.bind(this),
             showResults: this.showResultsRequest.bind(this),
             nextQuestion: this.nextQuestionRequest.bind(this),
@@ -265,7 +267,8 @@ class App extends Component {
                 questionProgress: {
                     remainingQuestions: data.RoomState.remainingQuestions,
                     initialQuestionLength: data.RoomState.initialQuestionLength,
-                }
+                },
+                questionUserState: data.RoomState.user_state,
             });
         } else if (data === "LeaveRoom" || data.LeaveRoom) {
             app.leaveRoom();
@@ -301,14 +304,6 @@ class App extends Component {
                     roomName: "",
                 });
             }
-        } else if (data.AdminRoomStatus) {
-            app.setState({
-                roomMaster: {
-                    ...app.state.roomMaster,
-                    membersSelected: data.AdminRoomStatus.selected,
-                    membersTotal: data.AdminRoomStatus.total,
-                },
-            })
         } else if (data.KeepAlive) {
             let next = data.KeepAlive.next;
 
@@ -428,6 +423,7 @@ class App extends Component {
                                  roomResults={this.state.roomResults} selectAnswer={this.selectAnswer.bind(this)}
                                  leaveRoom={this.leaveRoomRequest.bind(this)} onLogin={this.loginRequest.bind(this)}
                                  questionDatabase={this.state.questionDatabase}
+                                 questionUserState={this.state.questionUserState}
                                  onCreateRoom={this.createRoomRequest.bind(this)}
                                  roomMaster={this.state.roomMaster} questionProgress={this.state.questionProgress}/>
                     <div style={{height: "5em"}}/>
