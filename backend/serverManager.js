@@ -101,6 +101,9 @@ ServerManager.prototype.removeUserFromRoom = function (client) {
 ServerManager.prototype.sendRoomStatus = function (room, user) {
     let msg = "";
     let remainingQuestions = Array.isArray(room.queue) ? room.queue.length : 0;
+    let users_selected = room.members.filter(m => m.selectedAnswer !== -1).length;
+    let total_users = room.members.length - 1;
+
     switch (room.state) {
         case rm.ROOM_STATE.IDLE:
             msg = JSON.stringify({
@@ -118,6 +121,10 @@ ServerManager.prototype.sendRoomStatus = function (room, user) {
                     remainingQuestions: remainingQuestions,
                     initialQuestionLength: room.initialQueueLength,
                     question: room.currentQuestion,
+                    userState: {
+                        selected: users_selected,
+                        total: total_users,
+                    }
                 }
             });
             break;
@@ -144,16 +151,6 @@ ServerManager.prototype.sendRoomStatus = function (room, user) {
         room.members.forEach(function (user) {
             if (user.readyState === WebSocket.OPEN) user.send(msg);
         });
-    }
-
-    let admin = room.members[0];
-    if (admin.readyState === WebSocket.OPEN) {
-        admin.send(JSON.stringify({
-            AdminRoomStatus: {
-                selected: room.members.filter(m => m.selectedAnswer !== -1).length,
-                total: room.members.length - 1
-            }
-        }));
     }
 };
 
