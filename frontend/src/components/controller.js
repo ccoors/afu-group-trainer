@@ -25,10 +25,20 @@ const AppModes = Object.freeze({
     FATAL_ERROR: 100,
 });
 
-export {AppModes};
+const UserActions = Object.freeze({
+    BACK_TO_START: 1,
+    JOIN_ROOM: 2,
+    LOGIN: 3,
+
+    SELECT_ANSWER: 10,
+
+    CREATE_ROOM: 20,
+    START_QUESTIONS: 21,
+});
+
+export {AppModes, UserActions};
 
 class Controller extends React.Component {
-
     constructor(props) {
         super(props);
 
