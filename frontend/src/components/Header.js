@@ -1,8 +1,6 @@
 import React from 'react';
 
-import {
-    Menu,
-} from 'semantic-ui-react'
+import {Menu,} from 'semantic-ui-react'
 
 class AppHeader extends React.Component {
     render() {
@@ -17,7 +15,7 @@ class AppHeader extends React.Component {
                 {/*<Menu.Item href={"formelsammlung/Formelsammlung_A.pdf"} target={"_blank"} color={"black"} active>*/}
                     {/*Formelsammlung Klasse A*/}
                 {/*</Menu.Item>*/}
-                {this.props.roomName !== "" &&
+                {this.props.appState.roomName !== "" &&
                 <Menu.Item>
                     In Raum „{this.props.roomName}“
                 </Menu.Item>}

@@ -1,21 +1,11 @@
 import React from "react";
 
-import {
-    Container,
-    Header,
-    Segment,
-    Icon,
-    Step,
-    Button,
-    Form,
-    Checkbox,
-    Input,
-} from "semantic-ui-react";
+import {Button, Checkbox, Container, Form, Header, Icon, Input, Segment, Step,} from "semantic-ui-react";
 
-import {generateEmptyQuestion} from "../util";
-import QuestionRORenderer from "./question_renderer_ro"
-import Results from "./results";
-import QuestionProgress from "./question_progress";
+import {generateEmptyQuestion} from "../util/util";
+import QuestionRORenderer from "./QuestionRORenderer"
+import Results from "./Results";
+import QuestionProgress from "./QuestionProgress";
 import {RoomMasterModes} from "./App";
 
 class RoomMaster extends React.Component {

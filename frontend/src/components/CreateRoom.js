@@ -1,12 +1,6 @@
 import React from "react";
 
-import {
-    Button,
-    Container,
-    Segment,
-    Header,
-    Input,
-} from "semantic-ui-react"
+import {Button, Container, Header, Input, Segment,} from "semantic-ui-react"
 
 class CreateRoom extends React.Component {
     constructor(props) {

@@ -1,11 +1,8 @@
 import React from "react";
 
-import {
-    Label,
-    Segment,
-} from "semantic-ui-react";
+import {Label, Segment,} from "semantic-ui-react";
 
-import {stringToJSX} from "../util";
+import {stringToJSX} from "../util/util";
 
 class QuestionRORenderer extends React.Component {
     renderSegment(nr, answer, correct) {

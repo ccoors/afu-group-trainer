@@ -1,12 +1,7 @@
 import React from "react";
 
-import {
-    Button,
-    Container,
-    Tab,
-    Dropdown,
-    Input,
-} from "semantic-ui-react"
+import {Button, Container, Dropdown, Form, Input, Tab,} from "semantic-ui-react"
+import {joinRoom, login} from "../util/actions";
 
 class RenderPasswordBox extends React.Component {
     render() {
@@ -50,7 +45,7 @@ class RoomID extends React.Component {
     }
 
     handleJoinRoomChange(e, value) {
-        let room = this.props.rooms.find(r => r.uuid === value.value);
+        let room = this.props.appState.rooms.find(r => r.uuid === value.value);
         if (!room) {
             room = {
                 password_required: false,
@@ -70,7 +65,7 @@ class RoomID extends React.Component {
                 text: "Kein Raum ausgewählt",
                 value: ""
             }
-        ].concat(this.props.rooms.map(r => {
+        ].concat(this.props.appState.rooms.map(r => {
             return {
                 text: r.name + " (" + r.users + " Benutzer)",
                 value: r.uuid,
@@ -79,7 +74,7 @@ class RoomID extends React.Component {
         }));
 
         let joinRoomUUID = this.state.joinRoomUUID;
-        let existingRoom = this.props.rooms.find(r => r.uuid === joinRoomUUID);
+        let existingRoom = this.props.appState.rooms.find(r => r.uuid === joinRoomUUID);
         if (!existingRoom) {
             joinRoomUUID = "";
         }
@@ -97,7 +92,8 @@ class RoomID extends React.Component {
                     <Button disabled={joinRoomUUID === ""} color={this.props.color} fluid size="large"
                             onClick={() => {
                                 let roomName = this.props.rooms.find(r => r.uuid === joinRoomUUID).name;
-                                this.props.onRoomJoin(joinRoomUUID, this.state.roomPassword, roomName);
+                                let action = joinRoom(roomName, joinRoomUUID, this.state.roomPassword);
+                                this.props.appState.actionHandler(action);
                             }}>
                         <Button.Content visible>Raum beitreten</Button.Content>
                     </Button>
@@ -105,16 +101,19 @@ class RoomID extends React.Component {
             },
             {
                 menuItem: "Login", render: () => <Tab.Pane>
-                    <Input fluid icon="user" iconPosition="left" placeholder={"Benutzername"}
-                           onChange={this.handleNewUsernameMessage.bind(this)}/><br/>
-                    <Input fluid icon="key" iconPosition="left" placeholder={"Passwort"} type="password"
-                           onChange={this.handleNewPasswordMessage.bind(this)}/><br/>
+                    <Form>
+                        <Input fluid icon="user" iconPosition="left" placeholder={"Benutzername"}
+                               onChange={this.handleNewUsernameMessage.bind(this)}/><br/>
+                        <Input fluid icon="key" iconPosition="left" placeholder={"Passwort"} type="password"
+                               onChange={this.handleNewPasswordMessage.bind(this)}/><br/>
 
-                    <Button color={this.props.color} fluid size="large" onClick={() => {
-                        this.props.onLogin(this.state.username, this.state.password);
-                    }}>
-                        <Button.Content visible>Login</Button.Content>
-                    </Button>
+                        <Button color={this.props.color} fluid size="large" type="submit" onClick={() => {
+                            let action = login(this.state.username, this.state.password);
+                            this.props.appState.actionHandler(action);
+                        }}>
+                            <Button.Content visible>Login</Button.Content>
+                        </Button>
+                    </Form>
                 </Tab.Pane>
             },
         ];

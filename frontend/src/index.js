@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import "semantic-ui-css/semantic.css";
 import "./index.css";
 
-import Controller from "./components/controller";
+import Controller from "./components/Controller";
 
 import config from "./config";
 

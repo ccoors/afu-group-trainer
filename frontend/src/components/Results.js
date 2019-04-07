@@ -1,7 +1,7 @@
 import React from "react";
 import {Header, Icon} from "semantic-ui-react";
 import Chart from "react-apexcharts";
-import QuestionRORenderer from "./question_renderer_ro";
+import QuestionRORenderer from "./QuestionRORenderer";
 
 class Results extends React.Component {
     render() {

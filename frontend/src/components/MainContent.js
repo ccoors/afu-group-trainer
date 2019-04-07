@@ -1,22 +1,18 @@
 import React from "react";
 
-import {
-    Button,
-    Loader,
-    Modal,
-    Icon,
-} from "semantic-ui-react"
-import RoomID from "./room_id"
-import RecoverableError from "./recoverable_error";
-import RoomJoined from "./room_joined";
-import CreateRoom from "./create_room";
-import RoomMaster from "./room_master";
+import {Button, Icon, Loader, Modal,} from "semantic-ui-react"
+import RoomID from "./RoomID";
+import RecoverableError from "./RecoverableError";
+import RoomJoined from "./RoomJoined";
+import CreateRoom from "./CreateRoom";
+import RoomMaster from "./RoomMaster";
 
-import {AppModes} from "./controller"
+import {AppModes} from "./Controller"
+import {backToCreateRoom, backToStart} from "../util/actions";
 
 class MainContent extends React.Component {
     render() {
-        switch (this.props.mode) {
+        switch (this.props.appState.mode) {
             case AppModes.CONNECTING:
                 return (<Loader active={true}>Verbinde mit Server...</Loader>);
             case AppModes.LOADING_ROOMS:
@@ -28,21 +24,33 @@ class MainContent extends React.Component {
             case AppModes.CREATING_ROOM:
                 return (<Loader active={true}>Erstelle Raum...</Loader>);
             case AppModes.START_PAGE:
-                return (<RoomID color={this.props.color} rooms={this.props.rooms} onRoomJoin={this.props.onRoomJoin}
-                                onLogin={this.props.onLogin}/>);
+                return (<RoomID appState={this.props.appState} color={this.props.color}/>);
             case AppModes.JOIN_ROOM_FAILED:
                 return (<RecoverableError message={"Konnte Raum nicht beitreten. Passwort falsch?"}
-                                          onOk={this.props.onBackToSelect} color={this.props.color}/>);
+                                          onOk={() => {
+                                              let action = backToStart();
+                                              this.props.appState.actionHandler(action);
+                                          }
+                                          } color={this.props.color}/>);
             case AppModes.LOGIN_FAILED:
                 return (<RecoverableError message={"Login fehlgeschlagen. Passwort falsch?"}
-                                          onOk={this.props.onBackToSelect} color={this.props.color}/>);
+                                          onOk={() => {
+                                              let action = backToStart();
+                                              this.props.appState.actionHandler(action);
+                                          }} color={this.props.color}/>);
             case AppModes.CREATE_ROOM_FAILED:
                 return (<RecoverableError message={"Raum konnte nicht erstellt werden."}
-                                          onOk={this.props.onBackToCreate} color={this.props.color}/>);
+                                          onOk={() => {
+                                              let action = backToCreateRoom();
+                                              this.props.appState.actionHandler(action);
+                                          }} color={this.props.color}/>);
             case AppModes.REMOVED_FROM_ROOM:
                 return (<RecoverableError
                     message={"Sie wurden aus dem Raum entfernt. Vermutlich wurde der Raum geschlossen."}
-                    onOk={this.props.onBackToSelect} color={this.props.color}/>);
+                    onOk={() => {
+                        let action = backToStart();
+                        this.props.appState.actionHandler(action);
+                    }} color={this.props.color}/>);
             case AppModes.ROOM_JOINED:
                 return (<RoomJoined roomName={this.props.roomName} roomState={this.props.roomState}
                                     roomQuestion={this.props.roomQuestion} roomResults={this.props.roomResults}
@@ -71,7 +79,7 @@ class MainContent extends React.Component {
                                     Es ist ein schwerwiegender Fehler aufgetreten.
                                 </p>
                                 <p>
-                                    {this.props.errorMessage}
+                                    {this.props.appState.errorMessage}
                                 </p>
                             </Modal.Content>
                             <Modal.Actions>

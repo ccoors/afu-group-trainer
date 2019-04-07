@@ -1,6 +1,6 @@
 import React from "react";
 import {Form, Header, Label, Radio, Segment} from "semantic-ui-react";
-import {stringToJSX} from "../util";
+import {stringToJSX} from "../util/util";
 
 class QuestionRenderer extends React.Component {
     selectAnswer(e, value) {

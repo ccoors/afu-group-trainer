@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-import AppHeader from "./header";
-import AppFooter from "./footer";
-import MainContent from "./main_content";
+import AppHeader from "./Header";
+import AppFooter from "./Footer";
+import MainContent from "./MainContent";
 import MathJax from "react-mathjax";
-import {ltrim} from "../util";
+import {ltrim} from "../util/util";
 import {Responsive} from "semantic-ui-react";
-import {AppModes} from "./controller";
+import {AppModes} from "./Controller";
 
 const RoomMasterModes = {
     IDLE: 1,
@@ -19,29 +19,29 @@ export {RoomMasterModes};
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            mode: AppModes.CONNECTING,
-            rooms: [],
-            roomState: 0,
-            selectedAnswer: -1,
-            roomName: "",
-            roomQuestion: {},
-            roomResults: {},
-            questionDatabase: {},
-            questionUserState: {
-                selected: 0,
-                total: 0,
-            },
-            roomUUID: "",
-            errorMessage: "",
-            loggedIn: false,
-            roomMaster: this.getEmptyRoomMaster(),
-            questionProgress: {
-                remainingQuestions: 0,
-                initialQuestionLength: 0,
-            },
-            nextKeepAliveTimeout: null,
-        };
+        // this.state = {
+        //     mode: AppModes.CONNECTING,
+        //     rooms: [],
+        //     roomState: 0,
+        //     selectedAnswer: -1,
+        //     roomName: "",
+        //     roomQuestion: {},
+        //     roomResults: {},
+        //     questionDatabase: {},
+        //     questionUserState: {
+        //         selected: 0,
+        //         total: 0,
+        //     },
+        //     roomUUID: "",
+        //     errorMessage: "",
+        //     loggedIn: false,
+        //     roomMaster: this.getEmptyRoomMaster(),
+        //     questionProgress: {
+        //         remainingQuestions: 0,
+        //         initialQuestionLength: 0,
+        //     },
+        //     nextKeepAliveTimeout: null,
+        // };
     }
 
     startQuestionsRequest() {
@@ -349,30 +349,17 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <MathJax.Provider script={this.props.mathJaxProvider}>
-                    <AppHeader roomName={this.state.roomName}/>
-                    <div style={{height: "4em"}}/>
-                    <Responsive {...Responsive.onlyComputer}>
-                        <div style={{height: "2em"}}/>
-                    </Responsive>
+            <MathJax.Provider script={this.props.mathJaxProvider}>
+                <AppHeader appState={this.props.appState}/>
+                <div style={{height: "4em"}}/>
+                <Responsive {...Responsive.onlyComputer}>
+                    <div style={{height: "2em"}}/>
+                </Responsive>
 
-                    <MainContent mode={this.state.mode} errorMessage={this.state.errorMessage} color={this.props.color}
-                                 rooms={this.state.rooms} onRoomJoin={this.joinRoom.bind(this)}
-                                 onBackToSelect={this.handleBackToSelect.bind(this)}
-                                 selectedAnswer={this.state.selectedAnswer}
-                                 onBackToCreate={this.handleBackToCreate.bind(this)} roomName={this.state.roomName}
-                                 roomState={this.state.roomState} roomQuestion={this.state.roomQuestion}
-                                 roomResults={this.state.roomResults} selectAnswer={this.selectAnswer.bind(this)}
-                                 leaveRoom={this.leaveRoomRequest.bind(this)} onLogin={this.loginRequest.bind(this)}
-                                 questionDatabase={this.state.questionDatabase}
-                                 questionUserState={this.state.questionUserState}
-                                 onCreateRoom={this.createRoomRequest.bind(this)}
-                                 roomMaster={this.state.roomMaster} questionProgress={this.state.questionProgress}/>
-                    <div style={{height: "5em"}}/>
-                    <AppFooter version={"0.3.0"} footerLink={this.props.footerLink}/>
-                </MathJax.Provider>
-            </div>
+                <MainContent appState={this.props.appState} color={this.props.color}/>
+                <div style={{height: "5em"}}/>
+                <AppFooter version={"0.3.0"} footerLink={this.props.footerLink}/>
+            </MathJax.Provider>
         );
     }
 }
