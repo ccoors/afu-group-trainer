@@ -12,7 +12,7 @@ import RoomJoined from "./room_joined";
 import CreateRoom from "./create_room";
 import RoomMaster from "./room_master";
 
-import {AppModes} from "./App"
+import {AppModes} from "./controller"
 
 class MainContent extends React.Component {
     render() {

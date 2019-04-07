@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import "semantic-ui-css/semantic.css";
 import "./index.css";
 
-import App from "./components/App";
+import Controller from "./components/controller";
 
 import config from "./config";
 
@@ -21,6 +21,5 @@ if (!config.webSocketUrl) {
 
 const rootElement = document.getElementById("root");
 
-ReactDOM.render(<App socketUrl={config.webSocketUrl} mathJaxProvider={config.mathJaxProvider}
-                     footerLink={config.footerLink} release={config.release}
-                     color="blue"/>, rootElement);
+ReactDOM.render(<Controller socketUrl={config.webSocketUrl} mathJaxProvider={config.mathJaxProvider}
+                     footerLink={config.footerLink} release={config.release} color="blue"/>, rootElement);

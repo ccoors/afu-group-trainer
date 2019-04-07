@@ -5,31 +5,7 @@ import MainContent from "./main_content";
 import MathJax from "react-mathjax";
 import {ltrim} from "../util";
 import {Responsive} from "semantic-ui-react";
-
-const AppModes = Object.freeze({
-    CONNECTING: 1,
-    LOADING_ROOMS: 2,
-    JOINING_ROOM: 3,
-    LOGGING_IN: 4,
-    CREATING_ROOM: 5,
-
-    JOIN_ROOM_FAILED: 10,
-    LOGIN_FAILED: 11,
-    CREATE_ROOM_FAILED: 12,
-    REMOVED_FROM_ROOM: 13,
-
-    START_PAGE: 20,
-
-    ROOM_JOINED: 30,
-
-    CREATE_ROOM: 40,
-
-    ROOM_MASTER: 50,
-
-    FATAL_ERROR: 100,
-});
-
-export {AppModes};
+import {AppModes} from "./controller";
 
 const RoomMasterModes = {
     IDLE: 1,
@@ -46,7 +22,6 @@ class App extends Component {
         this.state = {
             mode: AppModes.CONNECTING,
             rooms: [],
-            socket: new WebSocket(props.socketUrl),
             roomState: 0,
             selectedAnswer: -1,
             roomName: "",
@@ -66,38 +41,6 @@ class App extends Component {
                 initialQuestionLength: 0,
             },
             nextKeepAliveTimeout: null,
-        };
-
-        let app = this;
-        let socket = this.state.socket;
-
-        socket.onopen = () => {
-            app.setState({
-                mode: AppModes.LOADING_ROOMS
-            });
-        };
-
-        socket.onclose = () => {
-            window.setTimeout(function () {
-                app.setState({
-                    mode: AppModes.FATAL_ERROR,
-                    errorMessage: "Die Verbindung zum Server wurde beendet"
-                });
-            }, 1000);
-        };
-
-        socket.onerror = () => {
-            app.setState({
-                mode: AppModes.FATAL_ERROR,
-                errorMessage: "Die Verbindung zum Server ist fehlgeschlagen"
-            });
-        };
-
-        socket.onmessage = function (e) {
-            if (!app.props.release) {
-                console.log("Received: " + e.data);
-            }
-            app.parseMessage(app, e.data);
         };
     }
 

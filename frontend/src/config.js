@@ -8,7 +8,6 @@ config.webSocketPort = 63605;
 config.webSocketUrl = "";
 config.footerLink = <List.Item href='about:blank' target="_blank"
                                rel="noopener noreferrer">Impressum &amp; Datenschutz</List.Item>;
-config.release = true;
-
+config.release = false;
 
 export default config;
