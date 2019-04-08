@@ -9,29 +9,29 @@ import {AppModes} from "./Controller";
 class App extends Component {
     // constructor(props) {
     //     super(props);
-        // this.state = {
-        //     mode: AppModes.CONNECTING,
-        //     rooms: [],
-        //     roomState: 0,
-        //     selectedAnswer: -1,
-        //     roomName: "",
-        //     roomQuestion: {},
-        //     roomResults: {},
-        //     questionDatabase: {},
-        //     questionUserState: {
-        //         selected: 0,
-        //         total: 0,
-        //     },
-        //     roomUUID: "",
-        //     errorMessage: "",
-        //     loggedIn: false,
-        //     roomMaster: this.getEmptyRoomMaster(),
-        //     questionProgress: {
-        //         remainingQuestions: 0,
-        //         initialQuestionLength: 0,
-        //     },
-        //     nextKeepAliveTimeout: null,
-        // };
+    // this.state = {
+    //     mode: AppModes.CONNECTING,
+    //     rooms: [],
+    //     roomState: 0,
+    //     selectedAnswer: -1,
+    //     roomName: "",
+    //     roomQuestion: {},
+    //     roomResults: {},
+    //     questionDatabase: {},
+    //     questionUserState: {
+    //         selected: 0,
+    //         total: 0,
+    //     },
+    //     roomUUID: "",
+    //     errorMessage: "",
+    //     loggedIn: false,
+    //     roomMaster: this.getEmptyRoomMaster(),
+    //     questionProgress: {
+    //         remainingQuestions: 0,
+    //         initialQuestionLength: 0,
+    //     },
+    //     nextKeepAliveTimeout: null,
+    // };
     // }
 
     // startQuestionsRequest() {

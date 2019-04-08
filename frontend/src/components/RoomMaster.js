@@ -7,7 +7,15 @@ import QuestionRORenderer from "./QuestionRORenderer"
 import Results from "./Results";
 import QuestionProgress from "./QuestionProgress";
 import {RoomMasterModes} from "./Controller";
-import {backToIdle, leaveRoom} from "../util/actions";
+import {
+    backToIdle,
+    endQuestions,
+    leaveRoom,
+    nextQuestion,
+    questionSettings,
+    showResults,
+    startQuestions
+} from "../util/actions";
 
 class RoomMaster extends React.Component {
     constructor(props) {
@@ -17,6 +25,21 @@ class RoomMaster extends React.Component {
             searchInput: "",
             shuffleQuestions: true,
             showOutdated: false,
+
+            uuid: "",
+            single: false,
+        }
+    }
+
+    static getCategorySuffix(category) {
+        if (category.prefix !== "" && category.questions.length !== 0) {
+            return <p>Fragenprefix {category.prefix}, {category.questions.length} Fragen</p>;
+        } else if (category.prefix !== "" && category.questions.length === 0) {
+            return <p>Fragenprefix {category.prefix}</p>;
+        } else if (category.questions.length !== 0) {
+            return <p>{category.questions.length} Fragen</p>;
+        } else {
+            return "";
         }
     }
 
@@ -42,20 +65,41 @@ class RoomMaster extends React.Component {
         })
     }
 
-    startWithUUID(uuid, single, startQuestions) {
-        // TODO
+    goToSettings(uuid, single) {
+        this.setState({
+            uuid: uuid,
+            single: single,
+        });
+        this.props.appState.actionHandler(questionSettings());
     }
 
-    static getCategorySuffix(category) {
-        if (category.prefix !== "" && category.questions.length !== 0) {
-            return <p>Fragenprefix {category.prefix}, {category.questions.length} Fragen</p>;
-        } else if (category.prefix !== "" && category.questions.length === 0) {
-            return <p>Fragenprefix {category.prefix}</p>;
-        } else if (category.questions.length !== 0) {
-            return <p>{category.questions.length} Fragen</p>;
-        } else {
-            return "";
-        }
+    quickStartQuestions(uuid) {
+        this.setState({
+            uuid: uuid,
+            single: true,
+            showOutdated: true,
+        }, () => {
+            this.startQuestions();
+        });
+    }
+
+    startQuestions() {
+        this.props.appState.actionHandler(startQuestions(this.state.uuid,
+            this.state.single,
+            this.state.shuffleQuestions,
+            this.state.showOutdated));
+    }
+
+    endQuestions() {
+        this.props.appState.actionHandler(endQuestions());
+    }
+
+    nextQuestion() {
+        this.props.appState.actionHandler(nextQuestion());
+    }
+
+    showResults() {
+        this.props.appState.actionHandler(showResults());
     }
 
     renderDatabaseTree(category) {
@@ -68,7 +112,7 @@ class RoomMaster extends React.Component {
 
         return <li key={"deep_" + category.uuid}>
             <p className="linkButton"
-               onClick={() => this.startWithUUID(category.uuid, false, false)}>{category.name}</p>
+               onClick={() => this.goToSettings(category.uuid, false)}>{category.name}</p>
             {suffix}
             {childrenTree.length > 0 && <ul>{childrenTree}</ul>}
         </li>;
@@ -90,7 +134,7 @@ class RoomMaster extends React.Component {
             let suffix = RoomMaster.getCategorySuffix(category);
             jsx = <li key={"flat_" + category.uuid}>
                 <p className="linkButton"
-                   onClick={() => this.startWithUUID(category.uuid, false, false)}>{category.name}</p>
+                   onClick={() => this.goToSettings(category.uuid, false)}>{category.name}</p>
                 {suffix}</li>;
         }
         let next = category.children.map(c => this.searchDatabaseInternally(c)).reduce((l, r) => l.concat(r), []);
@@ -118,7 +162,7 @@ class RoomMaster extends React.Component {
             return <li key={"question_" + q.uuid}>
                 <p className="linkButton"
                    onClick={() => {
-                       this.startWithUUID(q.uuid, true, true);
+                       this.quickStartQuestions(q.uuid);
                    }}>{q.id}: {q.question}</p>
             </li>;
         });
@@ -136,7 +180,7 @@ class RoomMaster extends React.Component {
     }
 
     startABCDQuestions() {
-        this.startWithUUID("", true, true);
+        this.quickStartQuestions("");
     }
 
     render() {
@@ -180,7 +224,7 @@ class RoomMaster extends React.Component {
                             <Icon name="chevron left"/>
                         </Button>
                         <Button color="green" icon labelPosition="right"
-                                onClick={this.props.roomMaster.startQuestions}>
+                                onClick={this.startQuestions.bind(this)}>
                             <Button.Content visible>Starten</Button.Content>
                             <Icon name="play"/>
                         </Button>
@@ -196,18 +240,18 @@ class RoomMaster extends React.Component {
 
                 <Button.Group fluid>
                     <Button color="red" size="small" icon labelPosition="left"
-                            onClick={this.props.roomMaster.endQuestions}>
+                            onClick={this.endQuestions.bind(this)}>
                         <Button.Content visible>Fragen beenden</Button.Content>
                         <Icon name="close"/>
                     </Button>
                     {replacedQuestion &&
                     <Button color="yellow" size="small" icon labelPosition="right"
-                            onClick={this.props.roomMaster.nextQuestion}>
+                            onClick={this.nextQuestion.bind(this)}>
                         <Button.Content visible>Frage überspringen</Button.Content>
                         <Icon name="fast forward"/>
                     </Button>}
                     <Button color="green" size="small" icon labelPosition="right"
-                            onClick={this.props.roomMaster.showResults}>
+                            onClick={this.showResults.bind(this)}>
                         <Button.Content visible>Frage auswerten</Button.Content>
                         <Icon name="chart bar"/>
                     </Button>
@@ -219,12 +263,12 @@ class RoomMaster extends React.Component {
 
                 <Button.Group fluid>
                     <Button color="red" size="small" icon labelPosition="left"
-                            onClick={this.props.roomMaster.endQuestions}>
+                            onClick={this.endQuestions.bind(this)}>
                         <Button.Content visible>Fragen beenden</Button.Content>
                         <Icon name="close"/>
                     </Button>
                     <Button color="green" size="small" icon labelPosition="right"
-                            onClick={this.props.roomMaster.nextQuestion}>
+                            onClick={this.nextQuestion.bind(this)}>
                         <Button.Content visible>Nächste Frage</Button.Content>
                         <Icon name="right arrow"/>
                     </Button>

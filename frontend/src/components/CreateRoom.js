@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Button, Container, Header, Input, Segment, Form} from "semantic-ui-react"
+import {Button, Container, Form, Header, Input, Segment} from "semantic-ui-react"
 import {createRoom} from "../util/actions";
 
 class CreateRoom extends React.Component {

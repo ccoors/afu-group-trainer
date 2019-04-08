@@ -21,7 +21,6 @@ class QuestionRORenderer extends React.Component {
     }
 
     render() {
-        console.log(this.props.question);
         return <Segment.Group>
             <Segment>
                 {this.props.question.outdated &&

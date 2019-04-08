@@ -13,7 +13,7 @@ class AppHeader extends React.Component {
                     Formelsammlung Klasse E
                 </Menu.Item>
                 {/*<Menu.Item href={"formelsammlung/Formelsammlung_A.pdf"} target={"_blank"} color={"black"} active>*/}
-                    {/*Formelsammlung Klasse A*/}
+                {/*Formelsammlung Klasse A*/}
                 {/*</Menu.Item>*/}
                 {this.props.appState.roomName !== "" &&
                 <Menu.Item>
