@@ -10,6 +10,8 @@ const UserActions = Object.freeze({
 
     CREATE_ROOM: 20,
     START_QUESTIONS: 21,
+    BACK_TO_IDLE: 22,
+
     LEAVE_ROOM: 30,
 });
 
@@ -54,6 +56,12 @@ function createRoom(roomName, password) {
         action: UserActions.CREATE_ROOM,
         roomName: roomName,
         password: password,
+    };
+}
+
+function backToIdle() {
+    return {
+        action: UserActions.BACK_TO_IDLE,
     };
 }
 
@@ -120,4 +128,4 @@ function updateState(action, setState, socket) {
 }
 
 
-export {UserActions, backToStart, backToCreateRoom, joinRoom, login, selectAnswer, createRoom, leaveRoom, updateState};
+export {UserActions, backToStart, backToCreateRoom, joinRoom, login, selectAnswer, createRoom, backToIdle, leaveRoom, updateState};

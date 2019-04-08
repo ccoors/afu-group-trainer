@@ -7,7 +7,7 @@ import QuestionRORenderer from "./QuestionRORenderer"
 import Results from "./Results";
 import QuestionProgress from "./QuestionProgress";
 import {RoomMasterModes} from "./Controller";
-import {leaveRoom} from "../util/actions";
+import {backToIdle, leaveRoom} from "../util/actions";
 
 class RoomMaster extends React.Component {
     constructor(props) {
@@ -15,7 +15,25 @@ class RoomMaster extends React.Component {
 
         this.state = {
             searchInput: "",
+            shuffleQuestions: true,
+            showOutdated: false,
         }
+    }
+
+    toggleShuffle() {
+        this.setState(state => {
+            return {
+                shuffleQuestions: !state.shuffleQuestions,
+            }
+        })
+    }
+
+    toggleOutdated() {
+        this.setState(state => {
+            return {
+                showOutdated: !state.showOutdated,
+            }
+        })
     }
 
     setSearchInput(input) {
@@ -148,16 +166,16 @@ class RoomMaster extends React.Component {
                 <Header as="h1">Einstellungen</Header>
                 <Form>
                     <Form.Field>
-                        <Checkbox label={{children: "Fragen mischen"}} checked={this.props.roomMaster.shuffleQuestions}
-                                  onChange={this.props.roomMaster.toggleShuffle}/><br/>
+                        <Checkbox label={{children: "Fragen mischen"}} checked={this.state.shuffleQuestions}
+                                  onChange={this.toggleShuffle.bind(this)}/><br/>
                         <Checkbox label={{children: "Nicht mehr relevante Fragen stellen"}}
-                                  checked={this.props.roomMaster.showObsoleteQuestions}
-                                  onChange={this.props.roomMaster.toggleOutdated}/>
+                                  checked={this.state.showOutdated}
+                                  onChange={this.toggleOutdated.bind(this)}/>
                     </Form.Field>
 
                     <Button.Group>
                         <Button color="red" icon labelPosition="left"
-                                onClick={this.props.roomMaster.backToIdle}>
+                                onClick={() => this.props.appState.actionHandler(backToIdle())}>
                             <Button.Content visible>Zurück</Button.Content>
                             <Icon name="chevron left"/>
                         </Button>
