@@ -1,7 +1,7 @@
 import React from 'react';
 
 import App from './App';
-import {updateState, UserActions} from "../util/actions";
+import {updateState} from "../util/actions";
 
 const AppModes = Object.freeze({
     CONNECTING: 1,
@@ -26,23 +26,46 @@ const AppModes = Object.freeze({
     FATAL_ERROR: 100,
 });
 
-export {AppModes};
+const RoomMasterModes = {
+    IDLE: 1,
+    SETTINGS: 2,
+    RUNNING: 3,
+    RESULTS: 4,
+};
+
+export {RoomMasterModes, AppModes};
 
 class Controller extends React.Component {
     constructor(props) {
         super(props);
 
+        // React doesn't like nested states. :(
         this.state = {
+            // Globals
             mode: AppModes.CONNECTING,
             rooms: [],
-
-            roomName: "",
-            loggedIn: false,
-
             questionDatabase: {},
+
+            // Room
+            roomName: "",
+            roomUUID: "",
+            usersOnline: 0,
+            usersAnswered: 0,
+
+            // Question
+            currentQuestion: null,
+
+            // Admin
+            loggedIn: false,
+            roomMasterMode: RoomMasterModes.IDLE,
+            initialQuestionLength: 0,
+            remainingQuestions: 0,
+
+            // Util
             nextKeepAliveTimeout: null,
             errorMessage: "",
 
+            // Action handler
             actionHandler: this.handleAction.bind(this)
         };
 
@@ -127,6 +150,23 @@ class Controller extends React.Component {
             this.setState({
                 questionDatabase: data.QuestionDatabase,
             });
+        } else if (data.hasOwnProperty("CreateRoomResult")) {
+            let result = data.CreateRoomResult.success;
+            let uuid = data.CreateRoomResult.uuid;
+
+            if (result) {
+                this.setState({
+                    mode: AppModes.ROOM_MASTER,
+                    roomUUID: uuid,
+                    roomMasterMode: RoomMasterModes.IDLE,
+                });
+            } else {
+                this.setState({
+                    mode: AppModes.CREATE_ROOM_FAILED,
+                    roomName: "",
+                    roomUUID: "",
+                });
+            }
         } else {
             this.setState({
                 mode: AppModes.FATAL_ERROR,

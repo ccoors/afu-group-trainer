@@ -27,30 +27,20 @@ class MainContent extends React.Component {
                 return (<RoomID appState={this.props.appState} color={this.props.color}/>);
             case AppModes.JOIN_ROOM_FAILED:
                 return (<RecoverableError message={"Konnte Raum nicht beitreten. Passwort falsch?"}
-                                          onOk={() => {
-                                              let action = backToStart();
-                                              this.props.appState.actionHandler(action);
-                                          }
-                                          } color={this.props.color}/>);
+                                          onOk={() => this.props.appState.actionHandler(backToStart())}
+                                          color={this.props.color}/>);
             case AppModes.LOGIN_FAILED:
                 return (<RecoverableError message={"Login fehlgeschlagen. Passwort falsch?"}
-                                          onOk={() => {
-                                              let action = backToStart();
-                                              this.props.appState.actionHandler(action);
-                                          }} color={this.props.color}/>);
+                                          onOk={() => this.props.appState.actionHandler(backToStart())}
+                                          color={this.props.color}/>);
             case AppModes.CREATE_ROOM_FAILED:
                 return (<RecoverableError message={"Raum konnte nicht erstellt werden."}
-                                          onOk={() => {
-                                              let action = backToCreateRoom();
-                                              this.props.appState.actionHandler(action);
-                                          }} color={this.props.color}/>);
+                                          onOk={() => this.props.appState.actionHandler(backToCreateRoom())}
+                                          color={this.props.color}/>);
             case AppModes.REMOVED_FROM_ROOM:
                 return (<RecoverableError
                     message={"Sie wurden aus dem Raum entfernt. Vermutlich wurde der Raum geschlossen."}
-                    onOk={() => {
-                        let action = backToStart();
-                        this.props.appState.actionHandler(action);
-                    }} color={this.props.color}/>);
+                    onOk={() => this.props.appState.actionHandler(backToStart())} color={this.props.color}/>);
             case AppModes.ROOM_JOINED:
                 return (<RoomJoined roomName={this.props.roomName} roomState={this.props.roomState}
                                     roomQuestion={this.props.roomQuestion} roomResults={this.props.roomResults}
@@ -58,14 +48,9 @@ class MainContent extends React.Component {
                                     questionProgress={this.props.questionProgress} color={this.props.color}
                                     selectedAnswer={this.props.selectedAnswer}/>);
             case AppModes.CREATE_ROOM:
-                return (<CreateRoom color={this.props.color} onCreateRoom={this.props.onCreateRoom}/>);
+                return (<CreateRoom appState={this.props.appState} color={this.props.color}/>);
             case AppModes.ROOM_MASTER:
-                return (<RoomMaster roomName={this.props.roomName} questionDatabase={this.props.questionDatabase}
-                                    leaveRoom={this.props.leaveRoom} color={this.props.color}
-                                    questionUserState={this.props.questionUserState}
-                                    roomQuestion={this.props.roomQuestion} roomResults={this.props.roomResults}
-                                    roomMaster={this.props.roomMaster}
-                                    questionProgress={this.props.questionProgress}/>);
+                return (<RoomMaster appState={this.props.appState} color={this.props.color}/>);
             case AppModes.FATAL_ERROR:
             default:
                 window.onbeforeunload = undefined;

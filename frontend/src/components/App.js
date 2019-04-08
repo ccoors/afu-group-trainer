@@ -3,22 +3,12 @@ import AppHeader from "./Header";
 import AppFooter from "./Footer";
 import MainContent from "./MainContent";
 import MathJax from "react-mathjax";
-import {ltrim} from "../util/util";
 import {Responsive} from "semantic-ui-react";
 import {AppModes} from "./Controller";
 
-const RoomMasterModes = {
-    IDLE: 1,
-    SETTINGS: 2,
-    RUNNING: 3,
-    RESULTS: 4,
-};
-
-export {RoomMasterModes};
-
 class App extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
         // this.state = {
         //     mode: AppModes.CONNECTING,
         //     rooms: [],
@@ -42,110 +32,110 @@ class App extends Component {
         //     },
         //     nextKeepAliveTimeout: null,
         // };
-    }
+    // }
 
-    startQuestionsRequest() {
-        this.state.socket.send(JSON.stringify({
-            StartQuestions: {
-                mode: this.state.roomMaster.startUUID !== "" ? "uuid" : "plain",
-                start_uuid: this.state.roomMaster.startUUID,
-                shuffle: this.state.roomMaster.shuffleQuestions,
-                ignore_outdated: !this.state.roomMaster.showObsoleteQuestions,
-            }
-        }));
-    }
-
-    showResultsRequest() {
-        this.state.socket.send(JSON.stringify("ShowResults"));
-    }
-
-    nextQuestionRequest() {
-        this.state.socket.send(JSON.stringify("NextQuestion"));
-    }
-
-    endQuestionsRequest() {
-        this.setState({
-            roomMaster: {
-                ...this.state.roomMaster,
-                searchInput: "",
-            }
-        });
-        this.state.socket.send(JSON.stringify("EndQuestions"));
-    }
-
-    toggleShuffleQuestions() {
-        this.setState({
-            roomMaster: {
-                ...this.state.roomMaster,
-                shuffleQuestions: !this.state.roomMaster.shuffleQuestions,
-            }
-        });
-    }
-
-    toggleOutdatedQuestions() {
-        this.setState({
-            roomMaster: {
-                ...this.state.roomMaster,
-                showObsoleteQuestions: !this.state.roomMaster.showObsoleteQuestions,
-            }
-        });
-    }
-
-    setStartUUID(uuid, single, callback) {
-        this.setState({
-            roomMaster: {
-                ...this.state.roomMaster,
-                mode: single ? RoomMasterModes.RUNNING : RoomMasterModes.SETTINGS,
-                startUUID: uuid,
-                singleUUID: single,
-            }
-        }, callback);
-    }
-
-    setSearchInput(input) {
-        this.setState({
-            roomMaster: {
-                ...this.state.roomMaster,
-                searchInput: ltrim(input.target.value.toLowerCase()),
-            }
-        });
-    }
-
-    setBackToIdle() {
-        this.setState({
-            roomMaster: {
-                ...this.state.roomMaster,
-                mode: RoomMasterModes.IDLE,
-            }
-        });
-    }
-
-    getEmptyRoomMaster() {
-        return {
-            mode: RoomMasterModes.IDLE,
-            searchInput: "",
-            startUUID: "",
-            singleUUID: false,
-            shuffleQuestions: true,
-            showObsoleteQuestions: false,
-            startQuestions: this.startQuestionsRequest.bind(this),
-            showResults: this.showResultsRequest.bind(this),
-            nextQuestion: this.nextQuestionRequest.bind(this),
-            endQuestions: this.endQuestionsRequest.bind(this),
-            toggleShuffle: this.toggleShuffleQuestions.bind(this),
-            toggleOutdated: this.toggleOutdatedQuestions.bind(this),
-            setStartUUID: this.setStartUUID.bind(this),
-            setSearchInput: this.setSearchInput.bind(this),
-            backToIdle: this.setBackToIdle.bind(this),
-        };
-    }
-
-    timeout() {
-        this.setState({
-            mode: AppModes.ERROR,
-            errorMessage: "Die Verbindung zum Server ist abgebrochen."
-        });
-    }
+    // startQuestionsRequest() {
+    //     this.state.socket.send(JSON.stringify({
+    //         StartQuestions: {
+    //             mode: this.state.roomMaster.startUUID !== "" ? "uuid" : "plain",
+    //             start_uuid: this.state.roomMaster.startUUID,
+    //             shuffle: this.state.roomMaster.shuffleQuestions,
+    //             ignore_outdated: !this.state.roomMaster.showObsoleteQuestions,
+    //         }
+    //     }));
+    // }
+    //
+    // showResultsRequest() {
+    //     this.state.socket.send(JSON.stringify("ShowResults"));
+    // }
+    //
+    // nextQuestionRequest() {
+    //     this.state.socket.send(JSON.stringify("NextQuestion"));
+    // }
+    //
+    // endQuestionsRequest() {
+    //     this.setState({
+    //         roomMaster: {
+    //             ...this.state.roomMaster,
+    //             searchInput: "",
+    //         }
+    //     });
+    //     this.state.socket.send(JSON.stringify("EndQuestions"));
+    // }
+    //
+    // toggleShuffleQuestions() {
+    //     this.setState({
+    //         roomMaster: {
+    //             ...this.state.roomMaster,
+    //             shuffleQuestions: !this.state.roomMaster.shuffleQuestions,
+    //         }
+    //     });
+    // }
+    //
+    // toggleOutdatedQuestions() {
+    //     this.setState({
+    //         roomMaster: {
+    //             ...this.state.roomMaster,
+    //             showObsoleteQuestions: !this.state.roomMaster.showObsoleteQuestions,
+    //         }
+    //     });
+    // }
+    //
+    // setStartUUID(uuid, single, callback) {
+    //     this.setState({
+    //         roomMaster: {
+    //             ...this.state.roomMaster,
+    //             mode: single ? RoomMasterModes.RUNNING : RoomMasterModes.SETTINGS,
+    //             startUUID: uuid,
+    //             singleUUID: single,
+    //         }
+    //     }, callback);
+    // }
+    //
+    // setSearchInput(input) {
+    //     this.setState({
+    //         roomMaster: {
+    //             ...this.state.roomMaster,
+    //             searchInput: ltrim(input.target.value.toLowerCase()),
+    //         }
+    //     });
+    // }
+    //
+    // setBackToIdle() {
+    //     this.setState({
+    //         roomMaster: {
+    //             ...this.state.roomMaster,
+    //             mode: RoomMasterModes.IDLE,
+    //         }
+    //     });
+    // }
+    //
+    // getEmptyRoomMaster() {
+    //     return {
+    //         mode: RoomMasterModes.IDLE,
+    //         searchInput: "",
+    //         startUUID: "",
+    //         singleUUID: false,
+    //         shuffleQuestions: true,
+    //         showObsoleteQuestions: false,
+    //         startQuestions: this.startQuestionsRequest.bind(this),
+    //         showResults: this.showResultsRequest.bind(this),
+    //         nextQuestion: this.nextQuestionRequest.bind(this),
+    //         endQuestions: this.endQuestionsRequest.bind(this),
+    //         toggleShuffle: this.toggleShuffleQuestions.bind(this),
+    //         toggleOutdated: this.toggleOutdatedQuestions.bind(this),
+    //         setStartUUID: this.setStartUUID.bind(this),
+    //         setSearchInput: this.setSearchInput.bind(this),
+    //         backToIdle: this.setBackToIdle.bind(this),
+    //     };
+    // }
+    //
+    // timeout() {
+    //     this.setState({
+    //         mode: AppModes.ERROR,
+    //         errorMessage: "Die Verbindung zum Server ist abgebrochen."
+    //     });
+    // }
 
     parseMessage(app, msg) {
         let data = JSON.parse(msg);
@@ -173,19 +163,19 @@ class App extends Component {
             }
         } else if (data.RoomState) {
             let mode = null;
-            switch (data.RoomState.state) {
-                default:
-                case 0:
-                    if (app.state.roomMaster.mode > RoomMasterModes.SETTINGS) {
-                        mode = RoomMasterModes.IDLE;
-                    }
-                    break;
-                case 1:
-                    mode = RoomMasterModes.RUNNING;
-                    break;
-                case 2:
-                    mode = RoomMasterModes.RESULTS;
-            }
+            // switch (data.RoomState.state) {
+            //     default:
+            //     case 0:
+            //         if (app.state.roomMaster.mode > RoomMasterModes.SETTINGS) {
+            //             mode = RoomMasterModes.IDLE;
+            //         }
+            //         break;
+            //     case 1:
+            //         mode = RoomMasterModes.RUNNING;
+            //         break;
+            //     case 2:
+            //         mode = RoomMasterModes.RESULTS;
+            // }
             if (mode === null) {
                 mode = app.state.roomMaster.mode;
             }

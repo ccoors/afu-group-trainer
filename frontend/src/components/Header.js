@@ -17,7 +17,7 @@ class AppHeader extends React.Component {
                 {/*</Menu.Item>*/}
                 {this.props.appState.roomName !== "" &&
                 <Menu.Item>
-                    In Raum „{this.props.roomName}“
+                    In Raum „{this.props.appState.roomName}“
                 </Menu.Item>}
             </Menu>
         );

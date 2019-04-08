@@ -10,7 +10,7 @@ const UserActions = Object.freeze({
 
     CREATE_ROOM: 20,
     START_QUESTIONS: 21,
-    CLOSE_ROOM: 30,
+    LEAVE_ROOM: 30,
 });
 
 function backToStart() {
@@ -57,6 +57,12 @@ function createRoom(roomName, password) {
     };
 }
 
+function leaveRoom() {
+    return {
+        action: UserActions.LEAVE_ROOM,
+    }
+}
+
 function updateState(action, setState, socket) {
     switch (action.action) {
         case UserActions.BACK_TO_START:
@@ -81,6 +87,30 @@ function updateState(action, setState, socket) {
             setState({
                 mode: AppModes.CREATE_ROOM,
             });
+            break;
+        case UserActions.CREATE_ROOM:
+            socket.send(JSON.stringify({
+                CreateRoom: {
+                    room_name: action.roomName,
+                    password: action.password,
+                }
+            }));
+            setState({
+                mode: AppModes.CREATING_ROOM,
+                roomName: action.roomName,
+            });
+            break;
+        case UserActions.LEAVE_ROOM:
+            socket.send(JSON.stringify("LeaveRoom"));
+            setState(state => {
+                return {
+                    mode: state.loggedIn ? AppModes.CREATE_ROOM : AppModes.START_PAGE,
+                    roomName: "",
+                    roomState: 0,
+                    selectedAnswer: -1,
+                }
+            });
+            break;
         default:
             setState({
                 mode: AppModes.FATAL_ERROR,
@@ -90,4 +120,4 @@ function updateState(action, setState, socket) {
 }
 
 
-export {UserActions, backToStart, backToCreateRoom, joinRoom, login, selectAnswer, createRoom, updateState};
+export {UserActions, backToStart, backToCreateRoom, joinRoom, login, selectAnswer, createRoom, leaveRoom, updateState};

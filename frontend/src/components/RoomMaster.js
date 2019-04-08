@@ -2,13 +2,32 @@ import React from "react";
 
 import {Button, Checkbox, Container, Form, Header, Icon, Input, Segment, Step,} from "semantic-ui-react";
 
-import {generateEmptyQuestion} from "../util/util";
+import {generateEmptyQuestion, ltrim} from "../util/util";
 import QuestionRORenderer from "./QuestionRORenderer"
 import Results from "./Results";
 import QuestionProgress from "./QuestionProgress";
-import {RoomMasterModes} from "./App";
+import {RoomMasterModes} from "./Controller";
+import {leaveRoom} from "../util/actions";
 
 class RoomMaster extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            searchInput: "",
+        }
+    }
+
+    setSearchInput(input) {
+        this.setState({
+            searchInput: ltrim(input.target.value.toLowerCase()),
+        })
+    }
+
+    startWithUUID(uuid, single, startQuestions) {
+        // TODO
+    }
+
     static getCategorySuffix(category) {
         if (category.prefix !== "" && category.questions.length !== 0) {
             return <p>Fragenprefix {category.prefix}, {category.questions.length} Fragen</p>;
@@ -31,7 +50,7 @@ class RoomMaster extends React.Component {
 
         return <li key={"deep_" + category.uuid}>
             <p className="linkButton"
-               onClick={() => this.props.roomMaster.setStartUUID(category.uuid, false)}>{category.name}</p>
+               onClick={() => this.startWithUUID(category.uuid, false, false)}>{category.name}</p>
             {suffix}
             {childrenTree.length > 0 && <ul>{childrenTree}</ul>}
         </li>;
@@ -39,7 +58,7 @@ class RoomMaster extends React.Component {
 
     renderDatabaseNormal() {
         return <ul key="rootNode">
-            {this.props.questionDatabase.children.map(c => this.renderDatabaseTree(c))}
+            {this.props.appState.questionDatabase.children.map(c => this.renderDatabaseTree(c))}
         </ul>;
     }
 
@@ -49,11 +68,11 @@ class RoomMaster extends React.Component {
         }
 
         let jsx = null;
-        if (category.name.toLowerCase().includes(this.props.roomMaster.searchInput)) {
+        if (category.name.toLowerCase().includes(this.state.searchInput)) {
             let suffix = RoomMaster.getCategorySuffix(category);
             jsx = <li key={"flat_" + category.uuid}>
                 <p className="linkButton"
-                   onClick={() => this.props.roomMaster.setStartUUID(category.uuid, false)}>{category.name}</p>
+                   onClick={() => this.startWithUUID(category.uuid, false, false)}>{category.name}</p>
                 {suffix}</li>;
         }
         let next = category.children.map(c => this.searchDatabaseInternally(c)).reduce((l, r) => l.concat(r), []);
@@ -64,8 +83,7 @@ class RoomMaster extends React.Component {
     }
 
     searchDatabase() {
-        let databaseResults = this.searchDatabaseInternally(this.props.questionDatabase);
-        console.log(databaseResults);
+        let databaseResults = this.searchDatabaseInternally(this.props.appState.questionDatabase);
         if (databaseResults.length === 0) {
             return null;
         } else {
@@ -75,14 +93,14 @@ class RoomMaster extends React.Component {
 
     searchQuestionsInternally(category) {
         let matchingQuestions = category.questions.filter(q => {
-            return q.question.toLowerCase().includes(this.props.roomMaster.searchInput)
-                || q.id.toLowerCase().includes(this.props.roomMaster.searchInput)
-                || q.answers.filter(a => a.toLowerCase().includes(this.props.roomMaster.searchInput)).length > 0;
+            return q.question.toLowerCase().includes(this.state.searchInput)
+                || q.id.toLowerCase().includes(this.state.searchInput)
+                || q.answers.filter(a => a.toLowerCase().includes(this.state.searchInput)).length > 0;
         }).map(q => {
             return <li key={"question_" + q.uuid}>
                 <p className="linkButton"
                    onClick={() => {
-                       this.props.roomMaster.setStartUUID(q.uuid, true, () => this.props.roomMaster.startQuestions());
+                       this.startWithUUID(q.uuid, true, true);
                    }}>{q.id}: {q.question}</p>
             </li>;
         });
@@ -91,7 +109,7 @@ class RoomMaster extends React.Component {
     }
 
     searchQuestions() {
-        let databaseResults = this.searchQuestionsInternally(this.props.questionDatabase);
+        let databaseResults = this.searchQuestionsInternally(this.props.appState.questionDatabase);
         if (databaseResults.length === 0) {
             return null;
         } else {
@@ -100,34 +118,32 @@ class RoomMaster extends React.Component {
     }
 
     startABCDQuestions() {
-        this.props.roomMaster.setStartUUID("", true, () => this.props.roomMaster.startQuestions());
+        this.startWithUUID("", true, true);
     }
 
     render() {
-        console.log(this.props.roomMaster);
-
         let content = null;
 
         let replacedQuestion = false;
         let question = generateEmptyQuestion();
-        if (this.props.roomQuestion && this.props.roomQuestion.hasOwnProperty("uuid")) {
+        if (this.props.appState.currentQuestion && this.props.appState.currentQuestion.hasOwnProperty("uuid")) {
             question = this.props.roomQuestion;
-            replacedQuestion = true;
+            replacedQuestion = true; // TODO: HasNextQuestion
         }
 
-        if (this.props.roomMaster.mode === RoomMasterModes.IDLE) {
-            let databaseRendered = this.props.roomMaster.searchInput.length < 2 ?
+        if (this.props.appState.roomMasterMode === RoomMasterModes.IDLE) {
+            let databaseRendered = this.state.searchInput.length < 2 ?
                 this.renderDatabaseNormal() :
-                [<Header as="h2">Kategorien</Header>, this.searchDatabase(),
-                    <Header as="h2">Fragen</Header>, this.searchQuestions()];
+                [<Header as="h2" key="header_cat">Kategorien</Header>, this.searchDatabase(),
+                    <Header as="h2" key="header_quest">Fragen</Header>, this.searchQuestions()];
 
             content = <div>
                 <Input fluid placeholder="Frage oder Kategorie" icon="search"
-                       onChange={this.props.roomMaster.setSearchInput} value={this.props.roomMaster.searchInput}
+                       onChange={this.setSearchInput.bind(this)} value={this.state.searchInput}
                        style={{marginTop: "0.4em"}}/>
                 {databaseRendered}
             </div>;
-        } else if (this.props.roomMaster.mode === RoomMasterModes.SETTINGS) {
+        } else if (this.props.appState.roomMasterMode === RoomMasterModes.SETTINGS) {
             content = <Segment>
                 <Header as="h1">Einstellungen</Header>
                 <Form>
@@ -153,9 +169,9 @@ class RoomMaster extends React.Component {
                     </Button.Group>
                 </Form>
             </Segment>;
-        } else if (this.props.roomMaster.mode === RoomMasterModes.RUNNING) {
+        } else if (this.props.appState.roomMasterMode === RoomMasterModes.RUNNING) {
             content = <div>
-                <p>Bisher wurde die Frage von {this.props.questionUserState.selected} beantwortet.</p>
+                <p>Bisher wurde die Frage von {this.props.appState.usersAnswered} beantwortet.</p>
                 <QuestionRORenderer
                     question={question}
                     correctAnswer={-1}/>
@@ -179,7 +195,7 @@ class RoomMaster extends React.Component {
                     </Button>
                 </Button.Group>
             </div>;
-        } else if (this.props.roomMaster.mode === RoomMasterModes.RESULTS) {
+        } else if (this.props.appState.roomMasterMode === RoomMasterModes.RESULTS) {
             content = <div>
                 <Results roomResults={this.props.roomResults} selectedAnswer={-1} roomQuestion={question}/><br/>
 
@@ -197,28 +213,28 @@ class RoomMaster extends React.Component {
                 </Button.Group>
             </div>;
         }
-        let title = "Raum " + this.props.roomName + " - Referentensicht";
-        if (this.props.questionUserState.total) {
-            title += " (" + this.props.questionUserState.total + " online)";
+        let title = "Raum " + this.props.appState.roomName + " - Referentensicht";
+        if (this.props.appState.usersOnline) {
+            title += " (" + this.props.appState.usersOnline + " online)";
         }
 
-        let topContent = this.props.roomMaster.mode < RoomMasterModes.RUNNING ?
-            <div>{this.props.roomMaster.mode === RoomMasterModes.IDLE &&
+        let topContent = this.props.appState.roomMasterMode < RoomMasterModes.RUNNING ?
+            <div>{this.props.appState.roomMasterMode === RoomMasterModes.IDLE &&
             <Button color={this.props.color} size="small" onClick={this.startABCDQuestions.bind(this)}>
                 <Button.Content visible>Leere ABCD-Fragen stellen</Button.Content>
             </Button>}
 
                 <Step.Group size="mini" widths={2}>
-                    <Step active={this.props.roomMaster.mode === RoomMasterModes.IDLE}
-                          completed={this.props.roomMaster.mode > RoomMasterModes.IDLE}>
+                    <Step active={this.props.appState.roomMasterMode === RoomMasterModes.IDLE}
+                          completed={this.props.appState.roomMasterMode > RoomMasterModes.IDLE}>
                         <Icon name="question"/>
                         <Step.Content>
                             <Step.Title>Fragen auswählen</Step.Title>
                         </Step.Content>
                     </Step>
 
-                    <Step active={this.props.roomMaster.mode === RoomMasterModes.SETTINGS}
-                          completed={this.props.roomMaster.mode > RoomMasterModes.SETTINGS}>
+                    <Step active={this.props.appState.roomMasterMode === RoomMasterModes.SETTINGS}
+                          completed={this.props.appState.roomMasterMode > RoomMasterModes.SETTINGS}>
                         <Icon name="settings"/>
                         <Step.Content>
                             <Step.Title>Einstellungen</Step.Title>
@@ -229,7 +245,7 @@ class RoomMaster extends React.Component {
 
         return (
             <Container text>
-                <QuestionProgress questionProgress={this.props.questionProgress} color={this.props.color}/>
+                <QuestionProgress appState={this.props.appState} color={this.props.color}/>
                 <Segment>
                     <Header as="h1" content={title}/>
                     {topContent}
@@ -237,8 +253,9 @@ class RoomMaster extends React.Component {
                     {content}
                 </Segment>
 
-                {this.props.roomMaster.mode === RoomMasterModes.IDLE &&
-                <Button negative icon labelPosition="left" onClick={this.props.leaveRoom}>
+                {this.props.appState.roomMasterMode === RoomMasterModes.IDLE &&
+                <Button negative icon labelPosition="left"
+                        onClick={() => this.props.appState.actionHandler(leaveRoom())}>
                     <Button.Content visible>Raum verlassen</Button.Content>
                     <Icon name="close"/>
                 </Button>}
