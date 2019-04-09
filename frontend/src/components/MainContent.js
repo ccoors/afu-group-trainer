@@ -5,7 +5,7 @@ import RoomID from "./RoomID";
 import RecoverableError from "./RecoverableError";
 import RoomJoined from "./RoomJoined";
 import CreateRoom from "./CreateRoom";
-import RoomMaster from "./RoomMaster";
+import RoomMaster from "./RoomMaster/RoomMaster";
 
 import {AppModes} from "./Controller"
 import {backToCreateRoom, backToStart} from "../util/actions";
