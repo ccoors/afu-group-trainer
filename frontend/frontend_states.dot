@@ -1,0 +1,22 @@
+digraph G {
+    graph [ dpi = 300 ];
+    "CONNECTING" -> "LOADING_ROOMS" [label = "WebSocket connected"];
+    "LOADING_ROOMS" -> "START_PAGE" [label = "S: RoomList"];
+    "START_PAGE" -> "LOGGING_IN" [label = "C: Login"];
+    "LOGGING_IN" -> "LOGIN_FAILED" [label = "S: LoginResult: False"];
+    "LOGIN_FAILED" -> "START_PAGE";
+    "LOGGING_IN" -> "CREATE_ROOM" [label = "S: LoginResult: True"];
+    "CREATE_ROOM" -> "CREATING_ROOM" [label = "C: CreateRoom"];
+    "CREATING_ROOM" -> "CREATE_ROOM_FAILED" [label = "S: CreateRoomResult: False"];
+    "CREATING_ROOM" -> "ROOM_MASTER" [label = "S: CreateRoomResult: True"];
+    "CREATE_ROOM_FAILED" -> "CREATE_ROOM";
+    "ROOM_MASTER" -> "CREATE_ROOM" [label = "C: LeaveRoom"];
+
+    "START_PAGE" -> "JOINING_ROOM" [label = "C: JoinRoom"];
+    "JOINING_ROOM" -> "JOIN_ROOM_FAILED" [label = "S: RoomJoinResult: False"];
+    "JOIN_ROOM_FAILED" -> "START_PAGE";
+    "JOINING_ROOM" -> "ROOM_JOINED" [label = "S: RoomJoinResult: True"];
+    "ROOM_JOINED" -> "REMOVED_FROM_ROOM" [label = "S: LeaveRoom"];
+    "REMOVED_FROM_ROOM" -> "START_PAGE";
+    "ROOM_JOINED" -> "START_PAGE" [label = "C: LeaveRoom"];
+}

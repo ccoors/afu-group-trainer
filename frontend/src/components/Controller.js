@@ -167,10 +167,19 @@ class Controller extends React.Component {
                     roomUUID: "",
                 });
             }
-        } else {
+        } else if (data.hasOwnProperty("Error")) {
             this.setState({
                 mode: AppModes.FATAL_ERROR,
-                errorMessage: "Unbekannte Nachricht vom Server erhalten",
+                errorMessage: data.message
+            })
+        } else {
+            let errorMessage = "Unbekannte Nachricht vom Server erhalten";
+            if (!this.props.release) {
+                errorMessage += ": " + msg;
+            }
+            this.setState({
+                mode: AppModes.FATAL_ERROR,
+                errorMessage: errorMessage
             })
         }
     }
@@ -183,8 +192,7 @@ class Controller extends React.Component {
     }
 
     render() {
-        return <App appState={this.state} mathJaxProvider={this.props.mathJaxProvider}
-                    footerLink={this.props.footerLink} release={this.props.release} color={this.props.color}/>;
+        return <App appState={this.state} {...this.props}/>;
     }
 }
 

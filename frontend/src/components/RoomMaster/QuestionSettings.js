@@ -47,7 +47,7 @@ class QuestionSettings extends React.Component {
                     </Button>
                     <Button color="green" icon labelPosition="right"
                             onClick={() => {
-                                this.props.startQuestions(this.state.shuffle, this.state.outdated)
+                                this.props.onOk(this.state.shuffle, this.state.outdated)
                             }}>
                         <Button.Content visible>Starten</Button.Content>
                         <Icon name="play"/>

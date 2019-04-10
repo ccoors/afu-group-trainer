@@ -26,7 +26,7 @@ class MainContent extends React.Component {
             case AppModes.CREATING_ROOM:
                 return (<Loader active={true}>Erstelle Raum...</Loader>);
             case AppModes.START_PAGE:
-                return (<RoomID appState={this.props.appState} color={this.props.color}/>);
+                return (<RoomID {...this.props}/>);
             case AppModes.JOIN_ROOM_FAILED:
                 return (<RecoverableError message={"Konnte Raum nicht beitreten. Passwort falsch?"}
                                           onOk={() => this.props.appState.actionHandler(backToStart())}
@@ -50,9 +50,9 @@ class MainContent extends React.Component {
                                     questionProgress={this.props.questionProgress} color={this.props.color}
                                     selectedAnswer={this.props.selectedAnswer}/>);
             case AppModes.CREATE_ROOM:
-                return (<CreateRoom appState={this.props.appState} color={this.props.color}/>);
+                return (<CreateRoom {...this.props}/>);
             case AppModes.ROOM_MASTER:
-                return (<RoomMaster appState={this.props.appState} color={this.props.color}/>);
+                return (<RoomMaster {...this.props}/>);
             case AppModes.FATAL_ERROR:
             default:
                 window.onbeforeunload = undefined;

@@ -10,6 +10,7 @@ import {RoomMasterModes} from "../Controller";
 import {endQuestions, leaveRoom, nextQuestion, questionSettings, showResults, startQuestions} from "../../util/actions";
 import QuestionSettings from "./QuestionSettings";
 import QuestionTree from "./QuestionTree";
+import QuestionAnsweredBy from "../QuestionAnsweredBy";
 
 class RoomMaster extends React.Component {
     constructor(props) {
@@ -80,7 +81,7 @@ class RoomMaster extends React.Component {
             content = <QuestionSettings appState={this.props.appState} onOk={this.startQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RUNNING) {
             content = <div>
-                <p>Bisher wurde die Frage von {this.props.appState.usersAnswered} beantwortet.</p>
+                <QuestionAnsweredBy {...this.props}/>
                 <QuestionRORenderer
                     question={question}
                     correctAnswer={-1}/>

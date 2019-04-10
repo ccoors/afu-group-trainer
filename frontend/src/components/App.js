@@ -346,7 +346,7 @@ class App extends Component {
                     <div style={{height: "2em"}}/>
                 </Responsive>
 
-                <MainContent appState={this.props.appState} color={this.props.color}/>
+                <MainContent {...this.props}/>
                 <div style={{height: "5em"}}/>
                 <AppFooter version={"0.3.0"} footerLink={this.props.footerLink}/>
             </MathJax.Provider>
