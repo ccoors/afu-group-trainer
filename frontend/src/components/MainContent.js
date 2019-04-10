@@ -1,11 +1,13 @@
 import React from "react";
 
-import {Button, Icon, Loader, Modal,} from "semantic-ui-react"
+import {Loader} from "semantic-ui-react"
+
 import RoomID from "./RoomID";
 import RecoverableError from "./RecoverableError";
 import RoomJoined from "./RoomJoined";
 import CreateRoom from "./CreateRoom";
 import RoomMaster from "./RoomMaster/RoomMaster";
+import FatalError from "./FatalError";
 
 import {AppModes} from "./Controller"
 import {backToCreateRoom, backToStart} from "../util/actions";
@@ -55,25 +57,7 @@ class MainContent extends React.Component {
             default:
                 window.onbeforeunload = undefined;
                 return (
-                    <div>
-                        <Modal basic defaultOpen={true} closeOnDocumentClick={false} closeOnDimmerClick={false}
-                               closeIcon={false}>
-                            <Modal.Header>Schwerwiegender Fehler</Modal.Header>
-                            <Modal.Content>
-                                <p>
-                                    Es ist ein schwerwiegender Fehler aufgetreten.
-                                </p>
-                                <p>
-                                    {this.props.appState.errorMessage}
-                                </p>
-                            </Modal.Content>
-                            <Modal.Actions>
-                                <Button basic color="red" inverted onClick={() => document.location.reload(true)}>
-                                    <Icon name="refresh"/> Seite neu laden
-                                </Button>
-                            </Modal.Actions>
-                        </Modal>
-                    </div>
+                    <FatalError appState={this.props.appState}/>
                 );
         }
 

@@ -66,11 +66,11 @@ class RoomMaster extends React.Component {
     render() {
         let content = null;
 
-        let replacedQuestion = false;
+        let hasNextQuestion = false;
         let question = generateEmptyQuestion();
         if (this.props.appState.currentQuestion && this.props.appState.currentQuestion.hasOwnProperty("uuid")) {
             question = this.props.roomQuestion;
-            replacedQuestion = true; // TODO: HasNextQuestion
+            hasNextQuestion = true;
         }
 
         if (this.props.appState.roomMasterMode === RoomMasterModes.IDLE) {
@@ -91,7 +91,7 @@ class RoomMaster extends React.Component {
                         <Button.Content visible>Fragen beenden</Button.Content>
                         <Icon name="close"/>
                     </Button>
-                    {replacedQuestion &&
+                    {hasNextQuestion &&
                     <Button color="yellow" size="small" icon labelPosition="right"
                             onClick={this.nextQuestion.bind(this)}>
                         <Button.Content visible>Frage überspringen</Button.Content>
