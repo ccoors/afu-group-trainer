@@ -5,6 +5,7 @@ const WebSocket = require("ws");
 
 const qm = require("./questionManager");
 const rm = require("./roomManager");
+const qlm = require("./questionListManager");
 const util = require("./util");
 
 function noop() {
@@ -74,12 +75,15 @@ let ServerManager = function (config) {
 
     this.questionManager = new qm.QuestionManager();
     this.roomManager = new rm.RoomManager(this.callback.bind(this), this.removeUserFromRoom.bind(this), this.sendRoomStatus.bind(this));
+    this.questionListManager = new qlm.QuestionListManager('assets/dynamic/questionList.json', this.sendPublicListUpdate.bind(this));
+    this.questionListManager.sync();
 
     config.questions.forEach(file => this.loadQuestions(file));
 };
 
-ServerManager.prototype.broadcast = function (data) {
+ServerManager.prototype.broadcast = function (data, requireLogin) {
     this.wss.clients.forEach(function each(client) {
+        if (requireLogin && !client.loggedIn) return;
         if (client.readyState === WebSocket.OPEN) client.send(data);
     });
 };
@@ -95,6 +99,19 @@ ServerManager.prototype.callback = function () {
 ServerManager.prototype.removeUserFromRoom = function (client) {
     if (client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify("LeaveRoom"));
+    }
+};
+
+ServerManager.prototype.sendPublicListUpdate = function (client) {
+    const public_lists = this.questionListManager.getPublicLists();
+    const payload = JSON.stringify({
+        PublicQuestionLists: public_lists
+    });
+
+    if (client && client.readyState === WebSocket.OPEN) {
+        client.send(payload);
+    } else {
+        this.broadcast(payload, true);
     }
 };
 
@@ -179,9 +196,11 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
             let found_user = this.users.find(u => u.username === username && u.password === password);
             if (found_user) {
                 client.loggedIn = true;
+                client.loggedInAs = username;
                 client.selectedAnswer = -1;
                 this.sendLoginResult(client, true);
                 this.sendDatabase(client);
+                this.sendPublicListUpdate(client);
             } else {
                 this.sendLoginResult(client, false);
             }
@@ -267,6 +286,26 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
             if (room) {
                 this.sendRoomStatus(room);
             }
+        } else if (json.CreateQuestionList) {
+            if (!client.loggedIn) {
+                this.sendCreateQuestionListResult(client, false, "");
+                return;
+            }
+            const list_name = json.CreateQuestionList.list_name;
+            try {
+                const id = this.questionListManager.createList(list_name, client.loggedInAs, false);
+                this.sendCreateQuestionListResult(client, true, id);
+            } catch (e) {
+                this.sendCreateQuestionListResult(client, false, "");
+            }
+        } else if (json.UpdateQuestionList) {
+            if (!client.loggedIn) {
+                // TODO: Handle better
+                throw "Operation not allowed.";
+            }
+            const {list_uuid, list_name, is_public, questions} = json.UpdateQuestionList;
+            // TODO: Validate questions
+            this.questionListManager.updateList(list_uuid, list_name, is_public, questions);
         } else {
             this.sendError(client, "Command not found");
         }
@@ -291,6 +330,18 @@ ServerManager.prototype.sendJoinRoomResult = function (ws, success) {
     }
     ws.send(JSON.stringify({
         JoinRoomResult: success,
+    }));
+};
+
+ServerManager.prototype.sendCreateQuestionListResult = function (ws, success, uuid) {
+    if (ws.readyState !== WebSocket.OPEN) {
+        return;
+    }
+    ws.send(JSON.stringify({
+        CreateQuestionListResult: {
+            success: success,
+            uuid: uuid,
+        }
     }));
 };
 
