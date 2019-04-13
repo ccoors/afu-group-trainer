@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {Header, Input} from "semantic-ui-react";
+
 import {ltrim} from "../../util/util";
 
 class QuestionTree extends React.Component {
@@ -119,5 +122,11 @@ class QuestionTree extends React.Component {
         </div>;
     }
 }
+
+QuestionTree.propTypes = {
+    appState: PropTypes.object.isRequired,
+    quickStartQuestions: PropTypes.func.isRequired,
+    goToSettings: PropTypes.func.isRequired,
+};
 
 export default QuestionTree;

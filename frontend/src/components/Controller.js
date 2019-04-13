@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import App from './App';
 import {updateState} from "../util/actions";
@@ -26,20 +27,25 @@ const AppModes = Object.freeze({
     FATAL_ERROR: 100,
 });
 
-const RoomMasterModes = {
+const RoomMasterModes = Object.freeze({
     IDLE: 1,
     SETTINGS: 2,
     RUNNING: 3,
     RESULTS: 4,
-};
+});
 
-export {RoomMasterModes, AppModes};
+const RoomModes = Object.freeze({
+    IDLE: 0,
+    QUESTION: 1,
+    RESULTS: 2,
+});
+
+export {AppModes, RoomMasterModes, RoomModes};
 
 class Controller extends React.Component {
     constructor(props) {
         super(props);
 
-        // React doesn't like nested states. :(
         this.state = {
             // Globals
             mode: AppModes.CONNECTING,
@@ -49,11 +55,10 @@ class Controller extends React.Component {
             // Room
             roomName: "",
             roomUUID: "",
-            usersOnline: 0,
-            usersAnswered: 0,
+            roomState: null,
 
-            // Question
-            currentQuestion: null,
+            // Answer
+            selectedAnswer: -1,
 
             // Admin
             loggedIn: false,
@@ -110,7 +115,7 @@ class Controller extends React.Component {
     }
 
     handleSocketMessage(msg) {
-        let data = JSON.parse(msg);
+        const data = JSON.parse(msg);
         if (data.hasOwnProperty("RoomList")) {
             let newMode = this.state.mode;
 
@@ -124,7 +129,7 @@ class Controller extends React.Component {
                 rooms: data.RoomList,
             });
         } else if (data.hasOwnProperty("KeepAlive")) {
-            let next = data.KeepAlive.next;
+            const next = data.KeepAlive.next;
 
             if (this.state.nextKeepAliveTimeout) {
                 clearTimeout(this.state.nextKeepAliveTimeout);
@@ -134,7 +139,7 @@ class Controller extends React.Component {
                 nextKeepAliveTimeout: setTimeout(this.timeout.bind(this), next)
             });
         } else if (data.hasOwnProperty("LoginResult")) {
-            let result = data.LoginResult;
+            const result = data.LoginResult;
             if (result) {
                 this.setState({
                     mode: AppModes.CREATE_ROOM,
@@ -151,8 +156,8 @@ class Controller extends React.Component {
                 questionDatabase: data.QuestionDatabase,
             });
         } else if (data.hasOwnProperty("CreateRoomResult")) {
-            let result = data.CreateRoomResult.success;
-            let uuid = data.CreateRoomResult.uuid;
+            const result = data.CreateRoomResult.success;
+            const uuid = data.CreateRoomResult.uuid;
 
             if (result) {
                 this.setState({
@@ -167,11 +172,35 @@ class Controller extends React.Component {
                     roomUUID: "",
                 });
             }
+        } else if (data.hasOwnProperty("JoinRoomResult")) {
+            const result = data.JoinRoomResult;
+            if (result) {
+                this.setState({
+                    mode: AppModes.ROOM_JOINED,
+                    selectedAnswer: -1,
+                });
+            } else {
+                this.setState({
+                    mode: AppModes.JOIN_ROOM_FAILED,
+                });
+            }
         } else if (data.hasOwnProperty("Error")) {
             this.setState({
                 mode: AppModes.FATAL_ERROR,
                 errorMessage: data.message
-            })
+            });
+        } else if (data.hasOwnProperty("LeaveRoom")) {
+            this.setState({
+                mode: AppModes.REMOVED_FROM_ROOM,
+                roomName: "",
+                roomUUID: "",
+                roomState: null,
+                selectedAnswer: -1,
+            });
+        } else if (data.hasOwnProperty("RoomState")) {
+            this.setState({
+                roomState: data.RoomState,
+            });
         } else {
             let errorMessage = "Unbekannte Nachricht vom Server erhalten";
             if (!this.props.release) {
@@ -195,5 +224,13 @@ class Controller extends React.Component {
         return <App appState={this.state} {...this.props}/>;
     }
 }
+
+Controller.propTypes = {
+    socketUrl: PropTypes.string.isRequired,
+    mathJaxProvider: PropTypes.string.isRequired,
+    footerLink: PropTypes.node.isRequired,
+    release: PropTypes.bool.isRequired,
+    color: PropTypes.string.isRequired,
+};
 
 export default Controller;

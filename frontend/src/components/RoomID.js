@@ -81,7 +81,7 @@ class RoomID extends React.Component {
 
         let tabPanes = [
             {
-                menuItem: "Raum beitreten",
+                menuItem: {key: "joinRoom", content: "Raum beitreten", icon: "users"},
                 render: () => <Tab.Pane>
                     <Dropdown placeholder="Raum auswählen" fluid selection options={room_options}
                               value={joinRoomUUID} onChange={this.handleJoinRoomChange.bind(this)}/>
@@ -91,7 +91,7 @@ class RoomID extends React.Component {
 
                     <Button disabled={joinRoomUUID === ""} color={this.props.color} fluid size="large"
                             onClick={() => {
-                                let roomName = this.props.rooms.find(r => r.uuid === joinRoomUUID).name;
+                                let roomName = this.props.appState.rooms.find(r => r.uuid === joinRoomUUID).name;
                                 let action = joinRoom(roomName, joinRoomUUID, this.state.roomPassword);
                                 this.props.appState.actionHandler(action);
                             }}>
@@ -100,7 +100,8 @@ class RoomID extends React.Component {
                 </Tab.Pane>
             },
             {
-                menuItem: "Login", render: () => <Tab.Pane>
+                menuItem: {key: "login", content: "Login", icon: "sign-in"},
+                render: () => <Tab.Pane>
                     <Form>
                         <Input fluid icon="user" iconPosition="left" placeholder={"Benutzername"}
                                onChange={this.handleNewUsernameMessage.bind(this)}/><br/>

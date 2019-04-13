@@ -44,11 +44,7 @@ class MainContent extends React.Component {
                     message={"Sie wurden aus dem Raum entfernt. Vermutlich wurde der Raum geschlossen."}
                     onOk={() => this.props.appState.actionHandler(backToStart())} color={this.props.color}/>);
             case AppModes.ROOM_JOINED:
-                return (<RoomJoined roomName={this.props.roomName} roomState={this.props.roomState}
-                                    roomQuestion={this.props.roomQuestion} roomResults={this.props.roomResults}
-                                    selectAnswer={this.props.selectAnswer} leaveRoom={this.props.leaveRoom}
-                                    questionProgress={this.props.questionProgress} color={this.props.color}
-                                    selectedAnswer={this.props.selectedAnswer}/>);
+                return (<RoomJoined {...this.props}/>);
             case AppModes.CREATE_ROOM:
                 return (<CreateRoom {...this.props}/>);
             case AppModes.ROOM_MASTER:
@@ -56,9 +52,7 @@ class MainContent extends React.Component {
             case AppModes.FATAL_ERROR:
             default:
                 window.onbeforeunload = undefined;
-                return (
-                    <FatalError appState={this.props.appState}/>
-                );
+                return <FatalError appState={this.props.appState}/>;
         }
 
 

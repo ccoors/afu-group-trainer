@@ -117,17 +117,28 @@ function updateState(action, setState, socket) {
             });
             break;
         case UserActions.JOIN_ROOM:
-            break; // TODO
+            setState({
+                mode: AppModes.JOINING_ROOM,
+                roomName: action.roomName,
+                roomUUID: action.roomUUID,
+            });
+            socket.send(JSON.stringify({
+                JoinRoom: {
+                    room_uuid: action.roomUUID,
+                    password: action.password,
+                }
+            }));
+            break;
         case UserActions.LOGIN:
+            setState({
+                mode: AppModes.LOGGING_IN,
+            });
             socket.send(JSON.stringify({
                 Login: {
                     username: action.username,
                     password: action.password,
                 }
             }));
-            setState({
-                mode: AppModes.LOGGING_IN,
-            });
             break;
         case UserActions.BACK_TO_CREATE_ROOM:
             setState({
@@ -137,16 +148,16 @@ function updateState(action, setState, socket) {
         case UserActions.SELECT_ANSWER:
             break; // TODO
         case UserActions.CREATE_ROOM:
+            setState({
+                mode: AppModes.CREATING_ROOM,
+                roomName: action.roomName,
+            });
             socket.send(JSON.stringify({
                 CreateRoom: {
                     room_name: action.roomName,
                     password: action.password,
                 }
             }));
-            setState({
-                mode: AppModes.CREATING_ROOM,
-                roomName: action.roomName,
-            });
             break;
         case UserActions.QUESTION_SETTINGS:
             setState({
@@ -159,7 +170,6 @@ function updateState(action, setState, socket) {
                 startUUID: action.uuid,
                 initialQuestionLength: action.single ? 1 : 0,
             });
-
             socket.send(JSON.stringify({
                 StartQuestions: {
                     mode: action.uuid !== "" ? "uuid" : "plain",
@@ -170,10 +180,10 @@ function updateState(action, setState, socket) {
             }));
             break;
         case UserActions.NEXT_QUESTION:
-            this.state.socket.send(JSON.stringify("NextQuestion"));
+            socket.send(JSON.stringify("NextQuestion"));
             break;
         case UserActions.SHOW_RESULTS:
-            this.state.socket.send(JSON.stringify("ShowResults"));
+            socket.send(JSON.stringify("ShowResults"));
             break;
         case UserActions.END_QUESTIONS:
             socket.send(JSON.stringify("EndQuestions"));
@@ -184,15 +194,16 @@ function updateState(action, setState, socket) {
             });
             break;
         case UserActions.LEAVE_ROOM:
-            socket.send(JSON.stringify("LeaveRoom"));
             setState(state => {
                 return {
                     mode: state.loggedIn ? AppModes.CREATE_ROOM : AppModes.START_PAGE,
                     roomName: "",
-                    roomState: 0,
+                    roomUUID: "",
+                    roomState: null,
                     selectedAnswer: -1,
                 }
             });
+            socket.send(JSON.stringify("LeaveRoom"));
             break;
         default:
             setState({

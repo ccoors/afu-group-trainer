@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {Button, Checkbox, Form, Header, Icon, Segment} from "semantic-ui-react";
 import {backToIdle} from "../../util/actions";
 
@@ -57,5 +59,10 @@ class QuestionSettings extends React.Component {
         </Segment>;
     }
 }
+
+QuestionSettings.propTypes = {
+    appState: PropTypes.func.isRequired,
+    onOk: PropTypes.func.isRequired,
+};
 
 export default QuestionSettings;

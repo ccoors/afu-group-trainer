@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 import {Button, Container, Header, Icon, Segment, Step,} from "semantic-ui-react";
 
 import {generateEmptyQuestion} from "../../util/util";
 import QuestionRORenderer from "../QuestionRORenderer"
-import Results from "../Results";
+// import Results from "../Results";
 import QuestionProgress from "../QuestionProgress";
 import {RoomMasterModes} from "../Controller";
 import {endQuestions, leaveRoom, nextQuestion, questionSettings, showResults, startQuestions} from "../../util/actions";
@@ -70,13 +71,13 @@ class RoomMaster extends React.Component {
         let hasNextQuestion = false;
         let question = generateEmptyQuestion();
         if (this.props.appState.currentQuestion && this.props.appState.currentQuestion.hasOwnProperty("uuid")) {
-            question = this.props.roomQuestion;
+            question = this.props.appState.currentQuestion;
             hasNextQuestion = true;
         }
 
         if (this.props.appState.roomMasterMode === RoomMasterModes.IDLE) {
             content = <QuestionTree appState={this.props.appState} goToSettings={this.goToSettings.bind(this)}
-                                    quickStartSettings={this.quickStartQuestions.bind(this)}/>;
+                                    quickStartQuestions={this.quickStartQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.SETTINGS) {
             content = <QuestionSettings appState={this.props.appState} onOk={this.startQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RUNNING) {
@@ -107,8 +108,8 @@ class RoomMaster extends React.Component {
             </div>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RESULTS) {
             content = <div>
-                <Results roomResults={this.props.roomResults} selectedAnswer={-1} roomQuestion={question}/><br/>
-
+                {/*<Results roomResults={this.props.roomResults} selectedAnswer={-1} roomQuestion={question}/><br/>*/}
+                FIXME!
                 <Button.Group fluid>
                     <Button color="red" size="small" icon labelPosition="left"
                             onClick={this.endQuestions.bind(this)}>
@@ -173,5 +174,11 @@ class RoomMaster extends React.Component {
         );
     }
 }
+
+RoomMaster.propTypes = {
+    appState: PropTypes.object.isRequired,
+    color: PropTypes.string.isRequired,
+};
+
 
 export default RoomMaster;

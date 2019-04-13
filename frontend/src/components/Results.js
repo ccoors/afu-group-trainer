@@ -5,7 +5,7 @@ import QuestionRORenderer from "./QuestionRORenderer";
 
 class Results extends React.Component {
     render() {
-        if (!this.props.roomResults) {
+        if (!this.props.appState.roomResults) {
             return null;
         }
         let total = this.props.roomResults.selected.reduce((l, r) => l + r);

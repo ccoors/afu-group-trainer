@@ -1,7 +1,11 @@
 const uuidv4 = require("uuid/v4");
 const util = require("./util");
 
-const ROOM_STATE = Object.freeze({"IDLE": 0, "QUESTION": 1, "RESULTS": 2});
+const ROOM_STATE = Object.freeze({
+    IDLE: 0,
+    QUESTION: 1,
+    RESULTS: 2,
+});
 
 let RoomManager = function (callback, removeCallback, roomCallback) {
     this.rooms = [];

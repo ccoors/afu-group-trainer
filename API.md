@@ -1,4 +1,4 @@
-# AFU group trainer WebSocket API 0.3.1
+# AFU group trainer WebSocket API 0.3.2
 
 ## From server
 
@@ -13,7 +13,7 @@
     LoginResult:
         Bool
     
-    RoomJoinResult:
+    JoinRoomResult:
         Bool
     
     CreateRoomResult:
@@ -37,7 +37,7 @@
         }
     
     RoomState:
-        mode: Int (0: Waiting | 1: Question | 2: Results)
+        state: Int (0: Waiting | 1: Question | 2: Results)
         remainingQuestions: Int
         initialQuestionLength: Int
         question: {
@@ -46,10 +46,10 @@
             question: String
             outdated: Bool
             answers: Array<String>[4]
-            userState: {
-                selected: Int
-                total: Int
-            }
+        }
+        userState: {
+            selected: Int
+            total: Int
         }
         results: {
             totalUsers: Int
