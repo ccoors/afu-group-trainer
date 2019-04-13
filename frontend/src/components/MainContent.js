@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Loader} from "semantic-ui-react"
 
@@ -54,9 +55,12 @@ class MainContent extends React.Component {
                 window.onbeforeunload = undefined;
                 return <FatalError appState={this.props.appState}/>;
         }
-
-
     }
 }
+
+MainContent.propTypes = {
+    appState: PropTypes.object.isRequired,
+    color: PropTypes.string.isRequired,
+};
 
 export default MainContent;

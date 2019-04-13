@@ -1,6 +1,16 @@
 # Changelog
 
 ## Public versions
+### 0.4.0 (unreleased)
+- Major refactoring of frontend code
+- Show both formularies
+- Minor style changes
+- Icons on start page
+- Improved usability by allowing to submit forms with the return key
+- Chart shows different colors for correct answer
+- Users can now see how many other users are in the room they are in
+- Removed load test as it became incompatible with current backend
+
 ### 0.3.0 (2019-01-19)
 - Configuration options in separate files
 - Headers in search results

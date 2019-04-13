@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {Button, Icon, Modal} from "semantic-ui-react";
 
 function FatalError(props) {
@@ -20,5 +22,9 @@ function FatalError(props) {
         </Modal.Actions>
     </Modal>;
 }
+
+FatalError.propTypes = {
+    appState: PropTypes.object.isRequired,
+};
 
 export default FatalError;

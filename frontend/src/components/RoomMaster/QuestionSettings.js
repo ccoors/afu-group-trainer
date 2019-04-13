@@ -61,7 +61,7 @@ class QuestionSettings extends React.Component {
 }
 
 QuestionSettings.propTypes = {
-    appState: PropTypes.func.isRequired,
+    appState: PropTypes.object.isRequired,
     onOk: PropTypes.func.isRequired,
 };
 

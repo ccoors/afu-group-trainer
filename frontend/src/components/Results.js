@@ -1,14 +1,26 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {Header, Icon} from "semantic-ui-react";
 import Chart from "react-apexcharts";
 import QuestionRORenderer from "./QuestionRORenderer";
 
 class Results extends React.Component {
     render() {
-        if (!this.props.appState.roomResults) {
+        if (!this.props.appState.roomState || !this.props.appState.roomState.results) {
             return null;
         }
-        let total = this.props.roomResults.selected.reduce((l, r) => l + r);
+        const results = this.props.appState.roomState.results;
+        const answeredUsers = results.selected.reduce((l, r) => l + r);
+
+        let chartColors = [];
+        for (let i = 0; i < 4; i++) {
+            chartColors.push(results.correctAnswer !== -1 ? '#d4383c' : '#026fad');
+        }
+        if (results.correctAnswer !== -1) {
+            chartColors[results.correctAnswer] = '#00ad00';
+        }
+
         let options = {
             chart: {
                 id: "basic-bar",
@@ -25,43 +37,61 @@ class Results extends React.Component {
                     },
                 },
             },
+            plotOptions: {
+                bar: {
+                    distributed: true,
+                }
+            },
             xaxis: {
                 categories: ["A", "B", "C", "D"]
-            }
+            },
+            colors: chartColors,
         };
         let series = [
             {
                 name: "Antworten",
-                data: this.props.roomResults.selected
+                data: results.selected
             }
         ];
+
+        let totalUsers = results.totalUsers;
+        if (totalUsers < answeredUsers) {
+            totalUsers = answeredUsers;
+        }
+
         return <div>
             <Header as="h1" content="Ergebnisse"/>
-            {this.props.selectedAnswer !== -1 && this.props.selectedAnswer !== this.props.roomResults.correctAnswer && this.props.roomResults.correctAnswer !== -1 &&
+            {this.props.selectedAnswer !== -1 && this.props.selectedAnswer !== results.correctAnswer && results.correctAnswer !== -1 &&
             <Header as="h2" color="red">
                 <Icon name="close"/>
                 <Header.Content>Leider falsch beantwortet</Header.Content>
             </Header>}
-            {this.props.selectedAnswer !== -1 && this.props.selectedAnswer === this.props.roomResults.correctAnswer && this.props.roomResults.correctAnswer !== -1 &&
+            {this.props.selectedAnswer !== -1 && this.props.selectedAnswer === results.correctAnswer && results.correctAnswer !== -1 &&
             <Header as="h2" color="green">
                 <Icon name="check"/>
                 <Header.Content>Korrekt</Header.Content>
             </Header>}
-            <p>Von {this.props.roomResults.totalUsers} Benutzern haben {total} die Frage beantwortet.</p>
-            {this.props.roomResults.correctAnswer !== -1 &&
+            <p>Von {totalUsers} Benutzern haben {answeredUsers} die Frage beantwortet.</p>
+            {results.correctAnswer !== -1 &&
             <p className={"correctAnswer"}>Korrekte
-                Antwort: {["A", "B", "C", "D"][this.props.roomResults.correctAnswer]}</p>}
+                Antwort: {["A", "B", "C", "D"][results.correctAnswer]}</p>}
             <Chart
                 options={options}
                 series={series}
                 type="bar"
             />
-            {this.props.roomQuestion && this.props.roomQuestion.uuid &&
+            {this.props.question && this.props.question.uuid &&
             <div><p>Die Frage lautete:</p>
-                <QuestionRORenderer question={this.props.roomQuestion}
-                                    correctAnswer={this.props.roomResults.correctAnswer}/></div>}
+                <QuestionRORenderer question={this.props.question}
+                                    correctAnswer={results.correctAnswer}/></div>}
         </div>;
     }
 }
+
+Results.propTypes = {
+    appState: PropTypes.object.isRequired,
+    selectedAnswer: PropTypes.number.isRequired,
+    question: PropTypes.object,
+};
 
 export default Results;

@@ -146,7 +146,15 @@ function updateState(action, setState, socket) {
             });
             break;
         case UserActions.SELECT_ANSWER:
-            break; // TODO
+            setState({
+                selectedAnswer: action.answer,
+            });
+            socket.send(JSON.stringify({
+                AnswerQuestion: {
+                    id: action.answer,
+                }
+            }));
+            break;
         case UserActions.CREATE_ROOM:
             setState({
                 mode: AppModes.CREATING_ROOM,

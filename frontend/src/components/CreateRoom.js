@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Button, Container, Form, Header, Input, Segment} from "semantic-ui-react"
 import {createRoom} from "../util/actions";
@@ -48,5 +49,10 @@ class CreateRoom extends React.Component {
         );
     }
 }
+
+CreateRoom.propTypes = {
+    appState: PropTypes.object.isRequired,
+    color: PropTypes.string.isRequired,
+};
 
 export default CreateRoom;

@@ -189,7 +189,7 @@ class Controller extends React.Component {
                 mode: AppModes.FATAL_ERROR,
                 errorMessage: data.message
             });
-        } else if (data.hasOwnProperty("LeaveRoom")) {
+        } else if (data === "LeaveRoom" || data.hasOwnProperty("LeaveRoom")) {
             this.setState({
                 mode: AppModes.REMOVED_FROM_ROOM,
                 roomName: "",
@@ -198,8 +198,64 @@ class Controller extends React.Component {
                 selectedAnswer: -1,
             });
         } else if (data.hasOwnProperty("RoomState")) {
-            this.setState({
-                roomState: data.RoomState,
+            this.setState(state => {
+                let masterMode = state.roomMasterMode;
+                let selectedAnswer = state.selectedAnswer;
+
+                if (state.loggedIn) {
+                    selectedAnswer = -1;
+                    switch (data.RoomState.state) {
+                        case RoomModes.IDLE:
+                            if (masterMode > RoomMasterModes.SETTINGS) {
+                                masterMode = RoomMasterModes.IDLE;
+                            }
+                            break;
+                        case RoomModes.QUESTION:
+                            masterMode = RoomMasterModes.RUNNING;
+                            break;
+                        case RoomModes.RESULTS:
+                            masterMode = RoomMasterModes.RESULTS;
+                            break;
+                        default:
+                            this.setState({
+                                mode: AppModes.FATAL_ERROR,
+                                errorMessage: "Invalid RoomState: " + data.RoomState.state
+                            });
+                            return;
+                    }
+                }
+
+                const hadState = Boolean(state.roomState && state.roomState.state);
+                const hadQuestion = Boolean(hadState && state.roomState.question);
+                const hadNonEmptyQuestion = Boolean(hadQuestion && state.roomState.question.uuid);
+
+                const hasQuestion = Boolean(data.RoomState.question);
+                const hasNonEmptyQuestion = Boolean(hasQuestion && data.RoomState.question.uuid);
+
+                const comingFromIdle = data.RoomState.state < RoomModes.QUESTION;
+                const comingFromResults = hadState && (data.RoomState.state === RoomModes.QUESTION && state.roomState.state === RoomModes.RESULTS);
+                const questionRemoved = hadQuestion && !hasQuestion;
+                const newQuestion = hasQuestion && !hadQuestion;
+                let questionChanged = false;
+                if (hadQuestion && hasQuestion) {
+                    if (hadNonEmptyQuestion && !hasNonEmptyQuestion) {
+                        questionChanged = true;
+                    } else if (!hadNonEmptyQuestion && hasNonEmptyQuestion) {
+                        questionChanged = true;
+                    } else if (hadNonEmptyQuestion && hasNonEmptyQuestion) {
+                        questionChanged = data.RoomState.question.uuid !== state.roomState.question.uuid;
+                    }
+                }
+
+                if (comingFromIdle || comingFromResults || questionRemoved || newQuestion || questionChanged) {
+                    selectedAnswer = -1;
+                }
+
+                return {
+                    roomState: data.RoomState,
+                    roomMasterMode: masterMode,
+                    selectedAnswer: selectedAnswer,
+                }
             });
         } else {
             let errorMessage = "Unbekannte Nachricht vom Server erhalten";

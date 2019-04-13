@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {List} from 'semantic-ui-react'
 
@@ -18,5 +19,10 @@ class AppFooter extends React.Component {
         );
     }
 }
+
+AppFooter.propTypes = {
+    version: PropTypes.string.isRequired,
+    footerLink: PropTypes.node.isRequired,
+};
 
 export default AppFooter;

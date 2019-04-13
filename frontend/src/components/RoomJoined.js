@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Button, Container, Header, Placeholder, Segment,} from "semantic-ui-react";
 
@@ -6,8 +7,9 @@ import QuestionRenderer from "./QuestionRenderer";
 import Results from "./Results";
 import {generateEmptyQuestion} from "../util/util";
 import QuestionProgress from "./QuestionProgress";
-import {selectAnswer} from "../util/actions";
+import {leaveRoom, selectAnswer} from "../util/actions";
 import {RoomModes} from "./Controller";
+import OnlineStatus from "./OnlineStatus";
 
 class RoomStateRenderer extends React.Component {
     selectAnswer(value) {
@@ -18,6 +20,9 @@ class RoomStateRenderer extends React.Component {
         if (!this.props.appState.roomState) {
             return null;
         }
+        let question = this.props.appState.roomState.question ?
+            this.props.appState.roomState.question : generateEmptyQuestion();
+
         switch (this.props.appState.roomState.state) {
             case RoomModes.IDLE:
                 return <div><Header as="h1">Warte auf Fragen</Header>
@@ -34,34 +39,44 @@ class RoomStateRenderer extends React.Component {
                         </Placeholder.Paragraph>
                     </Placeholder></div>;
             case RoomModes.QUESTION:
-                let question = this.props.appState.roomState.question ?
-                    this.props.appState.roomState.question : generateEmptyQuestion();
+
 
                 return <QuestionRenderer question={question} selectAnswer={this.selectAnswer.bind(this)}
                                          selectedAnswer={this.props.appState.selectedAnswer}/>;
             case RoomModes.RESULTS:
-                return <Results roomResults={this.props.roomResults} selectedAnswer={this.props.selectedAnswer}
-                                roomQuestion={this.props.roomQuestion}/>;
+                return <Results appState={this.props.appState} selectedAnswer={this.props.appState.selectedAnswer}
+                                roomQuestion={question}/>;
             default:
                 return <div>Unknown state: {this.props.appState.roomState.state}</div>;
         }
     }
 }
 
+RoomStateRenderer.propTypes = {
+    appState: PropTypes.object.isRequired,
+};
+
 class RoomJoined extends React.Component {
     render() {
         return (
             <Container text>
-                <QuestionProgress appState={this.props.appState} color={this.props.color}/>
+                <QuestionProgress appState={this.props.appState}/>
 
                 <Segment stacked raised>
+                    <OnlineStatus appState={this.props.appState}/>
                     <RoomStateRenderer {...this.props}/>
                 </Segment>
 
-                <Button negative onClick={this.props.leaveRoom}>Raum verlassen</Button>
+                <Button negative onClick={() => {
+                    this.props.appState.actionHandler(leaveRoom());
+                }}>Raum verlassen</Button>
             </Container>
         );
     }
 }
+
+RoomJoined.propTypes = {
+    appState: PropTypes.object.isRequired,
+};
 
 export default RoomJoined;

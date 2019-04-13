@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Button, Container, Dropdown, Form, Input, Tab,} from "semantic-ui-react"
 import {joinRoom, login} from "../util/actions";
@@ -13,6 +14,11 @@ class RenderPasswordBox extends React.Component {
         return <div/>;
     }
 }
+
+RenderPasswordBox.propTypes = {
+    show: PropTypes.bool,
+    onChange: PropTypes.func,
+};
 
 class RoomID extends React.Component {
     constructor(props) {
@@ -126,5 +132,10 @@ class RoomID extends React.Component {
         );
     }
 }
+
+RoomID.propTypes = {
+    appState: PropTypes.object.isRequired,
+    color: PropTypes.string.isRequired,
+};
 
 export default RoomID;

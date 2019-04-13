@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {Form, Header, Label, Radio, Segment} from "semantic-ui-react";
 import {stringToJSX} from "../util/util";
 
@@ -46,7 +48,7 @@ class QuestionRenderer extends React.Component {
             <Header as={"h1"} content={this.props.question.id}/>
             }
             {this.props.question.outdated &&
-            <Label as="a" color="red" ribbon="right">
+            <Label color="red" ribbon="right">
                 Nicht mehr relevante Frage
             </Label>
             }
@@ -62,5 +64,10 @@ class QuestionRenderer extends React.Component {
         </div>;
     }
 }
+
+QuestionRenderer.propTypes = {
+    question: PropTypes.object.isRequired,
+    selectedAnswer: PropTypes.number.isRequired,
+};
 
 export default QuestionRenderer;

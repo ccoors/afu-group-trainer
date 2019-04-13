@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Button, Card, Container, Header} from "semantic-ui-react"
 
@@ -18,9 +19,13 @@ class RecoverableError extends React.Component {
                     </Card.Content>
                 </Card>
             </Container>
-
         );
     }
 }
+
+RecoverableError.propTypes = {
+    message: PropTypes.string.isRequired,
+    onOk: PropTypes.func.isRequired,
+};
 
 export default RecoverableError;

@@ -5,8 +5,7 @@
   "main": "main.js",
   "scripts": {
     "backend": "node main.js",
-    "test": "mocha tests",
-    "load_test": "node load_test/load_test.js"
+    "test": "mocha tests"
   },
   "author": "Christian Friedrich Coors (DL5LQ) <me@dl5lq.de>",
   "license": "GPL-3.0-or-later",

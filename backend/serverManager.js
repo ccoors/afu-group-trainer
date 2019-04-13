@@ -98,7 +98,7 @@ ServerManager.prototype.removeUserFromRoom = function (client) {
     }
 };
 
-ServerManager.prototype.sendRoomStatus = function (room, user) {
+ServerManager.prototype.sendRoomStatus = function (room) {
     let msg = "";
     let remainingQuestions = Array.isArray(room.queue) ? room.queue.length : 0;
     let users_selected = room.members.filter(m => m.selectedAnswer !== -1).length;
@@ -145,13 +145,9 @@ ServerManager.prototype.sendRoomStatus = function (room, user) {
             break;
     }
 
-    if (user && user.readyState === WebSocket.OPEN) {
-        user.send(msg);
-    } else {
-        room.members.forEach(function (user) {
-            if (user.readyState === WebSocket.OPEN) user.send(msg);
-        });
-    }
+    room.members.forEach(function (user) {
+        if (user.readyState === WebSocket.OPEN) user.send(msg);
+    });
 };
 
 ServerManager.prototype.sendDatabase = function (client) {
@@ -217,7 +213,7 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
                 try {
                     this.roomManager.addUser(joinRoom, client, password);
                     this.sendJoinRoomResult(client, true);
-                    this.sendRoomStatus(joinRoom, client);
+                    this.sendRoomStatus(joinRoom);
                 } catch (e) {
                     this.sendJoinRoomResult(client, false);
                 }
@@ -269,7 +265,7 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
             client.selectedAnswer = answer;
             let room = this.roomManager.getRoomByUser(client);
             if (room) {
-                this.sendRoomStatus(room, room.members[0]);
+                this.sendRoomStatus(room);
             }
         } else {
             this.sendError(client, "Command not found");

@@ -29,6 +29,10 @@ footer {
     opacity: 1;
 }
 
+#onlineStatus {
+    margin-bottom: 0.15cm;
+}
+
 .hidden {
     display: none;
 }

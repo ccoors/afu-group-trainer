@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Label, Segment,} from "semantic-ui-react";
 
@@ -37,5 +38,10 @@ class QuestionRORenderer extends React.Component {
         </Segment.Group>;
     }
 }
+
+QuestionRORenderer.propTypes = {
+    question: PropTypes.object.isRequired,
+    correctAnswer: PropTypes.number.isRequired,
+};
 
 export default QuestionRORenderer;

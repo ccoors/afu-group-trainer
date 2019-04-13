@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Dropdown, Menu} from 'semantic-ui-react';
 
@@ -31,5 +32,9 @@ class AppHeader extends React.Component {
         );
     }
 }
+
+AppHeader.propTypes = {
+    appState: PropTypes.object.isRequired,
+};
 
 export default AppHeader;
