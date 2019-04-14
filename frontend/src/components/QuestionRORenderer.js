@@ -15,7 +15,7 @@ class QuestionRORenderer extends React.Component {
             </Segment>;
         } else {
             return <Segment>
-                <strong>{nr}{colon}</strong>{this.props.compact ? <br/> : <span>&nbsp;</span>}
+                <strong>{nr}{colon}</strong>{!this.props.compact ? <br/> : <span>&nbsp;</span>}
                 {stringToJSX(answer)}
             </Segment>;
         }

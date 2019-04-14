@@ -112,18 +112,17 @@ class QuestionListRenderer extends React.Component {
                     const questions = this.state.show.questions.map(q => {
                         let question = findQuestion(this.props.questionDatabase, q);
                         if (question) {
-                            return <QuestionRORenderer question={question} correctAnswer={-1} key={q}/>;
+                            return <QuestionRORenderer question={question} correctAnswer={-1} key={q} compact={true}/>;
                         } else {
-                            return <p key={q}>Frage {q} konnte nicht gefunden werden!</p>;
+                            return <p key={q}><strong>Die Frage <code>{q}</code> konnte in der Datenbank nicht gefunden werden!</strong></p>;
                         }
                     });
                     return <Modal
-                        trigger={<Button onClick={this.handleOpen}>Show Modal</Button>}
                         open={true}
                         onClose={onClose}
-                        size='small'
+                        size='large'
                         closeIcon>
-                        <Modal.Header>Liste anzeigen</Modal.Header>
+                        <Modal.Header>Liste anzeigen: {this.state.show.name}</Modal.Header>
                         <Modal.Content scrolling>
                             <p>Die Liste is {!this.state.show.is_public && <span>nicht</span>} öffentlich.</p>
                             {questions}
