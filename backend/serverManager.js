@@ -74,8 +74,12 @@ let ServerManager = function (config) {
     }
 
     this.questionManager = new qm.QuestionManager();
-    this.roomManager = new rm.RoomManager(this.callback.bind(this), this.removeUserFromRoom.bind(this), this.sendRoomStatus.bind(this));
-    this.questionListManager = new qlm.QuestionListManager('assets/dynamic/questionList.json', this.sendPublicListUpdate.bind(this));
+    this.roomManager = new rm.RoomManager(this.callback.bind(this),
+        this.removeUserFromRoom.bind(this),
+        this.sendRoomStatus.bind(this));
+    this.questionListManager = new qlm.QuestionListManager('assets/dynamic/questionList.json',
+        this.sendPublicListUpdate.bind(this),
+        this.sendUserListUpdate.bind(this));
     this.questionListManager.sync();
 
     config.questions.forEach(file => this.loadQuestions(file));
@@ -113,6 +117,20 @@ ServerManager.prototype.sendPublicListUpdate = function (client) {
     } else {
         this.broadcast(payload, true);
     }
+};
+
+ServerManager.prototype.sendUserListUpdate = function (user) {
+    const user_lists = this.questionListManager.getListsForUser(user);
+
+    const payload = JSON.stringify({
+        UserQuestionLists: user_lists,
+    });
+
+    this.wss.clients.forEach(function each(client) {
+        if (client.loggedIn && client.loggedInAs === user) {
+            if (client.readyState === WebSocket.OPEN) client.send(payload);
+        }
+    });
 };
 
 ServerManager.prototype.sendRoomStatus = function (room) {
@@ -201,6 +219,7 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
                 this.sendLoginResult(client, true);
                 this.sendDatabase(client);
                 this.sendPublicListUpdate(client);
+                this.sendUserListUpdate(username);
             } else {
                 this.sendLoginResult(client, false);
             }
@@ -304,7 +323,12 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
                 throw "Operation not allowed.";
             }
             const {list_uuid, list_name, is_public, questions} = json.UpdateQuestionList;
-            // TODO: Validate questions
+            questions.forEach(q => {
+                let found = this.questionManager.findByUUID(null, q);
+                if (!found) {
+                    throw "List contains invalid question.";
+                }
+            });
             this.questionListManager.updateList(list_uuid, list_name, is_public, questions);
         } else {
             this.sendError(client, "Command not found");

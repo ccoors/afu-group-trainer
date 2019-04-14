@@ -4,7 +4,7 @@ const UserActions = Object.freeze({
     BACK_TO_START: 1,
     JOIN_ROOM: 2,
     LOGIN: 3,
-    BACK_TO_CREATE_ROOM: 4,
+    BACK_TO_LOGIN: 4,
 
     SELECT_ANSWER: 10,
 
@@ -25,9 +25,9 @@ function backToStart() {
     };
 }
 
-function backToCreateRoom() {
+function backToLoggedIn() {
     return {
-        action: UserActions.BACK_TO_CREATE_ROOM,
+        action: UserActions.BACK_TO_LOGIN,
     };
 }
 
@@ -140,9 +140,9 @@ function updateState(action, setState, socket) {
                 }
             }));
             break;
-        case UserActions.BACK_TO_CREATE_ROOM:
+        case UserActions.BACK_TO_LOGIN:
             setState({
-                mode: AppModes.CREATE_ROOM,
+                mode: AppModes.LOGGED_IN,
             });
             break;
         case UserActions.SELECT_ANSWER:
@@ -204,7 +204,7 @@ function updateState(action, setState, socket) {
         case UserActions.LEAVE_ROOM:
             setState(state => {
                 return {
-                    mode: state.loggedIn ? AppModes.CREATE_ROOM : AppModes.START_PAGE,
+                    mode: state.loggedIn ? AppModes.LOGGED_IN : AppModes.START_PAGE,
                     roomName: "",
                     roomUUID: "",
                     roomState: null,
@@ -225,7 +225,7 @@ function updateState(action, setState, socket) {
 export {
     UserActions,
     backToStart,
-    backToCreateRoom,
+    backToLoggedIn,
     joinRoom,
     login,
     selectAnswer,

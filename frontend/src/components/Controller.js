@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import App from './App';
-import {updateState} from "../util/actions";
+import {login, updateState} from "../util/actions";
 
 const AppModes = Object.freeze({
     CONNECTING: 1,
@@ -20,7 +20,7 @@ const AppModes = Object.freeze({
 
     ROOM_JOINED: 30,
 
-    CREATE_ROOM: 40,
+    LOGGED_IN: 40,
 
     ROOM_MASTER: 50,
 
@@ -51,6 +51,8 @@ class Controller extends React.Component {
             mode: AppModes.CONNECTING,
             rooms: [],
             questionDatabase: {},
+            myQuestionLists: null,
+            publicQuestionLists: null,
 
             // Room
             roomName: "",
@@ -80,6 +82,7 @@ class Controller extends React.Component {
             app.setState({
                 mode: AppModes.LOADING_ROOMS
             });
+            app.state.actionHandler(login("root", "root"));
         };
 
         this.socket.onclose = () => {
@@ -142,7 +145,7 @@ class Controller extends React.Component {
             const result = data.LoginResult;
             if (result) {
                 this.setState({
-                    mode: AppModes.CREATE_ROOM,
+                    mode: AppModes.LOGGED_IN,
                     loggedIn: true,
                 });
             } else {
@@ -256,6 +259,14 @@ class Controller extends React.Component {
                     roomMasterMode: masterMode,
                     selectedAnswer: selectedAnswer,
                 }
+            });
+        } else if (data.hasOwnProperty("PublicQuestionLists")) {
+            this.setState({
+                publicQuestionLists: data.PublicQuestionLists,
+            });
+        } else if (data.hasOwnProperty("UserQuestionLists")) {
+            this.setState({
+                myQuestionLists: data.UserQuestionLists,
             });
         } else {
             let errorMessage = "Unbekannte Nachricht vom Server erhalten";

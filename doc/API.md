@@ -47,9 +47,13 @@
         Array<QuestionList {
             uuid: String,
             name: String,
+            user: String,
             is_public: Bool,
             questions: Array<String>[?]
         }>[?]
+    
+    UserQuestionLists:
+        Array<QuestionList>[?]
     
     RoomState:
         state: Int (0: Waiting | 1: Question | 2: Results)

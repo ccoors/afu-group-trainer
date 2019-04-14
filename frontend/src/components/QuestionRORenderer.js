@@ -15,7 +15,7 @@ class QuestionRORenderer extends React.Component {
             </Segment>;
         } else {
             return <Segment>
-                <strong>{nr}{colon}</strong><br/>
+                <strong>{nr}{colon}</strong>{this.props.compact ? <br/> : <span>&nbsp;</span>}
                 {stringToJSX(answer)}
             </Segment>;
         }
@@ -42,6 +42,11 @@ class QuestionRORenderer extends React.Component {
 QuestionRORenderer.propTypes = {
     question: PropTypes.object.isRequired,
     correctAnswer: PropTypes.number.isRequired,
+    compact: PropTypes.bool,
+};
+
+QuestionRORenderer.defaultProps = {
+    compact: false,
 };
 
 export default QuestionRORenderer;
