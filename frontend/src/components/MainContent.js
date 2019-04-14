@@ -50,6 +50,10 @@ class MainContent extends React.Component {
                 return (<LoggedIn {...this.props}/>);
             case AppModes.ROOM_MASTER:
                 return (<RoomMaster {...this.props}/>);
+            case AppModes.CREATE_LIST_FAILED:
+                return (<RecoverableError message={"Liste konnte nicht erstellt werden."}
+                                          onOk={() => this.props.appState.actionHandler(backToLoggedIn())}
+                                          color={this.props.color}/>);
             case AppModes.FATAL_ERROR:
             default:
                 window.onbeforeunload = undefined;

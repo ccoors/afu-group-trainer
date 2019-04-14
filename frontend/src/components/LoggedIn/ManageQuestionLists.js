@@ -10,6 +10,7 @@ class ManageQuestionLists extends React.Component {
             <Header as="h2" content="Meine Fragenlisten"/>
             <QuestionListRenderer questionList={this.props.appState.myQuestionLists}
                                   questionDatabase={this.props.appState.questionDatabase}
+                                  actionHandler={this.props.appState.actionHandler}
                                   publicLists={false} allowEdit={true}/>
 
             <Header as="h2" content="Öffentliche Fragelisten"/>

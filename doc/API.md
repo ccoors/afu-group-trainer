@@ -104,6 +104,9 @@
         is_public: Bool
         questions: Array<String>[?] (UUIDs)
     
+    DeleteQuestionList:
+        list_uuid: String
+    
     StartQuestions:
         mode: String (plain | uuid)
      => Only when starting with UUID:

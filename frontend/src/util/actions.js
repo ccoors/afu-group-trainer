@@ -17,6 +17,10 @@ const UserActions = Object.freeze({
     BACK_TO_IDLE: 29,
 
     LEAVE_ROOM: 30,
+
+    CREATE_QUESTION_LIST: 40,
+    UPDATE_QUESTION_LIST: 41, // TODO
+    DELETE_QUESTION_LIST: 42,
 });
 
 function backToStart() {
@@ -107,6 +111,20 @@ function leaveRoom() {
     return {
         action: UserActions.LEAVE_ROOM,
     };
+}
+
+function createQuestionList(name) {
+    return {
+        action: UserActions.CREATE_QUESTION_LIST,
+        name: name,
+    }
+}
+
+function deleteQuestionList(uuid) {
+    return {
+        action: UserActions.DELETE_QUESTION_LIST,
+        uuid: uuid,
+    }
 }
 
 function updateState(action, setState, socket) {
@@ -213,6 +231,27 @@ function updateState(action, setState, socket) {
             });
             socket.send(JSON.stringify("LeaveRoom"));
             break;
+        case UserActions.CREATE_QUESTION_LIST:
+            setState({
+                myQuestionLists: null,
+                lastCreateResult: null,
+            });
+            socket.send(JSON.stringify({
+                CreateQuestionList: {
+                    list_name: action.name
+                }
+            }));
+            break;
+        case UserActions.DELETE_QUESTION_LIST:
+            setState({
+                myQuestionLists: null,
+            });
+            socket.send(JSON.stringify({
+                DeleteQuestionList: {
+                    list_uuid: action.uuid
+                }
+            }));
+            break;
         default:
             setState({
                 mode: AppModes.FATAL_ERROR,
@@ -232,6 +271,8 @@ export {
     createRoom,
     backToIdle,
     leaveRoom,
+    createQuestionList,
+    deleteQuestionList,
     questionSettings,
     startQuestions,
     nextQuestion,

@@ -316,6 +316,7 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
                 this.sendCreateQuestionListResult(client, true, id);
             } catch (e) {
                 this.sendCreateQuestionListResult(client, false, "");
+                this.sendUserListUpdate(client.loggedInAs); // The client forgot his list, so resend it
             }
         } else if (json.UpdateQuestionList) {
             if (!client.loggedIn) {
@@ -330,6 +331,19 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
                 }
             });
             this.questionListManager.updateList(list_uuid, list_name, is_public, questions);
+            this.questionListManager.sync();
+        } else if (json.DeleteQuestionList) {
+            if (!client.loggedIn) {
+                // TODO: Handle better
+                throw "Operation not allowed.";
+            }
+            const result = this.questionListManager.deleteList(json.DeleteQuestionList.list_uuid, client.loggedInAs);
+            this.questionListManager.sync();
+            if (!result) {
+                // TODO: Handle better
+                this.sendUserListUpdate(client.loggedInAs);
+                throw "List not found.";
+            }
         } else {
             this.sendError(client, "Command not found");
         }
