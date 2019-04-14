@@ -10,7 +10,7 @@ class QuestionRORenderer extends React.Component {
         let colon = answer.trim() !== "" ? ":" : "";
         if (correct) {
             return <Segment color={"green"} inverted>
-                <strong>{nr}{colon}</strong><br/>
+                <strong>{nr}{colon}</strong>{!this.props.compact ? <br/> : <span>&nbsp;</span>}
                 {stringToJSX(answer)}
             </Segment>;
         } else {
@@ -27,8 +27,7 @@ class QuestionRORenderer extends React.Component {
                 {this.props.question.outdated &&
                 <div><Label as="a" color="red" ribbon="right">
                     Nicht mehr relevante Frage
-                </Label><br/></div>
-                }
+                </Label><br/></div>}
                 <strong>{this.props.question.id}:</strong> {stringToJSX(this.props.question.question)}
             </Segment>
             {this.renderSegment("A", this.props.question.answers[0], this.props.correctAnswer === 0)}

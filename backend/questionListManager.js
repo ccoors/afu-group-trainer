@@ -42,6 +42,15 @@ QuestionListManager.prototype.sync = function () {
     }
 };
 
+QuestionListManager.prototype.findList = function(uuid) {
+    const found = this.questionLists.find(l => l.uuid === uuid);
+    if (found) {
+        return found.questions;
+    } else {
+        return null;
+    }
+};
+
 QuestionListManager.prototype.createList = function (name, user, is_public) {
     name = name.trim();
     if (name === "") {
@@ -77,7 +86,7 @@ QuestionListManager.prototype.updateList = function (id, name, is_public, questi
 
         this.sort();
 
-        if (was_public !== is_public) {
+        if (was_public || is_public) {
             this.callback();
         }
 

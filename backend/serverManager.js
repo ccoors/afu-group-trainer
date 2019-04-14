@@ -271,6 +271,12 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
                 let questions = null;
                 if (mode === "uuid") {
                     questions = this.questionManager.getQuestionList(start_uuid);
+                    if (questions === null) {
+                        questions = this.questionListManager.findList(start_uuid);
+                        if (questions) {
+                            questions = questions.map(q => this.questionManager.findByUUID(null, q));
+                        }
+                    }
                     if (ignore_outdated && questions.length > 1) {
                         questions = questions.filter(q => !q.outdated);
                     }

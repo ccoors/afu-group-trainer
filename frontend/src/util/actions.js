@@ -19,7 +19,7 @@ const UserActions = Object.freeze({
     LEAVE_ROOM: 30,
 
     CREATE_QUESTION_LIST: 40,
-    UPDATE_QUESTION_LIST: 41, // TODO
+    UPDATE_QUESTION_LIST: 41,
     DELETE_QUESTION_LIST: 42,
 });
 
@@ -117,6 +117,16 @@ function createQuestionList(name) {
     return {
         action: UserActions.CREATE_QUESTION_LIST,
         name: name,
+    }
+}
+
+function updateQuestionList(uuid, name, is_public, questions) {
+    return {
+        action: UserActions.UPDATE_QUESTION_LIST,
+        uuid: uuid,
+        name: name,
+        is_public: is_public,
+        questions: questions
     }
 }
 
@@ -242,6 +252,16 @@ function updateState(action, setState, socket) {
                 }
             }));
             break;
+        case UserActions.UPDATE_QUESTION_LIST:
+            socket.send(JSON.stringify({
+                UpdateQuestionList: {
+                    list_uuid: action.uuid,
+                    list_name: action.name,
+                    is_public: action.is_public,
+                    questions: action.questions
+                }
+            }));
+            break;
         case UserActions.DELETE_QUESTION_LIST:
             setState({
                 myQuestionLists: null,
@@ -272,6 +292,7 @@ export {
     backToIdle,
     leaveRoom,
     createQuestionList,
+    updateQuestionList,
     deleteQuestionList,
     questionSettings,
     startQuestions,
