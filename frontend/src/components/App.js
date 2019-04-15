@@ -19,7 +19,7 @@ class App extends Component {
 
                 <MainContent {...this.props}/>
                 <div style={{height: "5em"}}/>
-                <AppFooter version={"0.3.0"} footerLink={this.props.footerLink}/>
+                <AppFooter version="0.4.0" footerLink={this.props.footerLink}/>
             </MathJax.Provider>
         );
     }
