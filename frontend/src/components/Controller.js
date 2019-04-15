@@ -20,9 +20,11 @@ const AppModes = Object.freeze({
 
     ROOM_JOINED: 30,
 
-    CREATE_ROOM: 40,
+    LOGGED_IN: 40,
 
     ROOM_MASTER: 50,
+
+    CREATE_LIST_FAILED: 90,
 
     FATAL_ERROR: 100,
 });
@@ -51,6 +53,8 @@ class Controller extends React.Component {
             mode: AppModes.CONNECTING,
             rooms: [],
             questionDatabase: {},
+            myQuestionLists: null,
+            publicQuestionLists: null,
 
             // Room
             roomName: "",
@@ -142,7 +146,7 @@ class Controller extends React.Component {
             const result = data.LoginResult;
             if (result) {
                 this.setState({
-                    mode: AppModes.CREATE_ROOM,
+                    mode: AppModes.LOGGED_IN,
                     loggedIn: true,
                 });
             } else {
@@ -257,6 +261,20 @@ class Controller extends React.Component {
                     selectedAnswer: selectedAnswer,
                 }
             });
+        } else if (data.hasOwnProperty("PublicQuestionLists")) {
+            this.setState({
+                publicQuestionLists: data.PublicQuestionLists,
+            });
+        } else if (data.hasOwnProperty("UserQuestionLists")) {
+            this.setState({
+                myQuestionLists: data.UserQuestionLists,
+            });
+        } else if (data.hasOwnProperty("CreateQuestionListResult")) {
+            if (!data.CreateQuestionListResult.success) {
+                this.setState({
+                    mode: AppModes.CREATE_LIST_FAILED,
+                });
+            }
         } else {
             let errorMessage = "Unbekannte Nachricht vom Server erhalten";
             if (!this.props.release) {
@@ -270,9 +288,13 @@ class Controller extends React.Component {
     }
 
     timeout() {
-        this.setState({
-            mode: AppModes.ERROR,
-            errorMessage: "Die Verbindung zum Server ist unerwartet abgebrochen (Timeout)."
+        this.setState(state => {
+            if (state.mode !== AppModes.FATAL_ERROR) {
+                return {
+                    mode: AppModes.ERROR,
+                    errorMessage: "Die Verbindung zum Server ist unerwartet abgebrochen (Timeout)."
+                };
+            }
         });
     }
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Header, Input} from "semantic-ui-react";
+import {Button, Header, Input, Tab} from "semantic-ui-react";
 
 import {ltrim} from "../../util/util";
+import QuestionListRenderer from "../LoggedIn/QuestionListRenderer";
 
 class QuestionTree extends React.Component {
     constructor(props) {
@@ -109,16 +110,50 @@ class QuestionTree extends React.Component {
     }
 
     render() {
-        let databaseRendered = this.state.searchInput.length < 2 ?
-            this.renderDatabaseNormal() :
-            [<Header as="h2" key="header_cat">Kategorien</Header>, this.searchDatabase(),
-                <Header as="h2" key="header_quest">Fragen</Header>, this.searchQuestions()];
+        const tabPanes = [
+            {
+                menuItem: {key: 'catalog', icon: 'book', content: 'Fragenkataloge'},
+                render: () => {
+                    const databaseRendered = this.state.searchInput.length < 2 ?
+                        this.renderDatabaseNormal() :
+                        [<Header as="h2" key="header_cat">Kategorien</Header>, this.searchDatabase(),
+                            <Header as="h2" key="header_quest">Fragen</Header>, this.searchQuestions()];
+                    return <Tab.Pane>
+                        <Input fluid placeholder="Frage oder Kategorie" icon="search"
+                               onChange={this.setSearchInput.bind(this)} value={this.state.searchInput}
+                               style={{marginTop: "0.4em"}}/>
+                        {databaseRendered}
+                    </Tab.Pane>;
+                }
+            },
+            {
+                menuItem: {key: 'lists', icon: 'list', content: 'Fragenlisten'},
+                render: () => <Tab.Pane>
+                    <Header as="h2" content="Meine Fragenlisten"/>
+                    <QuestionListRenderer questionList={this.props.appState.myQuestionLists}
+                                          questionDatabase={this.props.appState.questionDatabase}
+                                          actionHandler={this.props.appState.actionHandler}
+                                          publicLists={false} allowEdit={true}
+                                          startQuestions={this.props.quickStartQuestions}/>
+
+                    <Header as="h2" content="Öffentliche Fragelisten"/>
+                    <QuestionListRenderer questionList={this.props.appState.publicQuestionLists}
+                                          questionDatabase={this.props.appState.questionDatabase}
+                                          startQuestions={this.props.quickStartQuestions}/>
+                </Tab.Pane>
+            },
+            {
+                menuItem: {key: 'special', icon: 'star', content: 'Sonderfunktionen'},
+                render: () => <Tab.Pane>
+                    <Button color={this.props.color} size="small" onClick={() => this.props.quickStartQuestions("")}>
+                        <Button.Content visible>Leere ABCD-Fragen stellen</Button.Content>
+                    </Button>
+                </Tab.Pane>
+            }
+        ];
 
         return <div>
-            <Input fluid placeholder="Frage oder Kategorie" icon="search"
-                   onChange={this.setSearchInput.bind(this)} value={this.state.searchInput}
-                   style={{marginTop: "0.4em"}}/>
-            {databaseRendered}
+            <Tab panes={tabPanes}/>
         </div>;
     }
 }
@@ -127,6 +162,7 @@ QuestionTree.propTypes = {
     appState: PropTypes.object.isRequired,
     quickStartQuestions: PropTypes.func.isRequired,
     goToSettings: PropTypes.func.isRequired,
+    color: PropTypes.string.isRequired,
 };
 
 export default QuestionTree;

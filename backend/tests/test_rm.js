@@ -141,7 +141,11 @@ describe("RoomManager test", function () {
 
     it("Plain questions", function () {
         let c = 0;
-        let rm = new room_manager.RoomManager(function () {}, function () {}, function () { c++; });
+        let rm = new room_manager.RoomManager(function () {
+        }, function () {
+        }, function () {
+            c++;
+        });
         let room = rm.addRoom("Room1", {}, "");
         rm.startQuestions(room, null);
         expect(room.state).to.equal(room_manager.ROOM_STATE.QUESTION);

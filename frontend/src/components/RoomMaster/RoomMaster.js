@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Button, Container, Header, Icon, Segment, Step,} from "semantic-ui-react";
+import {Button, Container, Header, Icon, Segment} from "semantic-ui-react";
 
 import {generateEmptyQuestion} from "../../util/util";
 import QuestionRORenderer from "../QuestionRORenderer"
@@ -79,8 +79,11 @@ class RoomMaster extends React.Component {
         }
 
         if (this.props.appState.roomMasterMode === RoomMasterModes.IDLE) {
-            content = <QuestionTree appState={this.props.appState} goToSettings={this.goToSettings.bind(this)}
-                                    quickStartQuestions={this.quickStartQuestions.bind(this)}/>;
+            content = <div>
+                <QuestionTree appState={this.props.appState} color={this.props.color}
+                              goToSettings={this.goToSettings.bind(this)}
+                              quickStartQuestions={this.quickStartQuestions.bind(this)}/>
+            </div>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.SETTINGS) {
             content = <QuestionSettings appState={this.props.appState} onOk={this.startQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RUNNING) {
@@ -127,42 +130,16 @@ class RoomMaster extends React.Component {
         }
         const title = "Raum " + this.props.appState.roomName + " - Referentensicht";
 
-        const topContent = this.props.appState.roomMasterMode < RoomMasterModes.RUNNING ?
-            <div>
-                <Step.Group size="mini" widths={2}>
-                    <Step active={this.props.appState.roomMasterMode === RoomMasterModes.IDLE}
-                          completed={this.props.appState.roomMasterMode > RoomMasterModes.IDLE}>
-                        <Icon name="question"/>
-                        <Step.Content>
-                            <Step.Title>Fragen auswählen</Step.Title>
-                        </Step.Content>
-                    </Step>
-
-                    <Step active={this.props.appState.roomMasterMode === RoomMasterModes.SETTINGS}
-                          completed={this.props.appState.roomMasterMode > RoomMasterModes.SETTINGS}>
-                        <Icon name="settings"/>
-                        <Step.Content>
-                            <Step.Title>Einstellungen</Step.Title>
-                        </Step.Content>
-                    </Step>
-                </Step.Group>
-
-                {this.props.appState.roomMasterMode === RoomMasterModes.IDLE &&
-                <Button color={this.props.color} size="small" onClick={this.startABCDQuestions.bind(this)}>
-                    <Button.Content visible>Leere ABCD-Fragen stellen</Button.Content>
-                </Button>}
-            </div> : null;
-
-
         return (
             <Container text>
                 <QuestionProgress appState={this.props.appState}/>
                 <Segment>
-                    <Header as="h1" content={title}/>
                     <OnlineStatus appState={this.props.appState}/>
-                    {topContent}
+                    <div>
+                        <Header as="h1" content={title}/>
 
-                    {content}
+                        {content}
+                    </div>
                 </Segment>
 
                 {this.props.appState.roomMasterMode === RoomMasterModes.IDLE &&

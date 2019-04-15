@@ -4,7 +4,7 @@ const UserActions = Object.freeze({
     BACK_TO_START: 1,
     JOIN_ROOM: 2,
     LOGIN: 3,
-    BACK_TO_CREATE_ROOM: 4,
+    BACK_TO_LOGIN: 4,
 
     SELECT_ANSWER: 10,
 
@@ -17,6 +17,10 @@ const UserActions = Object.freeze({
     BACK_TO_IDLE: 29,
 
     LEAVE_ROOM: 30,
+
+    CREATE_QUESTION_LIST: 40,
+    UPDATE_QUESTION_LIST: 41,
+    DELETE_QUESTION_LIST: 42,
 });
 
 function backToStart() {
@@ -25,9 +29,9 @@ function backToStart() {
     };
 }
 
-function backToCreateRoom() {
+function backToLoggedIn() {
     return {
-        action: UserActions.BACK_TO_CREATE_ROOM,
+        action: UserActions.BACK_TO_LOGIN,
     };
 }
 
@@ -109,6 +113,30 @@ function leaveRoom() {
     };
 }
 
+function createQuestionList(name) {
+    return {
+        action: UserActions.CREATE_QUESTION_LIST,
+        name: name,
+    }
+}
+
+function updateQuestionList(uuid, name, is_public, questions) {
+    return {
+        action: UserActions.UPDATE_QUESTION_LIST,
+        uuid: uuid,
+        name: name,
+        is_public: is_public,
+        questions: questions
+    }
+}
+
+function deleteQuestionList(uuid) {
+    return {
+        action: UserActions.DELETE_QUESTION_LIST,
+        uuid: uuid,
+    }
+}
+
 function updateState(action, setState, socket) {
     switch (action.action) {
         case UserActions.BACK_TO_START:
@@ -140,9 +168,9 @@ function updateState(action, setState, socket) {
                 }
             }));
             break;
-        case UserActions.BACK_TO_CREATE_ROOM:
+        case UserActions.BACK_TO_LOGIN:
             setState({
-                mode: AppModes.CREATE_ROOM,
+                mode: AppModes.LOGGED_IN,
             });
             break;
         case UserActions.SELECT_ANSWER:
@@ -204,7 +232,7 @@ function updateState(action, setState, socket) {
         case UserActions.LEAVE_ROOM:
             setState(state => {
                 return {
-                    mode: state.loggedIn ? AppModes.CREATE_ROOM : AppModes.START_PAGE,
+                    mode: state.loggedIn ? AppModes.LOGGED_IN : AppModes.START_PAGE,
                     roomName: "",
                     roomUUID: "",
                     roomState: null,
@@ -212,6 +240,37 @@ function updateState(action, setState, socket) {
                 }
             });
             socket.send(JSON.stringify("LeaveRoom"));
+            break;
+        case UserActions.CREATE_QUESTION_LIST:
+            setState({
+                myQuestionLists: null,
+                lastCreateResult: null,
+            });
+            socket.send(JSON.stringify({
+                CreateQuestionList: {
+                    list_name: action.name
+                }
+            }));
+            break;
+        case UserActions.UPDATE_QUESTION_LIST:
+            socket.send(JSON.stringify({
+                UpdateQuestionList: {
+                    list_uuid: action.uuid,
+                    list_name: action.name,
+                    is_public: action.is_public,
+                    questions: action.questions
+                }
+            }));
+            break;
+        case UserActions.DELETE_QUESTION_LIST:
+            setState({
+                myQuestionLists: null,
+            });
+            socket.send(JSON.stringify({
+                DeleteQuestionList: {
+                    list_uuid: action.uuid
+                }
+            }));
             break;
         default:
             setState({
@@ -225,13 +284,16 @@ function updateState(action, setState, socket) {
 export {
     UserActions,
     backToStart,
-    backToCreateRoom,
+    backToLoggedIn,
     joinRoom,
     login,
     selectAnswer,
     createRoom,
     backToIdle,
     leaveRoom,
+    createQuestionList,
+    updateQuestionList,
+    deleteQuestionList,
     questionSettings,
     startQuestions,
     nextQuestion,

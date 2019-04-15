@@ -12,6 +12,39 @@ function generateEmptyQuestion() {
     };
 }
 
+function findQuestion(root, question) {
+    const ret = root.questions.find(q => q.uuid === question);
+    if (ret) {
+        return ret;
+    }
+
+    const findings = root.children.map(c => findQuestion(c, question));
+    const child = findings.find(c => c !== null);
+
+    if (child) {
+        return child;
+    } else {
+        return null;
+    }
+}
+
+function questionMatches(question, search) {
+    return question.id.toLowerCase().includes(search)
+        || question.question.toLowerCase().includes(search)
+        || question.answers.some(a => a.toLowerCase().includes(search));
+}
+
+function findQuestions(root, search) {
+    let ret = root.questions.filter(q => questionMatches(q, search));
+
+    const children = root.children.map(c => findQuestions(c, search));
+    children.forEach(l => {
+        ret = ret.concat(l);
+    });
+
+    return ret;
+}
+
 function stringToJSX(string) {
     if (typeof string !== "string") {
         return string;
@@ -50,4 +83,4 @@ function ltrim(str) {
     return str.replace(/^\s+/, "");
 }
 
-export {generateEmptyQuestion, stringToJSX, ltrim};
+export {generateEmptyQuestion, findQuestion, findQuestions, stringToJSX, ltrim};

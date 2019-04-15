@@ -46,6 +46,10 @@ QuestionManager.prototype.getQuestions = function (category) {
 };
 
 QuestionManager.prototype.findByUUID = function (node, uuid) {
+    if (!node) {
+        node = this.root_node;
+    }
+
     if (node.uuid === uuid) {
         return node;
     } else {

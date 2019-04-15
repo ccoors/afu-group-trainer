@@ -19,6 +19,13 @@
     CreateRoomResult:
         success: Bool
         uuid: String
+    
+    CreateQuestionListResult:
+        success: Bool
+        uuid: String
+    
+    UpdateQuestionListResult:
+        success: Bool
         
     QuestionDatabase:
         Category {
@@ -35,6 +42,18 @@
                 answers: Array<String>[4]
             }>[?]
         }
+        
+    PublicQuestionLists:
+        Array<QuestionList {
+            uuid: String,
+            name: String,
+            user: String,
+            is_public: Bool,
+            questions: Array<String>[?]
+        }>[?]
+    
+    UserQuestionLists:
+        Array<QuestionList>[?]
     
     RoomState:
         state: Int (0: Waiting | 1: Question | 2: Results)
@@ -75,6 +94,18 @@
     CreateRoom:
         room_name: String
         password: String
+    
+    CreateQuestionList:
+        list_name: String
+    
+    UpdateQuestionList:
+        list_uuid: String
+        list_name: String
+        is_public: Bool
+        questions: Array<String>[?] (UUIDs)
+    
+    DeleteQuestionList:
+        list_uuid: String
     
     StartQuestions:
         mode: String (plain | uuid)

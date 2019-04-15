@@ -6,12 +6,12 @@ import {Loader} from "semantic-ui-react"
 import RoomID from "./RoomID";
 import RecoverableError from "./RecoverableError";
 import RoomJoined from "./RoomJoined";
-import CreateRoom from "./CreateRoom";
+import LoggedIn from "./LoggedIn/LoggedIn";
 import RoomMaster from "./RoomMaster/RoomMaster";
 import FatalError from "./FatalError";
 
 import {AppModes} from "./Controller"
-import {backToCreateRoom, backToStart} from "../util/actions";
+import {backToLoggedIn, backToStart} from "../util/actions";
 
 class MainContent extends React.Component {
     render() {
@@ -38,7 +38,7 @@ class MainContent extends React.Component {
                                           color={this.props.color}/>);
             case AppModes.CREATE_ROOM_FAILED:
                 return (<RecoverableError message={"Raum konnte nicht erstellt werden."}
-                                          onOk={() => this.props.appState.actionHandler(backToCreateRoom())}
+                                          onOk={() => this.props.appState.actionHandler(backToLoggedIn())}
                                           color={this.props.color}/>);
             case AppModes.REMOVED_FROM_ROOM:
                 return (<RecoverableError
@@ -46,10 +46,14 @@ class MainContent extends React.Component {
                     onOk={() => this.props.appState.actionHandler(backToStart())} color={this.props.color}/>);
             case AppModes.ROOM_JOINED:
                 return (<RoomJoined {...this.props}/>);
-            case AppModes.CREATE_ROOM:
-                return (<CreateRoom {...this.props}/>);
+            case AppModes.LOGGED_IN:
+                return (<LoggedIn {...this.props}/>);
             case AppModes.ROOM_MASTER:
                 return (<RoomMaster {...this.props}/>);
+            case AppModes.CREATE_LIST_FAILED:
+                return (<RecoverableError message={"Liste konnte nicht erstellt werden."}
+                                          onOk={() => this.props.appState.actionHandler(backToLoggedIn())}
+                                          color={this.props.color}/>);
             case AppModes.FATAL_ERROR:
             default:
                 window.onbeforeunload = undefined;
