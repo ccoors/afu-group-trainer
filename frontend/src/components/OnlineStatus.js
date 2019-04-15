@@ -16,21 +16,21 @@ class OnlineStatus extends React.Component {
             }
         }
 
+        const onlineLabel = usersOnline !== null ? <div id="onlineStatus">
+            <Popup trigger={<Label color='black'>
+                <Icon name='users'/> {usersOnline}
+            </Label>} content='Benutzer online'/>
+        </div> : null;
+
         if (usersAnswered !== null) {
             return <div id="onlineStatus">
-                <Popup trigger={<Label>
-                    <Icon name='users'/> {usersOnline}
-                </Label>} content='Benutzer online'/>
-                <Popup trigger={<Label>
+                {onlineLabel}
+                <Popup trigger={<Label color='black' style={{marginRight: "1em"}}>
                     <Icon name='write'/> {usersAnswered}
                 </Label>} content='Frage beantwortet von'/>
             </div>;
         } else if (usersOnline !== null) {
-            return <div id="onlineStatus">
-                <Popup trigger={<Label>
-                    <Icon name='users'/> {usersOnline}
-                </Label>} content='Benutzer online'/>
-            </div>;
+            return onlineLabel;
         } else {
             return null;
         }
