@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Confirm, Form, Icon, Loader, Modal, Table} from "semantic-ui-react";
+import {Button, Confirm, Form, Icon, Loader, Modal, Popup, Table} from "semantic-ui-react";
 import {createQuestionList, deleteQuestionList} from "../../util/actions";
 import ListEditor from "./ListEditor";
 import {findQuestion} from "../../util/util";
@@ -27,11 +27,18 @@ function QuestionListEntry(props) {
         {by_user}
         <Table.Cell collapsing textAlign='center'>
             <Button.Group size='tiny'>
-                <Button icon="eye" color="green" title="Liste anzeigen" onClick={props.onShow}/>
+                <Popup trigger={<Button icon="eye" color="green" onClick={props.onShow}/>}
+                       content='Liste anzeigen'/>
                 {props.allowEdit &&
-                <Button icon="edit" color="yellow" title="Liste bearbeiten" onClick={props.onEdit}/>}
+                <Popup trigger={<Button icon="edit" color="yellow" onClick={props.onEdit}/>}
+                       content='Liste bearbeiten'/>}
                 {props.allowEdit &&
-                <Button icon="delete" color="red" title="Liste löschen" onClick={props.onDelete}/>}
+                <Popup trigger={<Button icon="delete" color="red" onClick={props.onDelete}/>}
+                       content='Liste löschen'/>}
+                {props.startQuestions &&
+                <Popup trigger={<Button icon="play" color="blue" onClick={() => {
+                    props.startQuestions(props.list.uuid);
+                }}/>} content='Liste starten'/>}
             </Button.Group>
         </Table.Cell>
     </Table.Row>;
@@ -137,7 +144,7 @@ class QuestionListRenderer extends React.Component {
                     show: l,
                     mode: ListRendererStates.CONFIRMING_DELETE,
                 });
-            }}/>;
+            }} onStart={this.props.startQuestions}/>;
         });
 
         return <Table celled striped>
@@ -251,6 +258,7 @@ QuestionListRenderer.propTypes = {
     questionList: PropTypes.array,
     allowEdit: PropTypes.bool,
     publicLists: PropTypes.bool,
+    startQuestions: PropTypes.func,
 };
 
 QuestionListRenderer.defaultProps = {

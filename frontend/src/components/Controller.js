@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import App from './App';
-import {login, updateState} from "../util/actions";
+import {updateState} from "../util/actions";
 
 const AppModes = Object.freeze({
     CONNECTING: 1,
@@ -84,7 +84,6 @@ class Controller extends React.Component {
             app.setState({
                 mode: AppModes.LOADING_ROOMS
             });
-            app.state.actionHandler(login("root", "root"));
         };
 
         this.socket.onclose = () => {
