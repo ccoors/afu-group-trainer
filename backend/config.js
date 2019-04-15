@@ -13,7 +13,7 @@ config.users = [
     },
 ];
 config.pingTest = 20000;
-config.debug = true;
+config.debug = false;
 config.questions = [
     "assets/TechnikE.json",
     "assets/BetriebstechnikVorschriften.json"
