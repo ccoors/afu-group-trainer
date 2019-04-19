@@ -6,22 +6,33 @@ import {Label, Segment,} from "semantic-ui-react";
 import {stringToJSX} from "../util/util";
 
 class QuestionRORenderer extends React.Component {
-    renderSegment(nr, answer, correct) {
-        let colon = answer.trim() !== "" ? ":" : "";
-        if (correct) {
-            return <Segment color={"green"} inverted>
-                <strong>{nr}{colon}</strong>{!this.props.compact ? <br/> : <span>&nbsp;</span>}
-                {stringToJSX(answer)}
-            </Segment>;
-        } else {
-            return <Segment>
-                <strong>{nr}{colon}</strong>{!this.props.compact ? <br/> : <span>&nbsp;</span>}
-                {stringToJSX(answer)}
-            </Segment>;
+    renderSegment(nr) {
+        const answer = this.props.question.answers[nr];
+        const selected = nr === this.props.selectedAnswer;
+        const correct = this.props.correctAnswer === nr;
+        const wrong = selected && !(this.props.correctAnswer === - 1) && !correct;
+
+        let attributes = {
+            key: "answer" + nr,
+        };
+
+        const color = correct ? "green" : wrong ? "red" : "";
+        if (color) {
+            attributes.color = color;
+            attributes.inverted = true
         }
+
+        const colon = answer.trim() !== "" ? ":" : "";
+
+        return <Segment {...attributes}>
+            <strong>{nr}{colon}</strong>{!this.props.compact ? <br/> : <span>&nbsp;</span>}
+            {stringToJSX(answer)}
+        </Segment>;
     }
 
     render() {
+        const segments = [...Array(4).keys()].map(n => this.renderSegment(n));
+
         return <Segment.Group>
             <Segment>
                 {this.props.question.outdated &&
@@ -30,10 +41,7 @@ class QuestionRORenderer extends React.Component {
                 </Label><br/></div>}
                 <strong>{this.props.question.id}:</strong> {stringToJSX(this.props.question.question)}
             </Segment>
-            {this.renderSegment("A", this.props.question.answers[0], this.props.correctAnswer === 0)}
-            {this.renderSegment("B", this.props.question.answers[1], this.props.correctAnswer === 1)}
-            {this.renderSegment("C", this.props.question.answers[2], this.props.correctAnswer === 2)}
-            {this.renderSegment("D", this.props.question.answers[3], this.props.correctAnswer === 3)}
+            {segments}
         </Segment.Group>;
     }
 }
@@ -41,6 +49,7 @@ class QuestionRORenderer extends React.Component {
 QuestionRORenderer.propTypes = {
     question: PropTypes.object.isRequired,
     correctAnswer: PropTypes.number.isRequired,
+    selectedAnswer: PropTypes.number,
     compact: PropTypes.bool,
 };
 

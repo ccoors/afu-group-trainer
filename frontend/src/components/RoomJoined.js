@@ -39,13 +39,11 @@ class RoomStateRenderer extends React.Component {
                         </Placeholder.Paragraph>
                     </Placeholder></div>;
             case RoomModes.QUESTION:
-
-
                 return <QuestionRenderer question={question} selectAnswer={this.selectAnswer.bind(this)}
                                          selectedAnswer={this.props.appState.selectedAnswer}/>;
             case RoomModes.RESULTS:
                 return <Results appState={this.props.appState} selectedAnswer={this.props.appState.selectedAnswer}
-                                roomQuestion={question}/>;
+                                question={question}/>;
             default:
                 return <div>Unknown state: {this.props.appState.roomState.state}</div>;
         }

@@ -15,10 +15,10 @@ class Results extends React.Component {
 
         let chartColors = [];
         for (let i = 0; i < 4; i++) {
-            chartColors.push(results.correctAnswer !== -1 ? '#d4383c' : '#026fad');
+            chartColors.push(results.correctAnswer !== -1 ? '#DB2828' : '#2185D0');
         }
         if (results.correctAnswer !== -1) {
-            chartColors[results.correctAnswer] = '#00ad00';
+            chartColors[results.correctAnswer] = '#21BA45';
         }
 
         let options = {
@@ -83,6 +83,7 @@ class Results extends React.Component {
             {this.props.question && this.props.question.uuid &&
             <div><p>Die Frage lautete:</p>
                 <QuestionRORenderer question={this.props.question}
+                                    selectedAnswer={this.props.selectedAnswer}
                                     correctAnswer={results.correctAnswer}/></div>}
         </div>;
     }
