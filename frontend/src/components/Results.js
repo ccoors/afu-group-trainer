@@ -79,6 +79,7 @@ class Results extends React.Component {
                 options={options}
                 series={series}
                 type="bar"
+                height="300"
             />
             {this.props.question && this.props.question.uuid &&
             <div><p>Die Frage lautete:</p>

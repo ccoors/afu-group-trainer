@@ -186,6 +186,8 @@ class Controller extends React.Component {
             } else {
                 this.setState({
                     mode: AppModes.JOIN_ROOM_FAILED,
+                    roomName: "",
+                    roomUUID: "",
                 });
             }
         } else if (data.hasOwnProperty("Error")) {

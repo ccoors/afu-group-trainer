@@ -7,6 +7,7 @@ import {stringToJSX} from "../util/util";
 
 class QuestionRORenderer extends React.Component {
     renderSegment(nr) {
+        const letter = ["A", "B", "C", "D"][nr];
         const answer = this.props.question.answers[nr];
         const selected = nr === this.props.selectedAnswer;
         const correct = this.props.correctAnswer === nr;
@@ -25,7 +26,7 @@ class QuestionRORenderer extends React.Component {
         const colon = answer.trim() !== "" ? ":" : "";
 
         return <Segment {...attributes}>
-            <strong>{nr}{colon}</strong>{!this.props.compact ? <br/> : <span>&nbsp;</span>}
+            <strong>{letter}{colon}</strong>{!this.props.compact ? <br/> : <span>&nbsp;</span>}
             {stringToJSX(answer)}
         </Segment>;
     }
