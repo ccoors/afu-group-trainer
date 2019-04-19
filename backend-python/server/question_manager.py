@@ -2,50 +2,27 @@ import json
 import copy
 import logging
 
-
-class Question:
-    def __init__(self, uuid, question_id, question, answers):
-        self.uuid = uuid
-        self.id = question_id
-        self.question = question
-        self.answers = answers
-
-
-class QuestionCategory:
-    def __init__(self, uuid='', category_id='', name='', prefix='', children=None, questions=None):
-        if children is None:
-            children = []
-        if questions is None:
-            questions = []
-        self.uuid = uuid
-        self.id = category_id
-        self.name = name
-        self.prefix = prefix
-        self.children = children
-        self.questions = questions
-
-    def add_children(self, children):
-        self.children.extend(children)
-
-    def count_questions(self):
-        return len(self.questions) + sum(map(lambda c: c.count_questions(), self.children))
+from server.data_types import Question, QuestionCategory, Answer
 
 
 def question_hook(param):
     if 'question' in param:
-        uuid = param['uuid']
+        # uuid = param['uuid']
         question_id = param['id']
         question = param['question']
         answers = param['answers']
-        return Question(uuid, question_id, question, answers)
+        add_answers = []
+        for i in range(0, 4):
+            add_answers.append(Answer(answers[i], i == 0, question_id))
+        return Question(question_id, question, add_answers)
     else:
-        uuid = param['uuid']
+        # uuid = param['uuid']
         question_id = param['id']
         name = param['name']
         prefix = param['prefix']
         children = param['children']
         questions = param['questions']
-        return QuestionCategory(uuid, question_id, name, prefix, children, questions)
+        return QuestionCategory(question_id, name, prefix, children, questions)
 
 
 class QuestionManager:
