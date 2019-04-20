@@ -5,7 +5,7 @@ import {updateQuestionList} from "../../util/actions";
 import QuestionSearch from "./QuestionSearch";
 import {findQuestion} from "../../util/util";
 import SortContainer from "./SortContainer";
-import CompactQuestionRenderer from "../CompactQuestionRenderer";
+import CompactQuestionRenderer from "../QuestionRenderer/CompactQuestionRenderer";
 
 class ListEditor extends React.Component {
     constructor(props) {

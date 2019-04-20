@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {Button, Container, Header, Icon, Segment} from "semantic-ui-react";
 
 import {generateEmptyQuestion} from "../../util/util";
-import QuestionRORenderer from "../QuestionRORenderer"
+import QuestionRORenderer from "../QuestionRenderer/QuestionRORenderer"
 import Results from "../Results";
 import QuestionProgress from "../QuestionProgress";
 import {RoomMasterModes} from "../Controller";
@@ -120,11 +120,11 @@ class RoomMaster extends React.Component {
                         <Button.Content visible>Fragen beenden</Button.Content>
                         <Icon name="close"/>
                     </Button>
-                    <Button color="green" size="small" icon labelPosition="right"
-                            onClick={this.nextQuestion.bind(this)}>
+                    {hasNextQuestion && <Button color="green" size="small" icon labelPosition="right"
+                                                onClick={this.nextQuestion.bind(this)}>
                         <Button.Content visible>Nächste Frage</Button.Content>
                         <Icon name="right arrow"/>
-                    </Button>
+                    </Button>}
                 </Button.Group>
             </div>;
         }

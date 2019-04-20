@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Label, Segment,} from "semantic-ui-react";
+import {Label, Segment} from "semantic-ui-react";
 
-import {stringToJSX} from "../util/util";
+import {stringToJSX} from "../../util/util";
+import AnswerOption from "./AnswerOption";
 
 class QuestionRORenderer extends React.Component {
     renderSegment(nr) {
@@ -11,24 +12,20 @@ class QuestionRORenderer extends React.Component {
         const answer = this.props.question.answers[nr];
         const selected = nr === this.props.selectedAnswer;
         const correct = this.props.correctAnswer === nr;
-        const wrong = selected && !(this.props.correctAnswer === - 1) && !correct;
+        const wrong = selected && !(this.props.correctAnswer === -1) && !correct;
 
-        let attributes = {
-            key: "answer" + nr,
-        };
+        let attributes = {};
+        let letterStyle = {};
 
         const color = correct ? "green" : wrong ? "red" : "";
         if (color) {
             attributes.color = color;
-            attributes.inverted = true
+            attributes.inverted = true;
+            letterStyle.color = "white";
         }
 
-        const colon = answer.trim() !== "" ? ":" : "";
-
-        return <Segment {...attributes}>
-            <strong>{letter}{colon}</strong>{!this.props.compact ? <br/> : <span>&nbsp;</span>}
-            {stringToJSX(answer)}
-        </Segment>;
+        return <AnswerOption key={"answer" + nr} letter={letter} text={answer} attributes={attributes}
+                             letterStyle={letterStyle}/>;
     }
 
     render() {
@@ -37,10 +34,11 @@ class QuestionRORenderer extends React.Component {
         return <Segment.Group>
             <Segment>
                 {this.props.question.outdated &&
-                <div><Label as="a" color="red" ribbon="right">
+                <div><Label color="red" ribbon="right">
                     Nicht mehr relevante Frage
                 </Label><br/></div>}
-                <strong>{this.props.question.id}:</strong> {stringToJSX(this.props.question.question)}
+                <strong>{this.props.question.id}:</strong>&nbsp;
+                {stringToJSX(this.props.question.question)}
             </Segment>
             {segments}
         </Segment.Group>;
@@ -56,6 +54,7 @@ QuestionRORenderer.propTypes = {
 
 QuestionRORenderer.defaultProps = {
     compact: false,
+    selectedAnswer: -1,
 };
 
 export default QuestionRORenderer;

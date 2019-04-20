@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Header, Icon} from "semantic-ui-react";
 import Chart from "react-apexcharts";
-import QuestionRORenderer from "./QuestionRORenderer";
+import QuestionRORenderer from "./QuestionRenderer/QuestionRORenderer";
 
 class Results extends React.Component {
     render() {

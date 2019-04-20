@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Button, Container, Header, Placeholder, Segment,} from "semantic-ui-react";
 
-import QuestionRenderer from "./QuestionRenderer";
+import QuestionRenderer from "./QuestionRenderer/QuestionRenderer";
 import Results from "./Results";
 import {generateEmptyQuestion} from "../util/util";
 import QuestionProgress from "./QuestionProgress";

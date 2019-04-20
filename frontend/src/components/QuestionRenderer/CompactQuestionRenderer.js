@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Label, Segment} from "semantic-ui-react";
-import {stringToJSX} from "../util/util";
+import {stringToJSX} from "../../util/util";
 
 class CompactQuestionRenderer extends React.Component {
     renderSegment(nr, answer) {
