@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Label, Segment} from "semantic-ui-react";
+import {Button, Segment} from "semantic-ui-react";
 import {stringToJSX} from "../../util/util";
+import OutdatedQuestionLabel from "./OutdatedQuestionLabel";
 
 class CompactQuestionRenderer extends React.Component {
     renderSegment(nr, answer) {
@@ -15,9 +16,10 @@ class CompactQuestionRenderer extends React.Component {
     render() {
         return <Segment>
             {this.props.question.outdated &&
-            <div><Label as="a" color="red" ribbon="right">
-                Nicht mehr relevante Frage
-            </Label><br/></div>}
+            <OutdatedQuestionLabel/>}
+            {this.props.onDelete &&
+            <Button circular icon='close' color="red" floated="right"
+                    onClick={() => this.props.onDelete(this.props.question.uuid)}/>}
             <strong>{this.props.question.id}:</strong> {stringToJSX(this.props.question.question)}
             {this.renderSegment("A", this.props.question.answers[0])}
             {this.renderSegment("B", this.props.question.answers[1])}
@@ -29,6 +31,7 @@ class CompactQuestionRenderer extends React.Component {
 
 CompactQuestionRenderer.propTypes = {
     question: PropTypes.object.isRequired,
+    onDelete: PropTypes.func,
 };
 
 export default CompactQuestionRenderer;

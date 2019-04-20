@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Form, Header, Label, Segment} from "semantic-ui-react";
+import {Form, Header, Segment} from "semantic-ui-react";
 import {stringToJSX} from "../../util/util";
 import AnswerOption from "./AnswerOption";
+import OutdatedQuestionLabel from "./OutdatedQuestionLabel";
 
 class QuestionRenderer extends React.Component {
     selectAnswer(value) {
@@ -40,9 +41,7 @@ class QuestionRenderer extends React.Component {
             <Header as={"h1"} content={this.props.question.id}/>
             }
             {this.props.question.outdated &&
-            <Label color="red" ribbon="right">
-                Nicht mehr relevante Frage
-            </Label>
+            <OutdatedQuestionLabel/>
             }
 
             {this.props.question.question !== "" &&

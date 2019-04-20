@@ -12,6 +12,16 @@ function generateEmptyQuestion() {
     };
 }
 
+// For dev purposes
+function generateDummyQuestion() {
+    return {
+        id: "TX123",
+        question: "Lorem Ipsum dolor <code>SIT AMET</code>, $U=R\\cdot{}I$",
+        outdated: true,
+        answers: ["$\\sum_{x=5}^{10} x = 5 + 6 + 7 + 8 + 9 + 10 = 45$", "<code>CQ CQ CQ DE DL123 PSE K</code>", "FooBar", "Lorem Ipsum dolor sit amet"],
+    };
+}
+
 function findQuestion(root, question) {
     const ret = root.questions.find(q => q.uuid === question);
     if (ret) {
@@ -83,4 +93,4 @@ function ltrim(str) {
     return str.replace(/^\s+/, "");
 }
 
-export {generateEmptyQuestion, findQuestion, findQuestions, stringToJSX, ltrim};
+export {generateEmptyQuestion, generateDummyQuestion, findQuestion, findQuestions, stringToJSX, ltrim};

@@ -36,6 +36,14 @@ class Results extends React.Component {
                         reset: false
                     },
                 },
+                animations: {
+                    enabled: true,
+                    easing: 'easeout',
+                    speed: 500,
+                    animateGradually: {
+                        enabled: false,
+                    },
+                }
             },
             plotOptions: {
                 bar: {

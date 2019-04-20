@@ -35,6 +35,16 @@ class ListEditor extends React.Component {
         }, this.updateQuestion);
     }
 
+    handleQuestionRemove(id) {
+        console.log("Remove id", id);
+        this.setState(state => {
+            const newQuestions = state.newQuestions.filter(q => q !== id);
+            return {
+                newQuestions: newQuestions
+            }
+        }, this.updateQuestion);
+    }
+
     handleNameChange(e) {
         if (e.target.value.trim() === "") {
             return;
@@ -65,7 +75,8 @@ class ListEditor extends React.Component {
         let questions = this.state.newQuestions.map(q => {
             let questionObject = findQuestion(this.props.questionDatabase, q);
             if (questionObject) {
-                return <CompactQuestionRenderer key={q} question={questionObject}/>;
+                return <CompactQuestionRenderer key={q} question={questionObject}
+                                                onDelete={this.handleQuestionRemove.bind(this)}/>;
             } else {
                 return <p key={q}><strong>Fatal:</strong> Can not find question {q}!</p>;
             }

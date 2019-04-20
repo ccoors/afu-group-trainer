@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Label, Segment} from "semantic-ui-react";
+import {Segment} from "semantic-ui-react";
 
 import {stringToJSX} from "../../util/util";
 import AnswerOption from "./AnswerOption";
+import OutdatedQuestionLabel from "./OutdatedQuestionLabel";
 
 class QuestionRORenderer extends React.Component {
     renderSegment(nr) {
@@ -34,9 +35,7 @@ class QuestionRORenderer extends React.Component {
         return <Segment.Group>
             <Segment>
                 {this.props.question.outdated &&
-                <div><Label color="red" ribbon="right">
-                    Nicht mehr relevante Frage
-                </Label><br/></div>}
+                <OutdatedQuestionLabel/>}
                 <strong>{this.props.question.id}:</strong>&nbsp;
                 {stringToJSX(this.props.question.question)}
             </Segment>

@@ -66,23 +66,30 @@ class RoomID extends React.Component {
     }
 
     render() {
-        let room_options = [
-            {
-                text: "Kein Raum ausgewählt",
-                value: ""
-            }
-        ].concat(this.props.appState.rooms.map(r => {
+        const hasRooms = this.props.appState.rooms.length > 0;
+
+        let room_options = this.props.appState.rooms.map(r => {
             return {
                 text: r.name + " (" + r.users + " Benutzer)",
                 value: r.uuid,
                 icon: r.password_required === true ? "lock" : "lock open"
             };
-        }));
+        });
+
+        if (!hasRooms) {
+            room_options = [{
+                text: "Kein Raum verfügbar",
+                value: ""
+            }];
+        }
 
         let joinRoomUUID = this.state.joinRoomUUID;
-        let existingRoom = this.props.appState.rooms.find(r => r.uuid === joinRoomUUID);
+        const existingRoom = this.props.appState.rooms.find(r => r.uuid === joinRoomUUID);
         if (!existingRoom) {
             joinRoomUUID = "";
+        }
+        if (joinRoomUUID === "" && hasRooms) {
+            joinRoomUUID = this.props.appState.rooms[0].uuid;
         }
 
         let tabPanes = [
