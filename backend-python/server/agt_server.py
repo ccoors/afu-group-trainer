@@ -1,8 +1,11 @@
 import asyncio
 import logging
-import websockets
-import sqlalchemy
 
+import websockets
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from server.data_types import Base
 from server.question_manager import QuestionManager
 
 
@@ -19,17 +22,19 @@ async def handler(websocket, path):
 
 
 class AGTServer:
-    def __init__(self, questions=None, port=9120):
-        if questions is None:
-            questions = []
+    def __init__(self, db_url="sqlite:///", port=9120):
+        self.db_engine = create_engine(db_url)
+        Base.metadata.create_all(self.db_engine)
+        self.session_maker = sessionmaker(bind=self.db_engine)
+        self.session = self.session_maker()
         self.logger = logging.getLogger(__name__)
-        self.question_manager = QuestionManager()
+        self.question_manager = QuestionManager(self.session)
         self.port = port
-        for question_file in questions:
-            self.question_manager.load_questions(question_file)
-
         self.logger.info('Initialized AGTServer with {} questions'.format(self.question_manager.count_questions()))
 
     def run(self):
         self.logger.info('Starting AGTServer...'.format(self.question_manager.count_questions()))
         return websockets.serve(handler, '0.0.0.0', self.port)
+
+    def shutdown(self):
+        self.session.close()

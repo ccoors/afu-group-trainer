@@ -1,6 +1,6 @@
 import json
 
-from server.data_types import Base
+from server.data_types import Base, QuestionCategory
 from server.question_manager import question_hook
 
 from sqlalchemy import create_engine
@@ -16,23 +16,33 @@ def add_to_db(session, category):
     session.add_all(category.questions)
 
 
-def add_json(session, file):
+def add_json(root, file):
     with open(file) as f:
         category = json.load(f, object_hook=question_hook)
+        for child in category.children:
+            child.set_parent(root)
+            child.update_parents()
 
-    add_to_db(session, category)
+    print(len(category.children))
+    print(len(root.children))
+    root.add_children(category.children)
+    print(len(root.children))
 
 
 if __name__ == "__main__":
-    engine = create_engine('sqlite:///orm.sqlite', echo=True)
+    engine = create_engine('sqlite:///database.sqlite', echo=True)
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    add_json(session, '../backend/assets/TechnikE.json')
-    add_json(session, '../backend/assets/BetriebstechnikVorschriften.json')
+    root = QuestionCategory("__ROOT__")
+    add_json(root, '../backend/assets/TechnikE.json')
+    add_json(root, '../backend/assets/BetriebstechnikVorschriften.json')
+
+    add_to_db(session, root)
 
     session.commit()
+    session.close()
 
