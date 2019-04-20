@@ -114,18 +114,25 @@ class RoomMaster extends React.Component {
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RESULTS) {
             content = <div>
                 <Results {...this.props} selectedAnswer={-1} question={question}/><br/>
-                <Button.Group fluid>
+                {hasNextQuestion && <Button.Group fluid>
                     <Button color="red" size="small" icon labelPosition="left"
                             onClick={this.endQuestions.bind(this)}>
                         <Button.Content visible>Fragen beenden</Button.Content>
                         <Icon name="close"/>
                     </Button>
-                    {hasNextQuestion && <Button color="green" size="small" icon labelPosition="right"
+                    <Button color="green" size="small" icon labelPosition="right"
                                                 onClick={this.nextQuestion.bind(this)}>
                         <Button.Content visible>Nächste Frage</Button.Content>
                         <Icon name="right arrow"/>
-                    </Button>}
-                </Button.Group>
+                    </Button>
+                </Button.Group>}
+                {!hasNextQuestion && <Button.Group fluid>
+                    <Button color="orange" size="small" icon labelPosition="left"
+                            onClick={this.endQuestions.bind(this)}>
+                        <Button.Content visible>Zurück zur Fragenliste</Button.Content>
+                        <Icon name="left arrow"/>
+                    </Button>
+                </Button.Group>}
             </div>;
         }
         const title = "Raum " + this.props.appState.roomName + " - Referentensicht";
