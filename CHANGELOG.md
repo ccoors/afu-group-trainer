@@ -1,7 +1,11 @@
 # Changelog
 
 ## Public versions
-### 0.4.0 (unreleased)
+### 0.4.1 (2019-04-20)
+- Questions can now be deleted from question lists
+- Small UI and UX improvements
+
+### 0.4.0 (2019-04-15)
 - Major refactoring of frontend code
 - Show both formularies
 - Minor style changes
