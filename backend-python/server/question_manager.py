@@ -1,5 +1,3 @@
-import json
-import copy
 import logging
 
 from server.data_types import Question, QuestionCategory, Answer
@@ -30,6 +28,3 @@ class QuestionManager:
 
     def count_questions(self):
         return self.session.query(Question).count()
-
-    def get_database(self):
-        return copy.deepcopy(self.database)

@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 import asyncio
+import configparser
 import logging
 import sys
 from logging.config import fileConfig
-
-import sqlalchemy
 
 from server.agt_server import AGTServer
 
@@ -14,8 +13,12 @@ def main():
     fileConfig('logging.conf')
     logger = logging.getLogger(__name__)
     try:
-        logger.info('Starting AGT backend server...')
-        instance = AGTServer('sqlite:///database.sqlite', port=8080)
+        logger.debug('Parsing config file...')
+        config = configparser.ConfigParser()
+        config.read('config.conf')
+
+        logger.info('Configuring AGT server...')
+        instance = AGTServer(config)
 
         task = instance.run()
         asyncio.get_event_loop().run_until_complete(task)

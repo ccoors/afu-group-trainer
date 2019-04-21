@@ -1,10 +1,10 @@
 import json
 
-from server.data_types import Base, QuestionCategory
-from server.question_manager import question_hook
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
+from server.data_types import Base, QuestionCategory
+from server.question_manager import question_hook
 
 
 def add_to_db(session, category):
@@ -45,4 +45,3 @@ if __name__ == "__main__":
 
     session.commit()
     session.close()
-
