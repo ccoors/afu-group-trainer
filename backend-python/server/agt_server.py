@@ -14,10 +14,13 @@ WEBSOCKET_SETTINGS_NAMESPACE = "WebSocket"
 
 
 async def handler(websocket, path, props):
-    if path != '/':
+    settings = props['server'].config[AGT_SETTINGS_NAMESPACE]
+    websocket_settings = props['server'].config[WEBSOCKET_SETTINGS_NAMESPACE]
+
+    socket_path = websocket_settings.get('path', '/')
+    if path != socket_path:
         await websocket.close(404, reason='Not found')
 
-    settings = props['server'].config[AGT_SETTINGS_NAMESPACE]
     ping_test = float(settings['ping_test'])
 
     ping_wait = None
