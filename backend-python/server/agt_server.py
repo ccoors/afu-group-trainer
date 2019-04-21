@@ -1,44 +1,26 @@
 import asyncio
 import functools
-import json
 import logging
-from json import JSONDecodeError
 
 import websockets
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from server.client import Client
 from server.data_types import Base
-from server.messages import keep_alive, error
+from server.messages import keep_alive
 from server.question_manager import QuestionManager
+from server.room_manager import RoomManager
+from server.user import UserManager
 
 AGT_SETTINGS_NAMESPACE = "AGT Backend"
 WEBSOCKET_SETTINGS_NAMESPACE = "WebSocket"
 
 
-async def send_message(websocket, message):
-    serialized_message = json.dumps(message)
-    await websocket.send(serialized_message)
-
-
-class Client:
-    def __init__(self, props, websocket):
-        self.props = props
-        self.websocket = websocket
-
-    async def send(self, message):
-        await self.websocket.send(json.dumps(message))
-
-    async def handle_message(self, message):
-        try:
-            data = json.loads(message)
-        except (JSONDecodeError, TypeError):
-            await self.send(error('Can not parse message'))
-
-
-async def handler(websocket, path, props):
-    server = props['server']
+async def handler(websocket, path, server):
+    client = Client(server, websocket)
     try:
+        server.add_user(client)
         settings = server.config[AGT_SETTINGS_NAMESPACE]
         websocket_settings = server.config[WEBSOCKET_SETTINGS_NAMESPACE]
 
@@ -46,10 +28,10 @@ async def handler(websocket, path, props):
         if path != socket_path:
             await websocket.close(404, reason='Not found')
 
+        await client.send_room_list()
+
         ping_test = float(settings['ping_test'])
 
-        server.add_user(websocket)
-        client = Client(props, websocket)
         ping_wait = None
         message_wait = None
         while True:
@@ -64,7 +46,7 @@ async def handler(websocket, path, props):
 
             if ping_wait in done:
                 ping_wait = None
-                await send_message(websocket, keep_alive(2 * 1000 * ping_test))
+                await client.send(keep_alive(2 * 1000 * ping_test))
             elif message_wait in done:
                 message = message_wait.result()
                 message_wait = None
@@ -74,7 +56,7 @@ async def handler(websocket, path, props):
     except Exception as e:
         server.logger.error(e)
     finally:
-        server.remove_user(websocket)
+        server.remove_user(client)
 
 
 class AGTServer:
@@ -88,6 +70,8 @@ class AGTServer:
         self.session_maker = sessionmaker(bind=self.db_engine)
         self.session = self.session_maker()
         self.question_manager = QuestionManager(self.session)
+        self.room_manager = RoomManager()
+        self.user_manager = UserManager(self.session, self.config[AGT_SETTINGS_NAMESPACE])
         self.websocket_options = {
             'host': self.config[WEBSOCKET_SETTINGS_NAMESPACE]['host'],
             'port': int(self.config[WEBSOCKET_SETTINGS_NAMESPACE]['port']),
@@ -97,17 +81,30 @@ class AGTServer:
 
     def run(self):
         self.logger.info('Starting AGTServer...'.format(self.question_manager.count_questions()))
-        props = {
-            'server': self
-        }
-        bound_handler = functools.partial(handler, props=props)
+        bound_handler = functools.partial(handler, server=self)
         return websockets.serve(bound_handler, **self.websocket_options)
 
     def add_user(self, websocket):
         self.users.add(websocket)
 
-    def remove_user(self, websocket):
-        self.users.remove(websocket)
+    def remove_user(self, client):
+        self.room_manager.remove_client(client)
+        self.users.remove(client)
+
+    @staticmethod
+    def _map_room_to_list(room):
+        return {
+            'uuid': str(room.uuid),
+            'name': room.name,
+            'users': len(room.members),
+            'password_requried': room.password is not None
+        }
+
+    def get_room_list(self):
+        room_objects = self.room_manager.get_rooms()
+        rooms = list(map(self._map_room_to_list, room_objects))
+        rooms.sort(key=lambda r: r['name'])
+        return rooms
 
     async def broadcast(self, message):
         if self.users:
