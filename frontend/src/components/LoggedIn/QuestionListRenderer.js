@@ -4,7 +4,7 @@ import {Button, Confirm, Form, Icon, Loader, Modal, Popup, Table} from "semantic
 import {createQuestionList, deleteQuestionList} from "../../util/actions";
 import ListEditor from "./ListEditor";
 import {findQuestion} from "../../util/util";
-import CompactQuestionRenderer from "../CompactQuestionRenderer";
+import CompactQuestionRenderer from "../QuestionRenderer/CompactQuestionRenderer";
 
 function QuestionListEntry(props) {
     let public_status = null;

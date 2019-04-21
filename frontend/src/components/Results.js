@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Header, Icon} from "semantic-ui-react";
 import Chart from "react-apexcharts";
-import QuestionRORenderer from "./QuestionRORenderer";
+import QuestionRORenderer from "./QuestionRenderer/QuestionRORenderer";
 
 class Results extends React.Component {
     render() {
@@ -15,10 +15,10 @@ class Results extends React.Component {
 
         let chartColors = [];
         for (let i = 0; i < 4; i++) {
-            chartColors.push(results.correctAnswer !== -1 ? '#d4383c' : '#026fad');
+            chartColors.push(results.correctAnswer !== -1 ? '#DB2828' : '#2185D0');
         }
         if (results.correctAnswer !== -1) {
-            chartColors[results.correctAnswer] = '#00ad00';
+            chartColors[results.correctAnswer] = '#21BA45';
         }
 
         let options = {
@@ -36,6 +36,14 @@ class Results extends React.Component {
                         reset: false
                     },
                 },
+                animations: {
+                    enabled: true,
+                    easing: 'easeout',
+                    speed: 500,
+                    animateGradually: {
+                        enabled: false,
+                    },
+                }
             },
             plotOptions: {
                 bar: {
@@ -79,10 +87,12 @@ class Results extends React.Component {
                 options={options}
                 series={series}
                 type="bar"
+                height="300"
             />
             {this.props.question && this.props.question.uuid &&
             <div><p>Die Frage lautete:</p>
                 <QuestionRORenderer question={this.props.question}
+                                    selectedAnswer={this.props.selectedAnswer}
                                     correctAnswer={results.correctAnswer}/></div>}
         </div>;
     }

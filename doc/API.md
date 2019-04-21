@@ -1,4 +1,4 @@
-# AFU group trainer WebSocket API 0.3.2
+# AFU group trainer WebSocket API 0.4.1
 
 ## From server
 

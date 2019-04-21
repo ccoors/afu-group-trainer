@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Button, Container, Header, Placeholder, Segment,} from "semantic-ui-react";
 
-import QuestionRenderer from "./QuestionRenderer";
+import QuestionRenderer from "./QuestionRenderer/QuestionRenderer";
 import Results from "./Results";
 import {generateEmptyQuestion} from "../util/util";
 import QuestionProgress from "./QuestionProgress";
@@ -39,13 +39,11 @@ class RoomStateRenderer extends React.Component {
                         </Placeholder.Paragraph>
                     </Placeholder></div>;
             case RoomModes.QUESTION:
-
-
                 return <QuestionRenderer question={question} selectAnswer={this.selectAnswer.bind(this)}
                                          selectedAnswer={this.props.appState.selectedAnswer}/>;
             case RoomModes.RESULTS:
                 return <Results appState={this.props.appState} selectedAnswer={this.props.appState.selectedAnswer}
-                                roomQuestion={question}/>;
+                                question={question}/>;
             default:
                 return <div>Unknown state: {this.props.appState.roomState.state}</div>;
         }

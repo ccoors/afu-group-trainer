@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {Button, Container, Header, Icon, Segment} from "semantic-ui-react";
 
 import {generateEmptyQuestion} from "../../util/util";
-import QuestionRORenderer from "../QuestionRORenderer"
+import QuestionRORenderer from "../QuestionRenderer/QuestionRORenderer"
 import Results from "../Results";
 import QuestionProgress from "../QuestionProgress";
 import {RoomMasterModes} from "../Controller";
@@ -68,12 +68,14 @@ class RoomMaster extends React.Component {
     render() {
         let content = null;
 
-        let hasNextQuestion = false;
+        let hasNextQuestion = true;
+        let emptyQuestion = true;
         let question = generateEmptyQuestion();
         if (this.props.appState.roomState) {
             if (this.props.appState.roomState.question &&
                 this.props.appState.roomState.question.hasOwnProperty("uuid")) {
                 question = this.props.appState.roomState.question;
+                emptyQuestion = false;
                 hasNextQuestion = this.props.appState.roomState.remainingQuestions > 0;
             }
         }
@@ -96,10 +98,10 @@ class RoomMaster extends React.Component {
                     <Button color="red" size="small" icon labelPosition="left"
                             onClick={this.endQuestions.bind(this)}>
                         <Button.Content visible>Fragen beenden</Button.Content>
-                        <Icon name="close"/>
+                        <Icon name="left arrow"/>
                     </Button>
-                    {hasNextQuestion &&
-                    <Button color="yellow" size="small" icon labelPosition="right"
+                    {hasNextQuestion && !emptyQuestion &&
+                    <Button color="orange" size="small" icon labelPosition="right"
                             onClick={this.nextQuestion.bind(this)}>
                         <Button.Content visible>Frage überspringen</Button.Content>
                         <Icon name="fast forward"/>
@@ -114,21 +116,27 @@ class RoomMaster extends React.Component {
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RESULTS) {
             content = <div>
                 <Results {...this.props} selectedAnswer={-1} question={question}/><br/>
-                <Button.Group fluid>
+                {hasNextQuestion && <Button.Group fluid>
                     <Button color="red" size="small" icon labelPosition="left"
                             onClick={this.endQuestions.bind(this)}>
                         <Button.Content visible>Fragen beenden</Button.Content>
-                        <Icon name="close"/>
+                        <Icon name="left arrow"/>
                     </Button>
                     <Button color="green" size="small" icon labelPosition="right"
-                            onClick={this.nextQuestion.bind(this)}>
+                                                onClick={this.nextQuestion.bind(this)}>
                         <Button.Content visible>Nächste Frage</Button.Content>
                         <Icon name="right arrow"/>
                     </Button>
-                </Button.Group>
+                </Button.Group>}
+                {!hasNextQuestion && <Button.Group fluid>
+                    <Button color="orange" size="small" icon labelPosition="left"
+                            onClick={this.endQuestions.bind(this)}>
+                        <Button.Content visible>Zurück zur Fragenauswahl</Button.Content>
+                        <Icon name="left arrow"/>
+                    </Button>
+                </Button.Group>}
             </div>;
         }
-        const title = "Raum " + this.props.appState.roomName + " - Referentensicht";
 
         return (
             <Container text>
@@ -136,8 +144,7 @@ class RoomMaster extends React.Component {
                 <Segment>
                     <OnlineStatus appState={this.props.appState}/>
                     <div>
-                        <Header as="h1" content={title}/>
-
+                        <Header as="h1" content={"Referentensicht"}/>
                         {content}
                     </div>
                 </Segment>
