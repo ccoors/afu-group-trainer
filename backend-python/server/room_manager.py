@@ -27,13 +27,15 @@ class Room:
 
 class RoomManager:
     def __init__(self):
-        self.rooms = {Room('foo', 'user', 'abc123')}
+        self.rooms = set()
 
     def get_rooms(self):
         return self.rooms
 
     def create_room(self, name, master, password=None):
-        self.rooms.add(Room(name, master, password))
+        room = Room(name, master, password)
+        self.rooms.add(room)
+        return room
 
     def remove_client(self, member):
         rooms_to_remove = filter(lambda r: r.master_is(member), self.rooms)

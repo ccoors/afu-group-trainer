@@ -25,7 +25,7 @@ def main():
         asyncio.get_event_loop().run_forever()
     except PermissionError as e:
         logger.error(e)
-    except (asyncio.CancelledError, KeyboardInterrupt):
+    except (asyncio.CancelledError, KeyboardInterrupt, SystemExit):
         logger.info('Exit requested...')
     finally:
         if instance:

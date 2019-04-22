@@ -11,7 +11,7 @@ from server.data_types import Base
 from server.messages import keep_alive
 from server.question_manager import QuestionManager
 from server.room_manager import RoomManager
-from server.user import UserManager
+from server.user_manager import UserManager
 
 AGT_SETTINGS_NAMESPACE = "AGT Backend"
 WEBSOCKET_SETTINGS_NAMESPACE = "WebSocket"
@@ -20,7 +20,7 @@ WEBSOCKET_SETTINGS_NAMESPACE = "WebSocket"
 async def handler(websocket, path, server):
     client = Client(server, websocket)
     try:
-        server.add_user(client)
+        server.add_client(client)
         settings = server.config[AGT_SETTINGS_NAMESPACE]
         websocket_settings = server.config[WEBSOCKET_SETTINGS_NAMESPACE]
 
@@ -56,7 +56,7 @@ async def handler(websocket, path, server):
     except Exception as e:
         server.logger.error(e)
     finally:
-        server.remove_user(client)
+        server.remove_client(client)
 
 
 class AGTServer:
@@ -76,7 +76,8 @@ class AGTServer:
             'host': self.config[WEBSOCKET_SETTINGS_NAMESPACE]['host'],
             'port': int(self.config[WEBSOCKET_SETTINGS_NAMESPACE]['port']),
         }
-        self.users = set()
+        self.clients = set()
+        self._qm_cache = None
         self.logger.info('Initialized AGTServer with {} questions'.format(self.question_manager.count_questions()))
 
     def run(self):
@@ -84,12 +85,22 @@ class AGTServer:
         bound_handler = functools.partial(handler, server=self)
         return websockets.serve(bound_handler, **self.websocket_options)
 
-    def add_user(self, websocket):
-        self.users.add(websocket)
+    def add_client(self, websocket):
+        self.clients.add(websocket)
 
-    def remove_user(self, client):
+    def remove_client(self, client):
         self.room_manager.remove_client(client)
-        self.users.remove(client)
+        self.clients.remove(client)
+
+    def login(self, username, password):
+        user = self.user_manager.get_user(username)
+        if user:
+            authenticated = user.check_password(password)
+            if authenticated:
+                return user
+
+    def create_room(self, client, room_name, password):
+        return self.room_manager.create_room(room_name, client, password)
 
     @staticmethod
     def _map_room_to_list(room):
@@ -106,9 +117,15 @@ class AGTServer:
         rooms.sort(key=lambda r: r['name'])
         return rooms
 
+    def get_question_database(self):
+        if self._qm_cache:
+            return self._qm_cache
+        self._qm_cache = self.question_manager.get_database().serializable()
+        return self._qm_cache
+
     async def broadcast(self, message):
-        if self.users:
-            await asyncio.wait([user.send(message) for user in self.users])
+        if self.clients:
+            await asyncio.wait([user.send(message) for user in self.clients])
 
     def shutdown(self):
         self.logger.info('Closing database connection...')

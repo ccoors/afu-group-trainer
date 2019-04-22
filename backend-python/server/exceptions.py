@@ -4,3 +4,11 @@ class AGTException(Exception):
 
 class InvalidRoomNameException(AGTException):
     pass
+
+
+class OperationFailedException(AGTException):
+    pass
+
+
+class NotAuthenticatedException(AGTException):
+    pass

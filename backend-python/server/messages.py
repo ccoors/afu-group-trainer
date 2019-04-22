@@ -25,6 +25,12 @@ def create_room_result(success, uuid):
     }
 
 
+def question_database(db):
+    return {
+        'QuestionDatabase': db
+    }
+
+
 def error(error_message):
     return {
         'Error': {

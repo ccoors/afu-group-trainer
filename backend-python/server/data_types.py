@@ -1,3 +1,4 @@
+import bcrypt
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
@@ -5,6 +6,20 @@ from sqlalchemy.orm import relationship, backref
 from server.util import gen_uuid
 
 Base = declarative_base()
+
+
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    password_hash = Column(String)
+
+    def __init__(self, name, password):
+        self.name = name
+        self.password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+    def check_password(self, password):
+        return bcrypt.checkpw(password.encode(), self.password_hash)
 
 
 class QuestionCategory(Base):
@@ -40,6 +55,16 @@ class QuestionCategory(Base):
     def uuid(self):
         return gen_uuid(self.category_id, self.name, self.prefix, self.parent_id)
 
+    def serializable(self):
+        return dict({
+            'uuid': self.uuid(),
+            'id': self.category_id,
+            'name': self.name,
+            'prefix': self.prefix,
+            'children': list(map(lambda c: c.serializable(), self.children)),
+            'questions': list(map(lambda q: q.serializable(), self.questions))
+        })
+
     def add_children(self, children):
         self.children.extend(children)
 
@@ -60,23 +85,36 @@ class Question(Base):
     id = Column(Integer, primary_key=True)
     question_id = Column(String)
     question = Column(String)
+    outdated = Column(Boolean)
 
     category = relationship("QuestionCategory", back_populates="questions")
     category_id = Column(Integer, ForeignKey('categories.category_id'))
 
-    def __init__(self, question_id, question, answers):
+    def __init__(self, question_id, question, outdated, answers):
         self.question_id = question_id
         self.question = question
         self.answers = answers
+        self.outdated = outdated
 
     def __repr__(self):
-        return "Question(uuid={}, id={}, question_id={}, question={}, category_id={})".format(self.uuid(), self.id,
-                                                                                              self.question_id,
-                                                                                              self.question,
-                                                                                              self.category_id)
+        return "Question(uuid={}, id={}, question_id={}, outdated={}, question={}, category_id={})".format(self.uuid(),
+                                                                                                           self.id,
+                                                                                                           self.question_id,
+                                                                                                           self.outdated,
+                                                                                                           self.question,
+                                                                                                           self.category_id)
 
     def uuid(self):
         return gen_uuid(self.question_id, self.question, self.category_id)
+
+    def serializable(self):
+        return dict({
+            'uuid': self.uuid(),
+            'id': self.question_id,
+            'question': self.question,
+            'outdated': self.outdated,
+            'answers': list(map(lambda a: a.text, self.answers))
+        })
 
 
 class Answer(Base):
