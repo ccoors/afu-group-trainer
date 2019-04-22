@@ -193,7 +193,7 @@ class Controller extends React.Component {
         } else if (data.hasOwnProperty("Error")) {
             this.setState({
                 mode: AppModes.FATAL_ERROR,
-                errorMessage: data.message
+                errorMessage: data.Error.message
             });
         } else if (data === "LeaveRoom" || data.hasOwnProperty("LeaveRoom")) {
             this.setState({
@@ -293,7 +293,7 @@ class Controller extends React.Component {
         this.setState(state => {
             if (state.mode !== AppModes.FATAL_ERROR) {
                 return {
-                    mode: AppModes.ERROR,
+                    mode: AppModes.FATAL_ERROR,
                     errorMessage: "Die Verbindung zum Server ist unerwartet abgebrochen (Timeout)."
                 };
             }
