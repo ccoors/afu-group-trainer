@@ -9,14 +9,18 @@ class Room:
             raise InvalidRoomNameException('Room name can not be empty')
         self.uuid = uuid.uuid4()
         self.name = name
-        self.members = [master]
+        self.master = master
+        self.members = set()
         self.password = password
 
     def contains_member(self, member):
         return member in self.members
 
     def master_is(self, member):
-        return member == self.members[0]
+        return member == self.master
+
+    def add_member(self, member):
+        self.members.add(member)
 
     def remove_member(self, member):
         self.members.remove(member)
@@ -38,10 +42,11 @@ class RoomManager:
         return room
 
     def remove_client(self, member):
-        rooms_to_remove = filter(lambda r: r.master_is(member), self.rooms)
+        rooms_to_remove = set(filter(lambda r: r.master_is(member), self.rooms))
         for room in rooms_to_remove:
             room.close_room()
-            self.rooms.remove(room)
+
+        self.rooms.difference_update(rooms_to_remove)
 
         rooms_to_remove_from = filter(lambda r: r.contains_member(member), self.rooms)
         for room in rooms_to_remove_from:
