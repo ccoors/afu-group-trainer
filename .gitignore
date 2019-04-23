@@ -462,5 +462,10 @@ typings/
 
 # End of https://www.gitignore.io/api/linux,latex,kdevelop4,intellij+all,node
 
+doc/_*
+venv/
+*.pyc
+
 frontend/resources/*.png
 frontend/resources/*.ico
+/doc/graphs/*.png
