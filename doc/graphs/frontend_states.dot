@@ -1,5 +1,5 @@
 digraph G {
-    graph [ dpi = 300 ];
+    graph [ dpi = 150 ];
     "CONNECTING" -> "LOADING_ROOMS" [label = "WebSocket connected"];
     "LOADING_ROOMS" -> "START_PAGE" [label = "S: RoomList"];
     "START_PAGE" -> "LOGGING_IN" [label = "C: Login"];

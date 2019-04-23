@@ -17,4 +17,4 @@ jq ".version=\"$1\"" backend/package.json > $TEMPFILE
 cp $TEMPFILE backend/package.json
 
 sed -i "s/version=\".*\"\s/version=\"$1\" /g" frontend/src/components/App.js
-sed -i "s/WebSocket API.*/WebSocket API $1/g" doc/API.md
+sed -i "s/release = .*/release = '$1'/g" doc/conf.py

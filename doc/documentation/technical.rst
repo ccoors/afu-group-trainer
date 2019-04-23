@@ -1,6 +1,25 @@
-# AFU group trainer WebSocket API 0.4.1
+Technische Hintergründe
+#######################
+Front- und Backend sind in JavaScript geschrieben. Das Backend wird mit Node ausgeführt, das Frontend basiert auf dem React-Framework und wird in „normales“ HTML/JS/CSS übersetzt. Front- und Backend kommunizieren über einen WebSocket, also eine ständig offene TCP-Verbindung. Dadurch wird eine Kommunikation aller Teilnehmer mit geringer Latenz ermöglicht.
 
-## From server
+Datenschutz
+===========
+Die Software ist absichtlich sehr datensparsam designt: Alle Teilnehmer sind nicht ohne weitere Informationen identifizierbar. Insbesondere wird keine Statistik über richtig und falsch beantwortete Fragen erstellt. Sobald ein Teilnehmer die Seite verlässt und die Verbindung geschlossen wird „vergisst“ das Backend alle Daten über diesen Teilnehmer. Es werden keine Cookies gesetzt oder sonstige persistente Daten auf den Endgerät des Teilnehmers gespeichert, die ihn identifizierbar machen.
+
+Performance
+===========
+Ein erster Lasttest unter Laborbedingungen verlief positiv. Realistisch können auf durchschnittlichen Systemen einige 100 Teilnehmer das System parallel benutzen, ohne dass es zu besonders störenden Performanceproblemen kommt. Die Ergebnisse sind erwartungskonform da über den WebSocket bis auf ein Mal die Fragendatenbank für den Dozenten nur sehr kleine Nachrichten verschickt werden und das Backend keine besonders rechenintensiven Aufgaben durchführt. 
+
+API Dokumentation
+=================
+.. Caution:: Die API gilt noch nicht als stabil und kann sich mit jeder Version ändern!
+
+Die Nachrichten werden mit JSON serialisiert und über eine WebSocket-Verbindung zwischen Frontend und Backend ausgetauscht.
+
+Vom Server
+----------
+
+::
 
     RoomList:
         Array<Room {
@@ -85,7 +104,10 @@
     KeepAlive:
         next: Int
 
-## From user
+Vom Client
+----------
+
+::
 
     Login:
         username: String
@@ -132,3 +154,10 @@
     
     LeaveRoom:
         /
+
+Frontend Zustandsdiagramm
+=========================
+
+.. figure:: /graphs/frontend_states.png
+
+    C: Nachrichten vom Client, S: Nachrichten vom Server

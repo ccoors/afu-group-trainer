@@ -585,5 +585,10 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/node,latex,linux,python,kdevelop4,intellij+all
 
+doc/_*
+venv/
+*.pyc
+
 frontend/resources/*.png
 frontend/resources/*.ico
+/doc/graphs/*.png

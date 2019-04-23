@@ -1,11 +1,16 @@
-# Changelog
+Changelog
+#########
 
-## Public versions
-### 0.4.1 (2019-04-20)
+Public versions
+===============
+
+0.4.1 (2019-04-20)
+------------------
 - Questions can now be deleted from question lists
 - Small UI and UX improvements
 
-### 0.4.0 (2019-04-15)
+0.4.0 (2019-04-15)
+------------------
 - Major refactoring of frontend code
 - Show both formularies
 - Minor style changes
@@ -15,20 +20,25 @@
 - Users can now see how many other users are in the room they are in
 - Removed load test as it became incompatible with current backend
 
-### 0.3.0 (2019-01-19)
+0.3.0 (2019-01-19)
+------------------
 - Configuration options in separate files
 - Headers in search results
 - KeepAlive packets for client
 - Various style fixes
 
-### 0.2.1 (2019-01-16)
+0.2.1 (2019-01-16)
+------------------
 - Fix TLS configuration
 - Improve responsive design
 
-## Non-public versions
-### 0.2.0 (2018-12-27)
+Non-public versions
+===================
+0.2.0 (2018-12-27)
+------------------
 - Complete rewrite of frontend and backend in JavaScript
 
-### 0.1.0 (2018-09-01)
+0.1.0 (2018-09-01)
+------------------
 - Initial version
 - Backend in Rust
