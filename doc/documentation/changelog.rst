@@ -4,6 +4,10 @@ Changelog
 Public versions
 ===============
 
+0.4.2 (unreleased)
+------------------
+- Add option for demo mode
+
 0.4.1 (2019-04-20)
 ------------------
 - Questions can now be deleted from question lists

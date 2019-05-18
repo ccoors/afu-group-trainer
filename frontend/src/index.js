@@ -22,4 +22,5 @@ if (!config.webSocketUrl) {
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(<Controller socketUrl={config.webSocketUrl} mathJaxProvider={config.mathJaxProvider}
-                            footerLink={config.footerLink} release={config.release} color="blue"/>, rootElement);
+                            footerLink={config.footerLink} release={config.release} demo={config.demo}
+                            color="blue"/>, rootElement);

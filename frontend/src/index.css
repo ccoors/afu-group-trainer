@@ -71,6 +71,10 @@ footer {
     cursor: move;
 }
 
+.noTopMargin {
+    margin-top: 0 !important;
+}
+
 .sortableHelper {
     z-index: 100000;
 }
