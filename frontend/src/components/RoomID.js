@@ -117,7 +117,7 @@ class RoomID extends React.Component {
                 render: () => <Tab.Pane>
                     <Form>
                         {this.props.demo && <p className={"noTopMargin"}>
-                            Demo-Instanz: Login mit Benutzername <strong>demo</strong> und Passwort <strong>demo</strong>
+                            Demoinstanz: Login mit Benutzername <strong>demo</strong> und Passwort <strong>demo</strong>
                         </p>}
 
                         <Input fluid icon="user" iconPosition="left" placeholder={"Benutzername"}
