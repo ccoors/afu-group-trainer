@@ -4,9 +4,10 @@ Changelog
 Public versions
 ===============
 
-0.4.2 (unreleased)
+0.4.2 (2019-05-19)
 ------------------
 - Add option for demo mode
+- Minor style fixes
 
 0.4.1 (2019-04-20)
 ------------------
