@@ -35,6 +35,10 @@ footer {
     float: right;
 }
 
+.questionTree p {
+    margin: 0;
+}
+
 .hidden {
     display: none;
 }

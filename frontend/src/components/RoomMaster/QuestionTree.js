@@ -15,9 +15,9 @@ class QuestionTree extends React.Component {
     }
 
     static getCategorySuffix(category) {
-        if (category.prefix !== "" && category.questions.length !== 0) {
+        if (category.prefix && category.questions.length !== 0) {
             return <p>Fragenprefix {category.prefix}, {category.questions.length} Fragen</p>;
-        } else if (category.prefix !== "" && category.questions.length === 0) {
+        } else if (category.prefix && category.questions.length === 0) {
             return <p>Fragenprefix {category.prefix}</p>;
         } else if (category.questions.length !== 0) {
             return <p>{category.questions.length} Fragen</p>;
@@ -43,7 +43,7 @@ class QuestionTree extends React.Component {
     }
 
     renderDatabaseNormal() {
-        return <ul key="rootNode">
+        return <ul key="rootNode" className="questionTree">
             {this.props.appState.questionDatabase.children.map(c => this.renderDatabaseTree(c))}
         </ul>;
     }
