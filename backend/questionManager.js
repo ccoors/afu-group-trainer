@@ -5,6 +5,7 @@ let QuestionManager = function () {
         uuid: "",
         id: "",
         name: "",
+        shortname: "",
         prefix: "",
         children: [],
         questions: [],
