@@ -4,6 +4,11 @@ Changelog
 Public versions
 ===============
 
+0.5.0 (Unreleased)
+------------------
+- Move from create-react-app to nano-react-app
+- Questions for class A
+
 0.4.2 (2019-05-19)
 ------------------
 - Add option for demo mode
