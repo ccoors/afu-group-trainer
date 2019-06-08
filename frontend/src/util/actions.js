@@ -1,4 +1,4 @@
-import {AppModes, RoomMasterModes} from "../components/Controller";
+import {AppModes, RoomMasterModes} from '../components/Controller';
 
 const UserActions = Object.freeze({
     BACK_TO_START: 1,
@@ -208,7 +208,7 @@ function updateState(action, setState, socket) {
             });
             socket.send(JSON.stringify({
                 StartQuestions: {
-                    mode: action.uuid !== "" ? "uuid" : "plain",
+                    mode: action.uuid !== '' ? 'uuid' : 'plain',
                     start_uuid: action.uuid,
                     shuffle: action.shuffle,
                     ignore_outdated: !action.outdated,
@@ -216,13 +216,13 @@ function updateState(action, setState, socket) {
             }));
             break;
         case UserActions.NEXT_QUESTION:
-            socket.send(JSON.stringify("NextQuestion"));
+            socket.send(JSON.stringify('NextQuestion'));
             break;
         case UserActions.SHOW_RESULTS:
-            socket.send(JSON.stringify("ShowResults"));
+            socket.send(JSON.stringify('ShowResults'));
             break;
         case UserActions.END_QUESTIONS:
-            socket.send(JSON.stringify("EndQuestions"));
+            socket.send(JSON.stringify('EndQuestions'));
             break;
         case UserActions.BACK_TO_IDLE:
             setState({
@@ -233,13 +233,13 @@ function updateState(action, setState, socket) {
             setState(state => {
                 return {
                     mode: state.loggedIn ? AppModes.LOGGED_IN : AppModes.START_PAGE,
-                    roomName: "",
-                    roomUUID: "",
+                    roomName: '',
+                    roomUUID: '',
                     roomState: null,
                     selectedAnswer: -1,
                 }
             });
-            socket.send(JSON.stringify("LeaveRoom"));
+            socket.send(JSON.stringify('LeaveRoom'));
             break;
         case UserActions.CREATE_QUESTION_LIST:
             setState({
@@ -275,7 +275,7 @@ function updateState(action, setState, socket) {
         default:
             setState({
                 mode: AppModes.FATAL_ERROR,
-                errorMessage: "Unbekannte Aktion angefragt",
+                errorMessage: 'Unbekannte Aktion angefragt',
             })
     }
 }

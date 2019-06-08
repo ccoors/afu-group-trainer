@@ -1,6 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {Icon, Label, Popup} from "semantic-ui-react";
+import React from 'react';
+import {Icon, Label, Popup} from 'semantic-ui-react';
 
 class OnlineStatus extends React.Component {
     render() {
@@ -25,7 +25,7 @@ class OnlineStatus extends React.Component {
         if (usersAnswered !== null) {
             return <div id="onlineStatus">
                 {onlineLabel}
-                <Popup trigger={<Label color='black' style={{marginRight: "1em"}}>
+                <Popup trigger={<Label color='black' style={{marginRight: '1em'}}>
                     <Icon name='write'/> {usersAnswered}
                 </Label>} content='Frage beantwortet von'/>
             </div>;

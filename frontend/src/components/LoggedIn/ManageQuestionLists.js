@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {Header} from "semantic-ui-react";
-import QuestionListRenderer from "./QuestionListRenderer";
+import React from 'react';
+import {Header} from 'semantic-ui-react';
+import QuestionListRenderer from './QuestionListRenderer';
 
 class ManageQuestionLists extends React.Component {
     render() {

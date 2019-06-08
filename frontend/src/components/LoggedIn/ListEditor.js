@@ -1,11 +1,11 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Checkbox, Form, Header, Message, Modal} from "semantic-ui-react";
-import {updateQuestionList} from "../../util/actions";
-import QuestionSearch from "./QuestionSearch";
-import {findQuestion} from "../../util/util";
-import SortContainer from "./SortContainer";
-import CompactQuestionRenderer from "../QuestionRenderer/CompactQuestionRenderer";
+import React from 'react';
+import {Button, Checkbox, Form, Header, Message, Modal} from 'semantic-ui-react';
+import {updateQuestionList} from '../../util/actions';
+import {findQuestion} from '../../util/util';
+import CompactQuestionRenderer from '../QuestionRenderer/CompactQuestionRenderer';
+import QuestionSearch from './QuestionSearch';
+import SortContainer from './SortContainer';
 
 class ListEditor extends React.Component {
     constructor(props) {
@@ -36,7 +36,6 @@ class ListEditor extends React.Component {
     }
 
     handleQuestionRemove(id) {
-        console.log("Remove id", id);
         this.setState(state => {
             const newQuestions = state.newQuestions.filter(q => q !== id);
             return {
@@ -46,7 +45,7 @@ class ListEditor extends React.Component {
     }
 
     handleNameChange(e) {
-        if (e.target.value.trim() === "") {
+        if (e.target.value.trim() === '') {
             return;
         }
 
@@ -83,7 +82,7 @@ class ListEditor extends React.Component {
         });
 
         if (questions.length === 0) {
-            questions = [<p key={"no-questions"}>Keine Fragen in der Liste.</p>];
+            questions = [<p key={'no-questions'}>Keine Fragen in der Liste.</p>];
         }
 
         return <Modal
@@ -96,7 +95,7 @@ class ListEditor extends React.Component {
             <Modal.Header>Liste bearbeiten</Modal.Header>
             <Modal.Content scrolling>
                 <strong>Die Änderungen an der Liste werden unmittelbar durchgeführt!</strong>
-                <div style={{height: "2em"}}/>
+                <div style={{height: '2em'}}/>
 
                 <Form>
                     <Form.Input
@@ -107,7 +106,7 @@ class ListEditor extends React.Component {
                         placeholder='Neue Liste'
                     />
                 </Form>
-                <div style={{height: "1em"}}/>
+                <div style={{height: '1em'}}/>
                 <Checkbox label='Liste anderen Ausbildern zur Verfügung stellen' checked={this.state.newPublic}
                           onChange={this.togglePublic.bind(this)}/>
                 <Message color="blue">
@@ -125,12 +124,12 @@ class ListEditor extends React.Component {
                     this.handleQuestionResort(list);
                 }}/>
 
-                <div style={{height: "1em"}}/>
+                <div style={{height: '1em'}}/>
                 <p>Frage hinzufügen:</p>
                 <QuestionSearch questionDatabase={this.props.questionDatabase} onSelect={(uuid) => {
                     this.handleQuestionAppend(uuid);
                 }}/>
-                <div style={{height: "10em"}}/>
+                <div style={{height: '10em'}}/>
             </Modal.Content>
             <Modal.Actions>
                 <Button onClick={() => {

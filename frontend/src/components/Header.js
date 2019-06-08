@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import {Dropdown, Menu} from 'semantic-ui-react';
 
@@ -24,7 +24,7 @@ class AppHeader extends React.Component {
                                        target='_blank'/>
                     </Dropdown.Menu>
                 </Dropdown>
-                {this.props.appState.roomName !== "" &&
+                {this.props.appState.roomName !== '' &&
                 <Menu.Item>
                     In Raum „{this.props.appState.roomName}“
                 </Menu.Item>}

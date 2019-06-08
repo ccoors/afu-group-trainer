@@ -1,21 +1,22 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {Search} from "semantic-ui-react";
-import {findQuestions} from "../../util/util";
+import React from 'react';
+import {Search} from 'semantic-ui-react';
+import {findQuestions, questionTitle} from '../../util/util';
 
 const resultRenderer = (e) => {
+    const {question} = e;
     return <p>
-        <strong>{e.title}</strong>
+        <strong>{questionTitle(question)}</strong>
         <br/>
-        {e.question.question}
+        {question.question}
         <br/>
-        A: {e.question.answers[0]}
+        A: {question.answers[0]}
         <br/>
-        B: {e.question.answers[1]}
+        B: {question.answers[1]}
         <br/>
-        C: {e.question.answers[2]}
+        C: {question.answers[2]}
         <br/>
-        D: {e.question.answers[3]}
+        D: {question.answers[3]}
     </p>;
 };
 
@@ -37,7 +38,7 @@ class QuestionSearch extends React.Component {
             matches = findQuestions(this.props.questionDatabase, searchTerm);
             matches = matches.map(m => {
                 return {
-                    title: m.id,
+                    title: m.uuid,
                     uuid: m.uuid,
                     question: m
                 }
