@@ -4,10 +4,10 @@ Changelog
 Public versions
 ===============
 
-0.5.0 (Unreleased)
+0.5.0 (2019-06-08)
 ------------------
 - Move from create-react-app to nano-react-app
-- Questions for class A
+- Questions for class A (Beta)
 
 0.4.2 (2019-05-19)
 ------------------

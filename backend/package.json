@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "The backend for afu-group-trainer",
   "main": "main.js",
   "scripts": {

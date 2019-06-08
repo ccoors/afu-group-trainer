@@ -22,7 +22,7 @@ copyright = '2019, Christian Friedrich Coors (DL5LQ)'
 author = 'Christian Friedrich Coors (DL5LQ)'
 
 # The full version, including alpha/beta/rc tags
-release = '0.4.2'
+release = '0.5.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -46,7 +46,7 @@ language = 'de'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '.directory']
 
 
 # -- Options for HTML output -------------------------------------------------
