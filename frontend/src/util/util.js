@@ -113,3 +113,15 @@ export function stringToJSX(string) {
 export function ltrim(str) {
     return str.replace(/^\s+/, "");
 }
+
+export function questionTitle(question) {
+    let ret = question.id;
+    if (question.hasOwnProperty('shortname')) {
+        ret += ' (' + question.shortname + ')';
+    }
+    return ret;
+}
+
+export function scrollToTop() {
+    window.scrollTo(0, 0);
+}

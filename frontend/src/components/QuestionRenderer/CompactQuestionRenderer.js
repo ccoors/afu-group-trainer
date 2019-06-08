@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Button, Segment} from "semantic-ui-react";
-import {stringToJSX} from "../../util/util";
+import {questionTitle, stringToJSX} from "../../util/util";
 import OutdatedQuestionLabel from "./OutdatedQuestionLabel";
 
 class CompactQuestionRenderer extends React.Component {
@@ -22,7 +22,7 @@ class CompactQuestionRenderer extends React.Component {
             {this.props.onDelete &&
             <Button circular icon='close' color="red" floated="right"
                     onClick={() => this.props.onDelete(this.props.question.uuid)}/>}
-            <strong>{question.id} ({question.shortname}):</strong> {stringToJSX(question.question)}
+            <strong>{questionTitle(question)}:</strong> {stringToJSX(question.question)}
             {this.renderSegment("A", question.answers[0])}
             {this.renderSegment("B", question.answers[1])}
             {this.renderSegment("C", question.answers[2])}

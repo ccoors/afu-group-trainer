@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Button, Container, Header, Icon, Segment} from "semantic-ui-react";
 
-import {generateEmptyQuestion} from "../../util/util";
+import {generateEmptyQuestion, scrollToTop} from "../../util/util";
 import QuestionRORenderer from "../QuestionRenderer/QuestionRORenderer"
 import Results from "../Results";
 import QuestionProgress from "../QuestionProgress";
@@ -50,14 +50,17 @@ class RoomMaster extends React.Component {
     }
 
     endQuestions() {
+        scrollToTop();
         this.props.appState.actionHandler(endQuestions());
     }
 
     nextQuestion() {
+        scrollToTop();
         this.props.appState.actionHandler(nextQuestion());
     }
 
     showResults() {
+        scrollToTop();
         this.props.appState.actionHandler(showResults());
     }
 
@@ -81,11 +84,9 @@ class RoomMaster extends React.Component {
         }
 
         if (this.props.appState.roomMasterMode === RoomMasterModes.IDLE) {
-            content = <div>
-                <QuestionTree appState={this.props.appState} color={this.props.color}
+            content = <QuestionTree appState={this.props.appState} color={this.props.color}
                               goToSettings={this.goToSettings.bind(this)}
-                              quickStartQuestions={this.quickStartQuestions.bind(this)}/>
-            </div>;
+                              quickStartQuestions={this.quickStartQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.SETTINGS) {
             content = <QuestionSettings appState={this.props.appState} onOk={this.startQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RUNNING) {
@@ -123,7 +124,7 @@ class RoomMaster extends React.Component {
                         <Icon name="left arrow"/>
                     </Button>
                     <Button color="green" size="small" icon labelPosition="right"
-                                                onClick={this.nextQuestion.bind(this)}>
+                            onClick={this.nextQuestion.bind(this)}>
                         <Button.Content visible>Nächste Frage</Button.Content>
                         <Icon name="right arrow"/>
                     </Button>

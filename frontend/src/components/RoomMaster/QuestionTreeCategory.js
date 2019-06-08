@@ -16,12 +16,6 @@ class QuestionTreeCategory extends React.Component {
         this.searchQuestionsInternally = this.searchQuestionsInternally.bind(this);
     }
 
-    setSearchInput(input) {
-        this.setState({
-            searchInput: ltrim(input.target.value.toLowerCase())
-        });
-    }
-
     static getCategorySuffix(category) {
         if (category.prefix && category.questions.length !== 0) {
             return <p>Fragenprefix {category.prefix}, {category.questions.length} Fragen</p>;
@@ -32,6 +26,12 @@ class QuestionTreeCategory extends React.Component {
         } else {
             return "";
         }
+    }
+
+    setSearchInput(input) {
+        this.setState({
+            searchInput: ltrim(input.target.value.toLowerCase())
+        });
     }
 
     renderDatabaseTree(category) {

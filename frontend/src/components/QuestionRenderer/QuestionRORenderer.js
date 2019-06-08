@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Segment} from "semantic-ui-react";
 
-import {stringToJSX} from "../../util/util";
+import {questionTitle, stringToJSX} from "../../util/util";
 import AnswerOption from "./AnswerOption";
 import OutdatedQuestionLabel from "./OutdatedQuestionLabel";
 
@@ -31,16 +31,12 @@ class QuestionRORenderer extends React.Component {
 
     render() {
         const segments = [...Array(4).keys()].map(n => this.renderSegment(n));
-        let id_suffix = '';
-        if (this.props.question.shortname) {
-            id_suffix = ' (' + this.props.question.shortname + ')';
-        }
 
         return <Segment.Group>
             <Segment>
                 {this.props.question.outdated &&
                 <OutdatedQuestionLabel/>}
-                <strong>{this.props.question.id}{id_suffix}:</strong>&nbsp;
+                <strong>{questionTitle(this.props.question)}:</strong>&nbsp;
                 {stringToJSX(this.props.question.question)}
             </Segment>
             {segments}

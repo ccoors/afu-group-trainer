@@ -10,9 +10,11 @@ class DemoQuestionRenderer extends React.Component {
 
         return (
             <div>
-                <CompactQuestionRenderer question={question} onDelete={() => {}}/>
-                <QuestionRenderer question={question} selectedAnswer={2} selectAnswer={() => {}}/>
-                <QuestionRORenderer question={question} correctAnswer={2} selectedAnswer={0} />
+                <CompactQuestionRenderer question={question} onDelete={() => {
+                }}/>
+                <QuestionRenderer question={question} selectedAnswer={2} selectAnswer={() => {
+                }}/>
+                <QuestionRORenderer question={question} correctAnswer={2} selectedAnswer={0}/>
             </div>
         );
     }

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Search} from "semantic-ui-react";
-import {findQuestions} from "../../util/util";
+import {findQuestions, questionTitle} from "../../util/util";
 
 const resultRenderer = (e) => {
     const {question} = e;
     return <p>
-        <strong>{question.id} ({question.shortname})</strong>
+        <strong>{questionTitle(question)}</strong>
         <br/>
         {question.question}
         <br/>

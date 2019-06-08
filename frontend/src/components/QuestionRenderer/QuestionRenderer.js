@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {Form, Header, Segment} from "semantic-ui-react";
-import {stringToJSX} from "../../util/util";
+import {questionTitle, stringToJSX} from "../../util/util";
 import AnswerOption from "./AnswerOption";
 import OutdatedQuestionLabel from "./OutdatedQuestionLabel";
 
@@ -35,14 +35,10 @@ class QuestionRenderer extends React.Component {
 
     render() {
         const questionList = [...Array(5).keys()].map(n => this.renderAnswer(n));
-        let id_suffix = '';
-        if (this.props.question.shortname) {
-            id_suffix = ' (' + this.props.question.shortname + ')';
-        }
 
         return <div>
             {this.props.question.id &&
-            <Header as={"h1"} content={this.props.question.id + id_suffix}/>
+            <Header as={"h1"} content={questionTitle(this.props.question)}/>
             }
             {this.props.question.outdated &&
             <OutdatedQuestionLabel/>

@@ -14,7 +14,7 @@ class AppFooter extends React.Component {
                         <List.Item href={"https://agt.dl5lq.de/doc"} target={"_blank"}
                                    rel={"noopener noreferrer"}>Dokumentation</List.Item>
                         <List.Item href={"https://github.com/ccoors/afu-group-trainer"} target={"_blank"}
-                            rel={"noopener noreferrer"}>Source</List.Item>
+                                   rel={"noopener noreferrer"}>Source</List.Item>
                     </List>
                 </div>
             </footer>
