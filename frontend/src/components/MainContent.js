@@ -1,17 +1,17 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Loader} from "semantic-ui-react"
+import {Loader} from 'semantic-ui-react'
+import {backToLoggedIn, backToStart} from '../util/actions';
 
-import RoomID from "./RoomID";
-import RecoverableError from "./RecoverableError";
-import RoomJoined from "./RoomJoined";
-import LoggedIn from "./LoggedIn/LoggedIn";
-import RoomMaster from "./RoomMaster/RoomMaster";
-import FatalError from "./FatalError";
+import {AppModes} from './Controller'
+import FatalError from './FatalError';
+import LoggedIn from './LoggedIn/LoggedIn';
+import RecoverableError from './RecoverableError';
 
-import {AppModes} from "./Controller"
-import {backToLoggedIn, backToStart} from "../util/actions";
+import RoomID from './RoomID';
+import RoomJoined from './RoomJoined';
+import RoomMaster from './RoomMaster/RoomMaster';
 
 class MainContent extends React.Component {
     render() {
@@ -29,20 +29,20 @@ class MainContent extends React.Component {
             case AppModes.START_PAGE:
                 return (<RoomID {...this.props}/>);
             case AppModes.JOIN_ROOM_FAILED:
-                return (<RecoverableError message={"Konnte Raum nicht beitreten. Passwort falsch?"}
+                return (<RecoverableError message={'Konnte Raum nicht beitreten. Passwort falsch?'}
                                           onOk={() => this.props.appState.actionHandler(backToStart())}
                                           color={this.props.color}/>);
             case AppModes.LOGIN_FAILED:
-                return (<RecoverableError message={"Login fehlgeschlagen. Passwort falsch?"}
+                return (<RecoverableError message={'Login fehlgeschlagen. Passwort falsch?'}
                                           onOk={() => this.props.appState.actionHandler(backToStart())}
                                           color={this.props.color}/>);
             case AppModes.CREATE_ROOM_FAILED:
-                return (<RecoverableError message={"Raum konnte nicht erstellt werden."}
+                return (<RecoverableError message={'Raum konnte nicht erstellt werden.'}
                                           onOk={() => this.props.appState.actionHandler(backToLoggedIn())}
                                           color={this.props.color}/>);
             case AppModes.REMOVED_FROM_ROOM:
                 return (<RecoverableError
-                    message={"Sie wurden aus dem Raum entfernt. Vermutlich wurde der Raum geschlossen."}
+                    message={'Sie wurden aus dem Raum entfernt. Vermutlich wurde der Raum geschlossen.'}
                     onOk={() => this.props.appState.actionHandler(backToStart())} color={this.props.color}/>);
             case AppModes.ROOM_JOINED:
                 return (<RoomJoined {...this.props}/>);
@@ -51,7 +51,7 @@ class MainContent extends React.Component {
             case AppModes.ROOM_MASTER:
                 return (<RoomMaster {...this.props}/>);
             case AppModes.CREATE_LIST_FAILED:
-                return (<RecoverableError message={"Liste konnte nicht erstellt werden."}
+                return (<RecoverableError message={'Liste konnte nicht erstellt werden.'}
                                           onOk={() => this.props.appState.actionHandler(backToLoggedIn())}
                                           color={this.props.color}/>);
             case AppModes.FATAL_ERROR:

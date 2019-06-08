@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Button, Icon, Modal} from "semantic-ui-react";
+import {Button, Icon, Modal} from 'semantic-ui-react';
 
 function FatalError(props) {
     return <Modal basic defaultOpen={true} closeOnDocumentClick={false} closeOnDimmerClick={false}

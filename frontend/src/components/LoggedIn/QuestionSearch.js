@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {Search} from "semantic-ui-react";
-import {findQuestions, questionTitle} from "../../util/util";
+import React from 'react';
+import {Search} from 'semantic-ui-react';
+import {findQuestions, questionTitle} from '../../util/util';
 
 const resultRenderer = (e) => {
     const {question} = e;

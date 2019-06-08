@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {Header, Input} from "semantic-ui-react";
-import {ltrim} from "../../util/util";
+import React from 'react';
+import {Header, Input} from 'semantic-ui-react';
+import {ltrim} from '../../util/util';
 
 class QuestionTreeCategory extends React.Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class QuestionTreeCategory extends React.Component {
         } else if (category.questions.length !== 0) {
             return <p>{category.questions.length} Fragen</p>;
         } else {
-            return "";
+            return '';
         }
     }
 
@@ -42,7 +42,7 @@ class QuestionTreeCategory extends React.Component {
 
         const suffix = QuestionTreeCategory.getCategorySuffix(category);
 
-        return <li key={"deep_" + category.uuid}>
+        return <li key={'deep_' + category.uuid}>
             <p className="linkButton"
                onClick={() => this.props.goToSettings(category.uuid, false)}>{category.name}</p>
             {suffix}
@@ -51,14 +51,14 @@ class QuestionTreeCategory extends React.Component {
     }
 
     searchDatabaseInternally(category, searchInput) {
-        if (category.name === "") {
+        if (category.name === '') {
             return category.children.map(c => this.searchDatabaseInternally(c)).reduce((l, r) => l.concat(r), []);
         }
 
         let jsx = null;
         if (category.name.toLowerCase().includes(searchInput)) {
             let suffix = QuestionTreeCategory.getCategorySuffix(category);
-            jsx = <li key={"flat_" + category.uuid}>
+            jsx = <li key={'flat_' + category.uuid}>
                 <p className="linkButton"
                    onClick={() => this.props.goToSettings(category.uuid, false)}>{category.name}</p>
                 {suffix}</li>;
@@ -85,7 +85,7 @@ class QuestionTreeCategory extends React.Component {
                 || q.id.toLowerCase().includes(searchInput)
                 || q.answers.filter(a => a.toLowerCase().includes(searchInput)).length > 0;
         }).map(q => {
-            return <li key={"question_" + q.uuid}>
+            return <li key={'question_' + q.uuid}>
                 <p className="linkButton"
                    onClick={() => {
                        this.props.quickStartQuestions(q.uuid);
@@ -141,7 +141,7 @@ class QuestionTreeCategory extends React.Component {
         return <React.Fragment>
             <Input fluid placeholder="Frage oder Kategorie" icon="search"
                    onChange={this.setSearchInput} value={searchInput}
-                   style={{marginTop: "0.4em"}}/>
+                   style={{marginTop: '0.4em'}}/>
 
             {databaseRendered}
         </React.Fragment>;

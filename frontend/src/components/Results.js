@@ -1,9 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import Chart from 'react-apexcharts';
 
-import {Header, Icon} from "semantic-ui-react";
-import Chart from "react-apexcharts";
-import QuestionRORenderer from "./QuestionRenderer/QuestionRORenderer";
+import {Header, Icon} from 'semantic-ui-react';
+import QuestionRORenderer from './QuestionRenderer/QuestionRORenderer';
 
 class Results extends React.Component {
     render() {
@@ -23,7 +23,7 @@ class Results extends React.Component {
 
         let options = {
             chart: {
-                id: "basic-bar",
+                id: 'basic-bar',
                 toolbar: {
                     show: false,
                     tools: {
@@ -51,13 +51,13 @@ class Results extends React.Component {
                 }
             },
             xaxis: {
-                categories: ["A", "B", "C", "D"]
+                categories: ['A', 'B', 'C', 'D']
             },
             colors: chartColors,
         };
         let series = [
             {
-                name: "Antworten",
+                name: 'Antworten',
                 data: results.selected
             }
         ];
@@ -81,8 +81,8 @@ class Results extends React.Component {
             </Header>}
             <p>Von {totalUsers} Benutzern haben {answeredUsers} die Frage beantwortet.</p>
             {results.correctAnswer !== -1 &&
-            <p className={"correctAnswer"}>Korrekte
-                Antwort: {["A", "B", "C", "D"][results.correctAnswer]}</p>}
+            <p className={'correctAnswer'}>Korrekte
+                Antwort: {['A', 'B', 'C', 'D'][results.correctAnswer]}</p>}
             <Chart
                 options={options}
                 series={series}

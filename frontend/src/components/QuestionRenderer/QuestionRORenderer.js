@@ -1,15 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Segment} from "semantic-ui-react";
+import {Segment} from 'semantic-ui-react';
 
-import {questionTitle, stringToJSX} from "../../util/util";
-import AnswerOption from "./AnswerOption";
-import OutdatedQuestionLabel from "./OutdatedQuestionLabel";
+import {questionTitle, stringToJSX} from '../../util/util';
+import AnswerOption from './AnswerOption';
+import OutdatedQuestionLabel from './OutdatedQuestionLabel';
 
 class QuestionRORenderer extends React.Component {
     renderSegment(nr) {
-        const letter = ["A", "B", "C", "D"][nr];
+        const letter = ['A', 'B', 'C', 'D'][nr];
         const answer = this.props.question.answers[nr];
         const selected = nr === this.props.selectedAnswer;
         const correct = this.props.correctAnswer === nr;
@@ -18,14 +18,14 @@ class QuestionRORenderer extends React.Component {
         let attributes = {};
         let letterStyle = {};
 
-        const color = correct ? "green" : wrong ? "red" : "";
+        const color = correct ? 'green' : wrong ? 'red' : '';
         if (color) {
             attributes.color = color;
             attributes.inverted = true;
-            letterStyle.color = "white";
+            letterStyle.color = 'white';
         }
 
-        return <AnswerOption key={"answer" + nr} letter={letter} text={answer} attributes={attributes}
+        return <AnswerOption key={'answer' + nr} letter={letter} text={answer} attributes={attributes}
                              letterStyle={letterStyle}/>;
     }
 

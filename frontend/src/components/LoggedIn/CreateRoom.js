@@ -1,15 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Button, Form, Header, Input} from "semantic-ui-react"
-import {createRoom} from "../../util/actions";
+import {Button, Form, Header, Input} from 'semantic-ui-react'
+import {createRoom} from '../../util/actions';
 
 class CreateRoom extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            createRoomName: "",
-            createRoomPassword: "",
+            createRoomName: '',
+            createRoomPassword: '',
         };
     }
 
@@ -26,7 +26,8 @@ class CreateRoom extends React.Component {
     }
 
     render() {
-        return (<div>
+        return (
+            <div>
                 <Header as="h1" content="Raum erstellen"/>
                 <Form>
                     <Input fluid icon="pencil" iconPosition="left" placeholder="Raumname"

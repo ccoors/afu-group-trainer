@@ -1,16 +1,16 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Button, Header, Tab} from "semantic-ui-react";
+import {Button, Header, Tab} from 'semantic-ui-react';
 
-import QuestionListRenderer from "../LoggedIn/QuestionListRenderer";
-import QuestionTreeCategory from "./QuestionTreeCategory";
+import QuestionListRenderer from '../LoggedIn/QuestionListRenderer';
+import QuestionTreeCategory from './QuestionTreeCategory';
 
 class QuestionTree extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchInput: "",
+            searchInput: '',
         };
     }
 
@@ -62,7 +62,7 @@ class QuestionTree extends React.Component {
             {
                 menuItem: {key: 'special', icon: 'star', content: 'Sonderfunktionen'},
                 render: () => <Tab.Pane>
-                    <Button color={this.props.color} size="small" onClick={() => this.props.quickStartQuestions("")}>
+                    <Button color={this.props.color} size="small" onClick={() => this.props.quickStartQuestions('')}>
                         <Button.Content visible>Leere ABCD-Fragen stellen</Button.Content>
                     </Button>
                 </Tab.Pane>

@@ -1,24 +1,24 @@
-import React, {Component} from "react";
 import PropTypes from 'prop-types';
+import React, {Component} from 'react';
+import MathJax from 'react-mathjax';
+import {Responsive} from 'semantic-ui-react';
+import AppFooter from './Footer';
 
-import AppHeader from "./Header";
-import AppFooter from "./Footer";
-import MainContent from "./MainContent";
-import MathJax from "react-mathjax";
-import {Responsive} from "semantic-ui-react";
+import AppHeader from './Header';
+import MainContent from './MainContent';
 
 class App extends Component {
     render() {
         return (
             <MathJax.Provider script={this.props.mathJaxProvider}>
                 <AppHeader appState={this.props.appState}/>
-                <div style={{height: "4em"}}/>
+                <div style={{height: '4em'}}/>
                 <Responsive {...Responsive.onlyComputer}>
-                    <div style={{height: "2em"}}/>
+                    <div style={{height: '2em'}}/>
                 </Responsive>
 
                 <MainContent {...this.props}/>
-                <div style={{height: "5em"}}/>
+                <div style={{height: '5em'}}/>
                 <AppFooter version="0.4.2" footerLink={this.props.footerLink}/>
             </MathJax.Provider>
         );

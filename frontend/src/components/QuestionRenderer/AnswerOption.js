@@ -1,9 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Grid, Header, Segment} from "semantic-ui-react";
+import {Grid, Header, Segment} from 'semantic-ui-react';
 
-import {stringToJSX} from "../../util/util";
+import {stringToJSX} from '../../util/util';
 
 class AnswerOption extends React.Component {
     render() {
@@ -11,12 +11,12 @@ class AnswerOption extends React.Component {
         return <Segment {...attributes}>
             <Grid columns={2}>
                 <Grid.Row>
-                    <Grid.Column verticalAlign='middle' width={text === "" ? 16 : 1}>
+                    <Grid.Column verticalAlign='middle' width={text === '' ? 16 : 1}>
                         <Header as='h3' textAlign='center' style={letterStyle}>
                             {letter}
                         </Header>
                     </Grid.Column>
-                    {text !== "" && <Grid.Column width={15}>
+                    {text !== '' && <Grid.Column width={15}>
                         {stringToJSX(text)}
                     </Grid.Column>}
                 </Grid.Row>
