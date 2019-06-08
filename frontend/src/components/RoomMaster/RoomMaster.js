@@ -22,6 +22,8 @@ class RoomMaster extends React.Component {
 
             uuid: "",
             single: false,
+
+            selectedTab: 0,
         }
     }
 
@@ -68,6 +70,8 @@ class RoomMaster extends React.Component {
         this.quickStartQuestions("");
     }
 
+    selectTab = (e, target) => this.setState({selectedTab: target.activeIndex});
+
     render() {
         let content = null;
 
@@ -85,8 +89,9 @@ class RoomMaster extends React.Component {
 
         if (this.props.appState.roomMasterMode === RoomMasterModes.IDLE) {
             content = <QuestionTree appState={this.props.appState} color={this.props.color}
-                              goToSettings={this.goToSettings.bind(this)}
-                              quickStartQuestions={this.quickStartQuestions.bind(this)}/>;
+                                    selectedTab={this.state.selectedTab} selectTab={this.selectTab}
+                                    goToSettings={this.goToSettings.bind(this)}
+                                    quickStartQuestions={this.quickStartQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.SETTINGS) {
             content = <QuestionSettings appState={this.props.appState} onOk={this.startQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RUNNING) {

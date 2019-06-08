@@ -29,7 +29,8 @@ class QuestionTree extends React.Component {
             };
         });
 
-        return <Tab menu={{secondary: true, pointing: true}} panes={tabPanes}/>;
+        return <Tab menu={{secondary: true, pointing: true}} activeIndex={this.props.selectedTab}
+                    onTabChange={this.props.selectTab} panes={tabPanes}/>;
     }
 
     render() {
@@ -79,6 +80,8 @@ QuestionTree.propTypes = {
     quickStartQuestions: PropTypes.func.isRequired,
     goToSettings: PropTypes.func.isRequired,
     color: PropTypes.string.isRequired,
+    selectedTab: PropTypes.number.isRequired,
+    selectTab: PropTypes.func.isRequired
 };
 
 export default QuestionTree;
