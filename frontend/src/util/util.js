@@ -2,7 +2,7 @@ import MathJax from "react-mathjax";
 import React from "react";
 import {Image} from "semantic-ui-react";
 
-function generateEmptyQuestion() {
+export function generateEmptyQuestion() {
     return {
         uuid: "",
         id: "Frage",
@@ -13,16 +13,17 @@ function generateEmptyQuestion() {
 }
 
 // For dev purposes
-function generateDummyQuestion() {
+export function generateDummyQuestion() {
     return {
         id: "TX123",
+        shortname: "Testkatalog",
         question: "Lorem Ipsum dolor <code>SIT AMET</code>, $U=R\\cdot{}I$",
         outdated: true,
         answers: ["$\\sum_{x=5}^{10} x = 5 + 6 + 7 + 8 + 9 + 10 = 45$", "<code>CQ CQ CQ DE DL123 PSE K</code>", "FooBar", "Lorem Ipsum dolor sit amet"],
     };
 }
 
-function findQuestion(root, question) {
+export function findQuestion(root, question) {
     const ret = root.questions.find(q => q.uuid === question);
     if (ret) {
         return ret;
@@ -38,13 +39,13 @@ function findQuestion(root, question) {
     }
 }
 
-function questionMatches(question, search) {
+export function questionMatches(question, search) {
     return question.id.toLowerCase().includes(search)
         || question.question.toLowerCase().includes(search)
         || question.answers.some(a => a.toLowerCase().includes(search));
 }
 
-function findQuestions(root, search) {
+export function findQuestions(root, search) {
     let ret = root.questions.filter(q => questionMatches(q, search));
 
     const children = root.children.map(c => findQuestions(c, search));
@@ -55,7 +56,27 @@ function findQuestions(root, search) {
     return ret;
 }
 
-function stringToJSX(string) {
+function preprocessDatabaseQuestion(question, shortname) {
+    question.shortname = shortname;
+    return question;
+}
+
+function preprocessDatabaseCategory(category, shortname = '') {
+    if (category.shortname) {
+        shortname = category.shortname;
+    }
+    category.shortname = shortname;
+
+    category.questions = category.questions.map(q => preprocessDatabaseQuestion(q, shortname));
+    category.children = category.children.map(c => preprocessDatabaseCategory(c, shortname));
+    return category;
+}
+
+export function preprocessQuestionDatabase(database) {
+    return preprocessDatabaseCategory(database, 'ROOT');
+}
+
+export function stringToJSX(string) {
     if (typeof string !== "string") {
         return string;
     }
@@ -89,8 +110,6 @@ function stringToJSX(string) {
     return <span>{tokens}</span>;
 }
 
-function ltrim(str) {
+export function ltrim(str) {
     return str.replace(/^\s+/, "");
 }
-
-export {generateEmptyQuestion, generateDummyQuestion, findQuestion, findQuestions, stringToJSX, ltrim};

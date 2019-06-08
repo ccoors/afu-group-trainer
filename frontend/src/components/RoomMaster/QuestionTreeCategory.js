@@ -133,16 +133,17 @@ class QuestionTreeCategory extends React.Component {
     render() {
         const {searchInput} = this.state;
         const databaseRendered = searchInput.length < 2 ?
-            this.renderDatabaseTree(this.props.category) :
+            <ul key="rootNode" className="questionTree">
+                {this.renderDatabaseTree(this.props.category)}
+            </ul> :
             this.searchDatabaseTree(this.props.category, searchInput);
 
         return <React.Fragment>
             <Input fluid placeholder="Frage oder Kategorie" icon="search"
                    onChange={this.setSearchInput} value={searchInput}
                    style={{marginTop: "0.4em"}}/>
-            <ul key="rootNode" className="questionTree">
-                {databaseRendered}
-            </ul>
+
+            {databaseRendered}
         </React.Fragment>;
     }
 }

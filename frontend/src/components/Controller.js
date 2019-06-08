@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import App from './App';
 import {updateState} from "../util/actions";
+import {preprocessQuestionDatabase} from "../util/util";
 
 const AppModes = Object.freeze({
     CONNECTING: 1,
@@ -156,8 +157,10 @@ class Controller extends React.Component {
                 });
             }
         } else if (data.hasOwnProperty("QuestionDatabase")) {
+            const questionDatabase = preprocessQuestionDatabase(data.QuestionDatabase);
+
             this.setState({
-                questionDatabase: data.QuestionDatabase,
+                questionDatabase: questionDatabase,
             });
         } else if (data.hasOwnProperty("CreateRoomResult")) {
             const result = data.CreateRoomResult.success;

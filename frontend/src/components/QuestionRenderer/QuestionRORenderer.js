@@ -31,12 +31,16 @@ class QuestionRORenderer extends React.Component {
 
     render() {
         const segments = [...Array(4).keys()].map(n => this.renderSegment(n));
+        let id_suffix = '';
+        if (this.props.question.shortname) {
+            id_suffix = ' (' + this.props.question.shortname + ')';
+        }
 
         return <Segment.Group>
             <Segment>
                 {this.props.question.outdated &&
                 <OutdatedQuestionLabel/>}
-                <strong>{this.props.question.id}:</strong>&nbsp;
+                <strong>{this.props.question.id}{id_suffix}:</strong>&nbsp;
                 {stringToJSX(this.props.question.question)}
             </Segment>
             {segments}

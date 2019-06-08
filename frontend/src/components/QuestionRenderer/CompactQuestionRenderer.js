@@ -14,17 +14,19 @@ class CompactQuestionRenderer extends React.Component {
     }
 
     render() {
+        const {question} = this.props;
+
         return <Segment>
-            {this.props.question.outdated &&
+            {question.outdated &&
             <OutdatedQuestionLabel/>}
             {this.props.onDelete &&
             <Button circular icon='close' color="red" floated="right"
                     onClick={() => this.props.onDelete(this.props.question.uuid)}/>}
-            <strong>{this.props.question.id}:</strong> {stringToJSX(this.props.question.question)}
-            {this.renderSegment("A", this.props.question.answers[0])}
-            {this.renderSegment("B", this.props.question.answers[1])}
-            {this.renderSegment("C", this.props.question.answers[2])}
-            {this.renderSegment("D", this.props.question.answers[3])}
+            <strong>{question.id} ({question.shortname}):</strong> {stringToJSX(question.question)}
+            {this.renderSegment("A", question.answers[0])}
+            {this.renderSegment("B", question.answers[1])}
+            {this.renderSegment("C", question.answers[2])}
+            {this.renderSegment("D", question.answers[3])}
         </Segment>;
     }
 }
