@@ -31,4 +31,4 @@ class QuestionManager:
         return self.session.query(Question).count()
 
     def get_database(self):
-        return self.session.query(QuestionCategory).filter_by(category_id="__ROOT__").first()
+        return self.session.query(QuestionCategory).filter_by(category_id='__ROOT__').first()
