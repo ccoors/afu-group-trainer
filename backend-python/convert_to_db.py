@@ -3,7 +3,7 @@ import json
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from server.data_types import Base, QuestionCategory
+from server.data_types import StaticBase, QuestionCategory
 from server.question_manager import question_hook
 
 
@@ -30,16 +30,15 @@ def add_json(root, file):
 
 
 if __name__ == "__main__":
-    engine = create_engine('sqlite:///database.sqlite', echo=True)
-    Base.metadata.drop_all(engine)
-    Base.metadata.create_all(engine)
+    engine = create_engine('sqlite:///questions.sqlite', echo=True)
+    StaticBase.metadata.drop_all(engine)
+    StaticBase.metadata.create_all(engine)
 
     Session = sessionmaker(bind=engine)
     session = Session()
 
     root = QuestionCategory("__ROOT__")
-    add_json(root, '../backend/assets/TechnikE.json')
-    add_json(root, '../backend/assets/BetriebstechnikVorschriften.json')
+    add_json(root, '../backend/assets/Fragenkatalog.json')
 
     add_to_db(session, root)
 

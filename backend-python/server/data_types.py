@@ -5,10 +5,11 @@ from sqlalchemy.orm import relationship, backref
 
 from server.util import gen_uuid
 
-Base = declarative_base()
+StaticBase = declarative_base()
+DynamicBase = declarative_base()
 
 
-class User(Base):
+class User(DynamicBase):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     name = Column(String)
@@ -22,10 +23,10 @@ class User(Base):
         return bcrypt.checkpw(password.encode(), self.password_hash)
 
 
-class QuestionCategory(Base):
+class QuestionCategory(StaticBase):
     __tablename__ = 'categories'
     id = Column(Integer, primary_key=True)
-    category_id = Column(String, unique=True)
+    category_id = Column(String)
     name = Column(String)
     prefix = Column(String)
 
@@ -80,7 +81,7 @@ class QuestionCategory(Base):
         return len(self.questions) + sum(map(lambda c: c.count_questions(), self.children))
 
 
-class Question(Base):
+class Question(StaticBase):
     __tablename__ = 'questions'
     id = Column(Integer, primary_key=True)
     question_id = Column(String)
@@ -117,7 +118,7 @@ class Question(Base):
         })
 
 
-class Answer(Base):
+class Answer(StaticBase):
     __tablename__ = "answers"
     id = Column(Integer, primary_key=True)
     correct = Column(Boolean)

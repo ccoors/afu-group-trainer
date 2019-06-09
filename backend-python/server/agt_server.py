@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from server.client import Client
-from server.data_types import Base
+from server.data_types import StaticBase, DynamicBase
 from server.messages import keep_alive
 from server.question_manager import QuestionManager
 from server.room_manager import RoomManager
@@ -63,15 +63,23 @@ class AGTServer:
     def __init__(self, config):
         self.logger = logging.getLogger(__name__)
         self.config = config
-        database = self.config[AGT_SETTINGS_NAMESPACE].get('database', 'sqlite:///')
-        self.logger.info('Using database {}'.format(database))
-        self.db_engine = create_engine(database)
-        Base.metadata.create_all(self.db_engine)
-        self.session_maker = sessionmaker(bind=self.db_engine)
-        self.session = self.session_maker()
-        self.question_manager = QuestionManager(self.session)
+
+        static_database = self.config[AGT_SETTINGS_NAMESPACE].get('static_database', 'sqlite:///')
+        self.logger.info(f'Using static database {static_database}')
+        self.static_engine = create_engine(static_database)
+        self.static_session_maker = sessionmaker(bind=self.static_engine)
+        self.static_session = self.static_session_maker()
+
+        dynamic_database = self.config[AGT_SETTINGS_NAMESPACE].get('dynamic_database', 'sqlite:///')
+        self.logger.info(f'Using dynamic database {dynamic_database}')
+        self.dynamic_engine = create_engine(dynamic_database)
+        DynamicBase.metadata.create_all(self.dynamic_engine)
+        self.dynamic_session_maker = sessionmaker(bind=self.dynamic_engine)
+        self.dynamic_session = self.dynamic_session_maker()
+
+        self.question_manager = QuestionManager(self.static_session)
         self.room_manager = RoomManager()
-        self.user_manager = UserManager(self.session, self.config[AGT_SETTINGS_NAMESPACE])
+        self.user_manager = UserManager(self.dynamic_session, self.config[AGT_SETTINGS_NAMESPACE])
         self.websocket_options = {
             'host': self.config[WEBSOCKET_SETTINGS_NAMESPACE]['host'],
             'port': int(self.config[WEBSOCKET_SETTINGS_NAMESPACE]['port']),
@@ -81,7 +89,7 @@ class AGTServer:
         self.logger.info('Initialized AGTServer with {} questions'.format(self.question_manager.count_questions()))
 
     def run(self):
-        self.logger.info('Starting AGTServer...'.format(self.question_manager.count_questions()))
+        self.logger.info('Starting AGTServer...')
         bound_handler = functools.partial(handler, server=self)
         return websockets.serve(bound_handler, **self.websocket_options)
 
@@ -128,5 +136,6 @@ class AGTServer:
             await asyncio.wait([user.send(message) for user in self.clients])
 
     def shutdown(self):
-        self.logger.info('Closing database connection...')
-        self.session.close()
+        self.logger.info('Closing database connections...')
+        self.static_session.close()
+        self.dynamic_session.close()
