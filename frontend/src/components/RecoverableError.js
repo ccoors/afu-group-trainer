@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Button, Card, Container, Header} from "semantic-ui-react"
+import {Button, Card, Container, Header} from 'semantic-ui-react'
 
 class RecoverableError extends React.Component {
     render() {

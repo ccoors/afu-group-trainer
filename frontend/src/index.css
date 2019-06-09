@@ -35,6 +35,10 @@ footer {
     float: right;
 }
 
+.questionTree p {
+    margin: 0;
+}
+
 .hidden {
     display: none;
 }
@@ -69,6 +73,10 @@ footer {
     user-select: none;
 
     cursor: move;
+}
+
+.noTopMargin {
+    margin-top: 0 !important;
 }
 
 .sortableHelper {

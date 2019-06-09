@@ -1,8 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Button, Checkbox, Form, Header, Icon, Segment} from "semantic-ui-react";
-import {backToIdle} from "../../util/actions";
+import {Button, Checkbox, Form, Header, Icon, Segment} from 'semantic-ui-react';
+import {backToIdle} from '../../util/actions';
 
 class QuestionSettings extends React.Component {
     constructor(props) {
@@ -34,9 +34,9 @@ class QuestionSettings extends React.Component {
             <Header as="h1">Einstellungen</Header>
             <Form>
                 <Form.Field>
-                    <Checkbox label={{children: "Fragen mischen"}} checked={this.state.shuffle}
+                    <Checkbox label={{children: 'Fragen mischen'}} checked={this.state.shuffle}
                               onChange={this.toggleShuffle.bind(this)}/><br/>
-                    <Checkbox label={{children: "Nicht mehr relevante Fragen stellen"}}
+                    <Checkbox label={{children: 'Nicht mehr relevante Fragen stellen'}}
                               checked={this.state.outdated}
                               onChange={this.toggleOutdated.bind(this)}/>
                 </Form.Field>

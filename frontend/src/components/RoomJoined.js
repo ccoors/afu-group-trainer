@@ -1,15 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Button, Container, Header, Placeholder, Segment,} from "semantic-ui-react";
+import {Button, Container, Header, Placeholder, Segment,} from 'semantic-ui-react';
+import {leaveRoom, selectAnswer} from '../util/actions';
+import {generateEmptyQuestion} from '../util/util';
+import {RoomModes} from './Controller';
+import OnlineStatus from './OnlineStatus';
+import QuestionProgress from './QuestionProgress';
 
-import QuestionRenderer from "./QuestionRenderer/QuestionRenderer";
-import Results from "./Results";
-import {generateEmptyQuestion} from "../util/util";
-import QuestionProgress from "./QuestionProgress";
-import {leaveRoom, selectAnswer} from "../util/actions";
-import {RoomModes} from "./Controller";
-import OnlineStatus from "./OnlineStatus";
+import QuestionRenderer from './QuestionRenderer/QuestionRenderer';
+import Results from './Results';
 
 class RoomStateRenderer extends React.Component {
     selectAnswer(value) {

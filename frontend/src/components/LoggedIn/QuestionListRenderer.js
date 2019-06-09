@@ -1,10 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Confirm, Form, Icon, Loader, Modal, Popup, Table} from "semantic-ui-react";
-import {createQuestionList, deleteQuestionList} from "../../util/actions";
-import ListEditor from "./ListEditor";
-import {findQuestion} from "../../util/util";
-import CompactQuestionRenderer from "../QuestionRenderer/CompactQuestionRenderer";
+import React from 'react';
+import {Button, Confirm, Form, Icon, Loader, Modal, Popup, Table} from 'semantic-ui-react';
+import {createQuestionList, deleteQuestionList} from '../../util/actions';
+import {findQuestion} from '../../util/util';
+import CompactQuestionRenderer from '../QuestionRenderer/CompactQuestionRenderer';
+import ListEditor from './ListEditor';
 
 function QuestionListEntry(props) {
     let public_status = null;
@@ -49,7 +49,7 @@ class ListNameInput extends React.Component {
         super(props);
 
         this.state = {
-            input: "",
+            input: '',
         }
     }
 
@@ -83,7 +83,7 @@ class ListNameInput extends React.Component {
                 </Button>
                 <Button onClick={() => {
                     this.props.onCreate(this.state.input);
-                }} disabled={this.state.input.trim() === ""} positive>
+                }} disabled={this.state.input.trim() === ''} positive>
                     Erstellen
                 </Button>
             </Modal.Actions>
@@ -212,7 +212,7 @@ class QuestionListRenderer extends React.Component {
                         <Modal.Content scrolling>
                             <p>Die Liste is {!this.state.show.is_public && <span>nicht</span>} öffentlich.</p>
                             {questions}
-                            <div style={{height: "2em"}}/>
+                            <div style={{height: '2em'}}/>
                         </Modal.Content>
                         <Modal.Actions>
                             <Button onClick={onClose} negative>

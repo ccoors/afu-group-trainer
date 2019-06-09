@@ -1,10 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Form, Header, Segment} from "semantic-ui-react";
-import {stringToJSX} from "../../util/util";
-import AnswerOption from "./AnswerOption";
-import OutdatedQuestionLabel from "./OutdatedQuestionLabel";
+import {Form, Header, Segment} from 'semantic-ui-react';
+import {questionTitle, stringToJSX} from '../../util/util';
+import AnswerOption from './AnswerOption';
+import OutdatedQuestionLabel from './OutdatedQuestionLabel';
 
 class QuestionRenderer extends React.Component {
     selectAnswer(value) {
@@ -13,23 +13,23 @@ class QuestionRenderer extends React.Component {
 
     // 4: No answer
     renderAnswer(nr) {
-        const answerString = nr < 4 ? this.props.question.answers[nr] : "";
+        const answerString = nr < 4 ? this.props.question.answers[nr] : '';
         const selectAnswer = nr < 4 ? nr : -1;
-        const letter = ["A", "B", "C", "D", "Frage nicht beantworten"][nr];
+        const letter = ['A', 'B', 'C', 'D', 'Frage nicht beantworten'][nr];
         let attributes = {
-            className: "pointer",
+            className: 'pointer',
             onClick: () => this.selectAnswer(selectAnswer),
         };
         let letterStyle = {};
 
         const selected = selectAnswer === this.props.selectedAnswer;
         if (selected) {
-            attributes.color = "blue";
+            attributes.color = 'blue';
             attributes.inverted = true;
-            letterStyle.color = "white";
+            letterStyle.color = 'white';
         }
 
-        return <AnswerOption key={"answer" + nr} letter={letter} text={answerString} attributes={attributes}
+        return <AnswerOption key={'answer' + nr} letter={letter} text={answerString} attributes={attributes}
                              letterStyle={letterStyle}/>;
     }
 
@@ -38,13 +38,13 @@ class QuestionRenderer extends React.Component {
 
         return <div>
             {this.props.question.id &&
-            <Header as={"h1"} content={this.props.question.id}/>
+            <Header as={'h1'} content={questionTitle(this.props.question)}/>
             }
             {this.props.question.outdated &&
             <OutdatedQuestionLabel/>
             }
 
-            {this.props.question.question !== "" &&
+            {this.props.question.question !== '' &&
             <p>{stringToJSX(this.props.question.question)}</p>}
 
             <Form>

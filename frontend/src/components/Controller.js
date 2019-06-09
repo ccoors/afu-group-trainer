@@ -1,8 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import {updateState} from '../util/actions';
+import {preprocessQuestionDatabase} from '../util/util';
 
 import App from './App';
-import {updateState} from "../util/actions";
 
 const AppModes = Object.freeze({
     CONNECTING: 1,
@@ -57,8 +58,8 @@ class Controller extends React.Component {
             publicQuestionLists: null,
 
             // Room
-            roomName: "",
-            roomUUID: "",
+            roomName: '',
+            roomUUID: '',
             roomState: null,
 
             // Answer
@@ -72,7 +73,7 @@ class Controller extends React.Component {
 
             // Util
             nextKeepAliveTimeout: null,
-            errorMessage: "",
+            errorMessage: '',
 
             // Action handler
             actionHandler: this.handleAction.bind(this)
@@ -90,7 +91,7 @@ class Controller extends React.Component {
             window.setTimeout(function () {
                 app.setState({
                     mode: AppModes.FATAL_ERROR,
-                    errorMessage: "Die Verbindung zum Server wurde beendet"
+                    errorMessage: 'Die Verbindung zum Server wurde beendet'
                 });
             }, 1000);
         };
@@ -98,13 +99,13 @@ class Controller extends React.Component {
         this.socket.onerror = () => {
             app.setState({
                 mode: AppModes.FATAL_ERROR,
-                errorMessage: "Die Verbindung zum Server ist fehlgeschlagen"
+                errorMessage: 'Die Verbindung zum Server ist fehlgeschlagen'
             });
         };
 
         this.socket.onmessage = function (e) {
             if (!app.props.release) {
-                console.log("Received", e.data);
+                console.log('Received', e.data);
             }
             app.handleSocketMessage(e.data);
         };
@@ -112,7 +113,7 @@ class Controller extends React.Component {
 
     handleAction(action) {
         if (!this.props.release) {
-            console.log("Action", action);
+            console.log('Action', action);
         }
 
         updateState(action, this.setState.bind(this), this.socket);
@@ -120,7 +121,7 @@ class Controller extends React.Component {
 
     handleSocketMessage(msg) {
         const data = JSON.parse(msg);
-        if (data.hasOwnProperty("RoomList")) {
+        if (data.hasOwnProperty('RoomList')) {
             let newMode = this.state.mode;
 
             if (this.state.mode === AppModes.LOADING_ROOMS) {
@@ -132,7 +133,7 @@ class Controller extends React.Component {
                 mode: newMode,
                 rooms: data.RoomList,
             });
-        } else if (data.hasOwnProperty("KeepAlive")) {
+        } else if (data.hasOwnProperty('KeepAlive')) {
             const next = data.KeepAlive.next;
 
             if (this.state.nextKeepAliveTimeout) {
@@ -142,7 +143,7 @@ class Controller extends React.Component {
             this.setState({
                 nextKeepAliveTimeout: setTimeout(this.timeout.bind(this), next)
             });
-        } else if (data.hasOwnProperty("LoginResult")) {
+        } else if (data.hasOwnProperty('LoginResult')) {
             const result = data.LoginResult;
             if (result) {
                 this.setState({
@@ -155,11 +156,13 @@ class Controller extends React.Component {
                     loggedIn: false,
                 });
             }
-        } else if (data.hasOwnProperty("QuestionDatabase")) {
+        } else if (data.hasOwnProperty('QuestionDatabase')) {
+            const questionDatabase = preprocessQuestionDatabase(data.QuestionDatabase);
+
             this.setState({
-                questionDatabase: data.QuestionDatabase,
+                questionDatabase: questionDatabase,
             });
-        } else if (data.hasOwnProperty("CreateRoomResult")) {
+        } else if (data.hasOwnProperty('CreateRoomResult')) {
             const result = data.CreateRoomResult.success;
             const uuid = data.CreateRoomResult.uuid;
 
@@ -172,11 +175,11 @@ class Controller extends React.Component {
             } else {
                 this.setState({
                     mode: AppModes.CREATE_ROOM_FAILED,
-                    roomName: "",
-                    roomUUID: "",
+                    roomName: '',
+                    roomUUID: '',
                 });
             }
-        } else if (data.hasOwnProperty("JoinRoomResult")) {
+        } else if (data.hasOwnProperty('JoinRoomResult')) {
             const result = data.JoinRoomResult;
             if (result) {
                 this.setState({
@@ -186,24 +189,24 @@ class Controller extends React.Component {
             } else {
                 this.setState({
                     mode: AppModes.JOIN_ROOM_FAILED,
-                    roomName: "",
-                    roomUUID: "",
+                    roomName: '',
+                    roomUUID: '',
                 });
             }
-        } else if (data.hasOwnProperty("Error")) {
+        } else if (data.hasOwnProperty('Error')) {
             this.setState({
                 mode: AppModes.FATAL_ERROR,
                 errorMessage: data.Error.message
             });
-        } else if (data === "LeaveRoom" || data.hasOwnProperty("LeaveRoom")) {
+        } else if (data === 'LeaveRoom' || data.hasOwnProperty('LeaveRoom')) {
             this.setState({
                 mode: AppModes.REMOVED_FROM_ROOM,
-                roomName: "",
-                roomUUID: "",
+                roomName: '',
+                roomUUID: '',
                 roomState: null,
                 selectedAnswer: -1,
             });
-        } else if (data.hasOwnProperty("RoomState")) {
+        } else if (data.hasOwnProperty('RoomState')) {
             this.setState(state => {
                 let masterMode = state.roomMasterMode;
                 let selectedAnswer = state.selectedAnswer;
@@ -225,7 +228,7 @@ class Controller extends React.Component {
                         default:
                             this.setState({
                                 mode: AppModes.FATAL_ERROR,
-                                errorMessage: "Invalid RoomState: " + data.RoomState.state
+                                errorMessage: 'Invalid RoomState: ' + data.RoomState.state
                             });
                             return;
                     }
@@ -263,24 +266,24 @@ class Controller extends React.Component {
                     selectedAnswer: selectedAnswer,
                 }
             });
-        } else if (data.hasOwnProperty("PublicQuestionLists")) {
+        } else if (data.hasOwnProperty('PublicQuestionLists')) {
             this.setState({
                 publicQuestionLists: data.PublicQuestionLists,
             });
-        } else if (data.hasOwnProperty("UserQuestionLists")) {
+        } else if (data.hasOwnProperty('UserQuestionLists')) {
             this.setState({
                 myQuestionLists: data.UserQuestionLists,
             });
-        } else if (data.hasOwnProperty("CreateQuestionListResult")) {
+        } else if (data.hasOwnProperty('CreateQuestionListResult')) {
             if (!data.CreateQuestionListResult.success) {
                 this.setState({
                     mode: AppModes.CREATE_LIST_FAILED,
                 });
             }
         } else {
-            let errorMessage = "Unbekannte Nachricht vom Server erhalten";
+            let errorMessage = 'Unbekannte Nachricht vom Server erhalten';
             if (!this.props.release) {
-                errorMessage += ": " + msg;
+                errorMessage += ': ' + msg;
             }
             this.setState({
                 mode: AppModes.FATAL_ERROR,
@@ -294,7 +297,7 @@ class Controller extends React.Component {
             if (state.mode !== AppModes.FATAL_ERROR) {
                 return {
                     mode: AppModes.FATAL_ERROR,
-                    errorMessage: "Die Verbindung zum Server ist unerwartet abgebrochen (Timeout)."
+                    errorMessage: 'Die Verbindung zum Server ist unerwartet abgebrochen (Timeout).'
                 };
             }
         });

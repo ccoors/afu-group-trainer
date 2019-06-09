@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import arrayMove from 'array-move';
+import PropTypes from 'prop-types';
+import React from 'react';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
-import arrayMove from "array-move";
 
 const SortableItem = SortableElement(({value}) => value);
 

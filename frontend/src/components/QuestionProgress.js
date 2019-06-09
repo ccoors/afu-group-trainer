@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Progress} from "semantic-ui-react";
+import {Progress} from 'semantic-ui-react';
 
 class QuestionProgress extends React.Component {
     render() {

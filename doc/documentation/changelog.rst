@@ -4,6 +4,16 @@ Changelog
 Public versions
 ===============
 
+0.5.0 (2019-06-08)
+------------------
+- Move from create-react-app to nano-react-app
+- Questions for class A (Beta)
+
+0.4.2 (2019-05-19)
+------------------
+- Add option for demo mode
+- Minor style fixes
+
 0.4.1 (2019-04-20)
 ------------------
 - Questions can now be deleted from question lists

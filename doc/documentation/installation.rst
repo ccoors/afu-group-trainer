@@ -29,6 +29,7 @@ Im Ordner ``frontend/src`` ist die Datei ``config.js`` anzupassen. Hier gibt es 
 - ``config.webSocketPort``: Der Port, über den der WebSocket des Backends erreichbar ist, falls die automatische WebSocket-Erkennung verwendet wird. Ansonsten wird die Angabe aus dem Parameter ``webSocketUrl`` verwendet.
 - ``config.webSocketUrl``: Die URL, unter der der WebSocket erreichbar ist. Falls dieser unter der gleichen Domain erreichbar ist, kann das Feld leer gelassen werden. Ein Beispiel für eine valide Eingabe wäre ``ws://example.com:63605/``.
 - ``config.footerLink``: Eine React-Komponente, die in den Footer der Seite eingebaut wird. Hier kann etwa ein Link auf ein eigenes Impressum und eigene Datenschutzbestimmungen gesetzt werden. Wenn nicht benötigt, hier ``null`` eintragen.
+- ``config.demo``: Wenn aktiv, wird auf der Loginseite der Hinweis angezeigt, dass es sich um eine Demoinstanz handelt und dass ein Login mit ``demo``/``demo`` möglich ist.
 - ``config.release``: Wenn aktiv, wird der Benutzer vor dem Verlassen der Seite gewarnt.
 
 .. Attention:: Der Parameter ``footerLink`` sollte für eine eigene Installation angepasst werden!

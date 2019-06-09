@@ -1,35 +1,51 @@
 {
   "name": "frontend",
-  "version": "0.4.1",
+  "version": "0.5.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url ."
+  },
+  "license": "GPL3",
   "private": true,
   "homepage": "https://agt.dl5lq.de/",
   "dependencies": {
-    "apexcharts": "^3.6.7",
+    "apexcharts": "^3.7.1",
     "array-move": "^2.1.0",
-    "npm-check-updates": "^3.1.5",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-apexcharts": "^1.3.2",
+    "react-apexcharts": "^1.3.3",
     "react-dom": "^16.8.6",
     "react-mathjax": "^1.0.1",
-    "react-scripts": "^2.1.8",
-    "react-sortable-hoc": "^1.8.3",
+    "react-scripts": "^3.0.1",
+    "react-sortable-hoc": "^1.9.1",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.86.0"
+    "semantic-ui-react": "^0.87.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "babel-preset-nano-react-app": "^0.1.0",
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-static-files-copy": "^2.1.2"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "babel": {
+    "presets": [
+      "nano-react-app"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ],
+      [
+        "@babel/plugin-transform-react-jsx",
+        {
+          "pragmaFrag": "React.Fragment"
+        }
+      ]
+    ]
+  }
 }

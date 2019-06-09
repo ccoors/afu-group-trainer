@@ -1,27 +1,29 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Button, Container, Header, Icon, Segment} from "semantic-ui-react";
+import {Button, Container, Header, Icon, Segment} from 'semantic-ui-react';
 
-import {generateEmptyQuestion} from "../../util/util";
-import QuestionRORenderer from "../QuestionRenderer/QuestionRORenderer"
-import Results from "../Results";
-import QuestionProgress from "../QuestionProgress";
-import {RoomMasterModes} from "../Controller";
-import {endQuestions, leaveRoom, nextQuestion, questionSettings, showResults, startQuestions} from "../../util/actions";
-import QuestionSettings from "./QuestionSettings";
-import QuestionTree from "./QuestionTree";
-import OnlineStatus from "../OnlineStatus";
+import {endQuestions, leaveRoom, nextQuestion, questionSettings, showResults, startQuestions} from '../../util/actions';
+import {generateEmptyQuestion, scrollToTop} from '../../util/util';
+import {RoomMasterModes} from '../Controller';
+import OnlineStatus from '../OnlineStatus';
+import QuestionProgress from '../QuestionProgress';
+import QuestionRORenderer from '../QuestionRenderer/QuestionRORenderer'
+import Results from '../Results';
+import QuestionSettings from './QuestionSettings';
+import QuestionTree from './QuestionTree';
 
 class RoomMaster extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            searchInput: "",
+            searchInput: '',
 
-            uuid: "",
+            uuid: '',
             single: false,
+
+            selectedTab: 0,
         }
     }
 
@@ -50,20 +52,25 @@ class RoomMaster extends React.Component {
     }
 
     endQuestions() {
+        scrollToTop();
         this.props.appState.actionHandler(endQuestions());
     }
 
     nextQuestion() {
+        scrollToTop();
         this.props.appState.actionHandler(nextQuestion());
     }
 
     showResults() {
+        scrollToTop();
         this.props.appState.actionHandler(showResults());
     }
 
     startABCDQuestions() {
-        this.quickStartQuestions("");
+        this.quickStartQuestions('');
     }
+
+    selectTab = (e, target) => this.setState({selectedTab: target.activeIndex});
 
     render() {
         let content = null;
@@ -73,7 +80,7 @@ class RoomMaster extends React.Component {
         let question = generateEmptyQuestion();
         if (this.props.appState.roomState) {
             if (this.props.appState.roomState.question &&
-                this.props.appState.roomState.question.hasOwnProperty("uuid")) {
+                this.props.appState.roomState.question.hasOwnProperty('uuid')) {
                 question = this.props.appState.roomState.question;
                 emptyQuestion = false;
                 hasNextQuestion = this.props.appState.roomState.remainingQuestions > 0;
@@ -81,11 +88,10 @@ class RoomMaster extends React.Component {
         }
 
         if (this.props.appState.roomMasterMode === RoomMasterModes.IDLE) {
-            content = <div>
-                <QuestionTree appState={this.props.appState} color={this.props.color}
-                              goToSettings={this.goToSettings.bind(this)}
-                              quickStartQuestions={this.quickStartQuestions.bind(this)}/>
-            </div>;
+            content = <QuestionTree appState={this.props.appState} color={this.props.color}
+                                    selectedTab={this.state.selectedTab} selectTab={this.selectTab}
+                                    goToSettings={this.goToSettings.bind(this)}
+                                    quickStartQuestions={this.quickStartQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.SETTINGS) {
             content = <QuestionSettings appState={this.props.appState} onOk={this.startQuestions.bind(this)}/>;
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RUNNING) {
@@ -123,7 +129,7 @@ class RoomMaster extends React.Component {
                         <Icon name="left arrow"/>
                     </Button>
                     <Button color="green" size="small" icon labelPosition="right"
-                                                onClick={this.nextQuestion.bind(this)}>
+                            onClick={this.nextQuestion.bind(this)}>
                         <Button.Content visible>Nächste Frage</Button.Content>
                         <Icon name="right arrow"/>
                     </Button>
@@ -144,7 +150,7 @@ class RoomMaster extends React.Component {
                 <Segment>
                     <OnlineStatus appState={this.props.appState}/>
                     <div>
-                        <Header as="h1" content={"Referentensicht"}/>
+                        <Header as="h1" content={'Referentensicht'}/>
                         {content}
                     </div>
                 </Segment>
