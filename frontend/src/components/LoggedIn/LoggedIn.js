@@ -22,7 +22,7 @@ class LoggedIn extends React.Component {
         ];
 
 
-        return <Container text>
+        return <Container>
             <Tab panes={tabPanes}/>
         </Container>;
     }
