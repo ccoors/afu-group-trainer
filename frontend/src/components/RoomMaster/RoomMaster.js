@@ -78,6 +78,8 @@ class RoomMaster extends React.Component {
         let hasNextQuestion = true;
         let emptyQuestion = true;
         let question = generateEmptyQuestion();
+        let textMode = true;
+
         if (this.props.appState.roomState) {
             if (this.props.appState.roomState.question &&
                 this.props.appState.roomState.question.hasOwnProperty('uuid')) {
@@ -88,6 +90,7 @@ class RoomMaster extends React.Component {
         }
 
         if (this.props.appState.roomMasterMode === RoomMasterModes.IDLE) {
+            textMode = false;
             content = <QuestionTree appState={this.props.appState} color={this.props.color}
                                     selectedTab={this.state.selectedTab} selectTab={this.selectTab}
                                     goToSettings={this.goToSettings.bind(this)}
@@ -145,7 +148,7 @@ class RoomMaster extends React.Component {
         }
 
         return (
-            <Container text>
+            <Container text={textMode}>
                 <QuestionProgress appState={this.props.appState}/>
                 <Segment>
                     <OnlineStatus appState={this.props.appState}/>
