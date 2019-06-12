@@ -4,6 +4,12 @@ Changelog
 Public versions
 ===============
 
+0.5.1 (Unreleased)
+------------------
+- Increase width of a few views for room masters
+- Add polyfills for older browsers
+- Minor fixes in question catalog
+
 0.5.0 (2019-06-08)
 ------------------
 - Move from create-react-app to nano-react-app
