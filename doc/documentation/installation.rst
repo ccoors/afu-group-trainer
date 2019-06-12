@@ -21,7 +21,7 @@ Anschließend im Ordner ``backend`` ``npm install`` ausführen, was die notwendi
 
 Frontend
 ========
-Das Frontend ist in `React`_ mit `Create React App`_ und einigen Dependencies entwickelt worden. Das Frontend kann lokal gebaut und auf einen normalen Webserver gehostet/deployt werden.
+Das Frontend ist in `React`_ mit `Nano React App`_ und einigen Dependencies entwickelt worden. Das Frontend kann lokal gebaut und auf einen normalen Webserver gehostet/deployt werden.
 
 Im Ordner ``frontend/src`` ist die Datei ``config.js`` anzupassen. Hier gibt es diese Konfigurationsparameter:
 
@@ -36,8 +36,8 @@ Im Ordner ``frontend/src`` ist die Datei ``config.js`` anzupassen. Hier gibt es 
 
 Dann muss in der Datei ``frontend/package.json`` noch der Parameter ``homepage`` auf die URL angepasst werden, unter der der AGT später verfügbar sein soll, damit die relativen Links richtig gesetzt werden.
 
-Anschließend muss auch hier ``npm install`` ausgeführt werden. Dann kann das Frontend mit ``yarn build`` in den Ordner ``frontend/build`` gebaut werden. Dort landen die Dateien, die auf den Webserver kopiert werden sollen.
+Anschließend muss hier ``yarn install`` ausgeführt werden. Dann kann das Frontend mit ``yarn build`` in den Ordner ``frontend/dist`` gebaut werden. Dort landen die Dateien, die auf den Webserver kopiert werden sollen.
 
 .. _Node: https://nodejs.org/en/
 .. _React: https://reactjs.org/
-.. _Create React App: https://facebook.github.io/create-react-app/
+.. _Nano React App: https://github.com/adrianmcli/nano-react-app
