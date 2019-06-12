@@ -4,13 +4,13 @@
   "description": "",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --public-url ."
+    "build": "parcel build src/index.html --public-url . --no-source-maps"
   },
   "license": "GPL3",
   "private": true,
   "homepage": "https://agt.dl5lq.de/",
   "dependencies": {
-    "apexcharts": "^3.7.1",
+    "apexcharts": "^3.8.0",
     "array-move": "^2.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -24,14 +24,22 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
-    "babel-preset-nano-react-app": "^0.1.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-static-files-copy": "^2.1.2"
   },
   "babel": {
     "presets": [
-      "nano-react-app"
+      "@babel/preset-react",
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry"
+        }
+      ]
     ],
     "plugins": [
       [
@@ -47,5 +55,12 @@
         }
       ]
     ]
-  }
+  },
+  "browserslist": [
+    "> 0.25%",
+    "last 2 version",
+    "not dead",
+    "Firefox ESR",
+    "not ie < 10"
+  ]
 }
