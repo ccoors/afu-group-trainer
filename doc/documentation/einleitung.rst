@@ -11,8 +11,7 @@ Christian Friedrich Coors, Rufzeichen DL5LQ, me@dl5lq.de
 
 Fragen, Anmerkungen, Kommentare, Erfahrungen und Pull Requests sind gerne gesehen. Accountanfragen für die „offizielle“ Instanz auf https://agt.dl5lq.de/ werden gerne beantwortet.
 
-Einschränkungen
-===============
-Die bisher größte Einschränkung ist, dass der Fragenkatalog Technik A momentan noch nicht fertig ist. Dieser wird voraussichtlich zum nächsten Klasse A-Kurs in Bremen ab etwa Oktober 2019 fertig.
-
+Bugs und Feature Requests
+=========================
+Bugs und Feature Requests können über die `GitHub-Seite <https://github.com/ccoors/afu-group-trainer>`_ gemeldet werden.
 
