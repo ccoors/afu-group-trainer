@@ -80,11 +80,11 @@ export function stringToJSX(string) {
         return string;
     }
     let mathElements = string.match(/(?:\$).*?(?:\$)/g);
-    let tokens = string.replace(/((?:\$).*?(?:\$)|(?:<img src=.*">))/g, function (i) {
+    let tokens = string.replace(/((?:\$).*?(?:\$)|(?:<img src=.+?">))/g, function (i) {
         if (!i.startsWith('<img')) {
             return '$_$';
         } else {
-            let imageRegex = /(?:<img src=")(.*)(:?">)/;
+            let imageRegex = /(?:<img src=")(.+?)(:?">)/;
             let file = imageRegex.exec(i)[1];
             return '$img/' + file + '$';
         }
