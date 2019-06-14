@@ -18,7 +18,7 @@ class App extends Component {
                 </Responsive>
 
                 <MainContent {...this.props}/>
-                <div style={{height: '5em'}}/>
+                <div className='fillContent'/>
                 <AppFooter version="0.5.0" footerLink={this.props.footerLink}/>
             </MathJax.Provider>
         );

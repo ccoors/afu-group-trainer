@@ -24,7 +24,12 @@ class RoomMaster extends React.Component {
             single: false,
 
             selectedTab: 0,
-        }
+        };
+
+        this.endQuestions = this.endQuestions.bind(this);
+        this.nextQuestion = this.nextQuestion.bind(this);
+        this.showResults = this.showResults.bind(this);
+        this.startABCDQuestions = this.startABCDQuestions.bind(this);
     }
 
     goToSettings(uuid, single) {
@@ -105,18 +110,18 @@ class RoomMaster extends React.Component {
 
                 <Button.Group fluid>
                     <Button color="red" size="small" icon labelPosition="left"
-                            onClick={this.endQuestions.bind(this)}>
+                            onClick={this.endQuestions}>
                         <Button.Content visible>Fragen beenden</Button.Content>
                         <Icon name="left arrow"/>
                     </Button>
                     {hasNextQuestion && !emptyQuestion &&
                     <Button color="orange" size="small" icon labelPosition="right"
-                            onClick={this.nextQuestion.bind(this)}>
+                            onClick={this.nextQuestion}>
                         <Button.Content visible>Frage überspringen</Button.Content>
                         <Icon name="fast forward"/>
                     </Button>}
                     <Button color="green" size="small" icon labelPosition="right"
-                            onClick={this.showResults.bind(this)}>
+                            onClick={this.showResults}>
                         <Button.Content visible>Frage auswerten</Button.Content>
                         <Icon name="chart bar"/>
                     </Button>
@@ -127,19 +132,19 @@ class RoomMaster extends React.Component {
                 <Results {...this.props} selectedAnswer={-1} question={question}/><br/>
                 {hasNextQuestion && <Button.Group fluid>
                     <Button color="red" size="small" icon labelPosition="left"
-                            onClick={this.endQuestions.bind(this)}>
+                            onClick={this.endQuestions}>
                         <Button.Content visible>Fragen beenden</Button.Content>
                         <Icon name="left arrow"/>
                     </Button>
                     <Button color="green" size="small" icon labelPosition="right"
-                            onClick={this.nextQuestion.bind(this)}>
+                            onClick={this.nextQuestion}>
                         <Button.Content visible>Nächste Frage</Button.Content>
                         <Icon name="right arrow"/>
                     </Button>
                 </Button.Group>}
                 {!hasNextQuestion && <Button.Group fluid>
                     <Button color="orange" size="small" icon labelPosition="left"
-                            onClick={this.endQuestions.bind(this)}>
+                            onClick={this.endQuestions}>
                         <Button.Content visible>Zurück zur Fragenauswahl</Button.Content>
                         <Icon name="left arrow"/>
                     </Button>
