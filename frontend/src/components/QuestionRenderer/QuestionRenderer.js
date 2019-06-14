@@ -1,3 +1,4 @@
+import * as Mousetrap from 'mousetrap';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -7,6 +8,20 @@ import AnswerOption from './AnswerOption';
 import OutdatedQuestionLabel from './OutdatedQuestionLabel';
 
 class QuestionRenderer extends React.Component {
+    componentDidMount() {
+        Mousetrap.bind(['0', 'x'], () => this.selectAnswer(-1));
+        [...Array(4).keys()].forEach(i => {
+            Mousetrap.bind([String(i + 1), 'abcd'[i]], () => this.selectAnswer(i));
+        });
+    }
+
+    componentWillUnmount() {
+        Mousetrap.unbind(['0', 'x']);
+        [...Array(4).keys()].forEach(i => {
+            Mousetrap.unbind([String(i + 1), 'abcd'[i]]);
+        });
+    }
+
     selectAnswer(value) {
         this.props.selectAnswer(value);
     }
