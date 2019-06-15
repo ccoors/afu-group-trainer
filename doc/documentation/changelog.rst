@@ -9,6 +9,8 @@ Public versions
 - Increase width of a few views for room masters
 - Add polyfills for older browsers
 - Minor fixes in question catalog
+- Add keyboard shortcuts for answering questions (1-4, A-D)
+- Display footer on bottom of page instead of fixed to improve usability
 
 0.5.0 (2019-06-08)
 ------------------

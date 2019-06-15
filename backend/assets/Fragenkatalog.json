@@ -55,12 +55,12 @@
                                     "uuid": "ec189b73-2af6-5735-97b6-4f71badadfdc",
                                     "id": "TA103",
                                     "outdated": false,
-                                    "question": "$100$ mW entspricht",
+                                    "question": "100 mW entspricht",
                                     "answers": [
-                                        "$10^{-1}$ W.",
+                                        "10$^{-1}$ W.",
                                         "0,001 W.",
                                         "0,01 W.",
-                                        "$10^{-2}$ W."
+                                        "10$^{-2}$ W."
                                     ]
                                 },
                                 {
@@ -149,24 +149,24 @@
                                     "uuid": "2ef59719-ad07-58da-8e36-53c3d8071144",
                                     "id": "TA206",
                                     "outdated": false,
-                                    "question": "$0,22$ \u00b5F sind",
+                                    "question": "0,22 \u00b5F sind",
                                     "answers": [
-                                        "$220$ nF.",
-                                        "$22$ nF.",
-                                        "$220$ pF.",
-                                        "$22$ pF."
+                                        "220 nF.",
+                                        "22 nF.",
+                                        "220 pF.",
+                                        "22 pF."
                                     ]
                                 },
                                 {
                                     "uuid": "f42805e9-08f2-5aa6-9f3d-fddeb454e705",
                                     "id": "TA207",
                                     "outdated": false,
-                                    "question": "$3,75$ MHz sind",
+                                    "question": "3,75 MHz sind",
                                     "answers": [
-                                        "$3750$ kHz.",
-                                        "$375$ kHz.",
-                                        "$0,0375$ GHz.",
-                                        "$0,375$ GHz."
+                                        "3750 kHz.",
+                                        "375 kHz.",
+                                        "0,0375 GHz.",
+                                        "0,375 GHz."
                                     ]
                                 },
                                 {
@@ -289,10 +289,10 @@
                                     "outdated": false,
                                     "question": "Folgende Schaltung eines Akkus besteht aus Zellen von je 2 V. Jede Zelle kann 10 Ah Ladung liefern. Welche Daten hat der Akku?<br><img src=\"technik_e/tb_202_q_1.png\">",
                                     "answers": [
-                                        "12 V / 10 Ah",
-                                        "12 V / 60 Ah",
-                                        "2 V / 10 Ah",
-                                        "2 V / 60 Ah"
+                                        "12 V/10 Ah",
+                                        "12 V/60 Ah",
+                                        "2 V/10 Ah",
+                                        "2 V/60 Ah"
                                     ]
                                 },
                                 {
@@ -2026,7 +2026,7 @@
                         {
                             "uuid": "4d63c9b9-a32e-51a2-9144-3bff54ef875a",
                             "id": "1.4.5",
-                            "name": "Modulator / Demodulator",
+                            "name": "Modulator/Demodulator",
                             "shortname": null,
                             "prefix": "TD",
                             "children": [],
@@ -2351,10 +2351,10 @@
                                     "outdated": false,
                                     "question": "Welche NF-Zwischentr\u00e4gerfrequenzen werden in der Regel in Packet Radio bei 1200 Baud benutzt?",
                                     "answers": [
-                                        "1200 / 2200 Hz",
-                                        "850 / 1200 kHz",
-                                        "500 / 1750 Hz",
-                                        "300 / 2700 Hz"
+                                        "1200/2200 Hz",
+                                        "850/1200 kHz",
+                                        "500/1750 Hz",
+                                        "300/2700 Hz"
                                     ]
                                 },
                                 {
@@ -2525,7 +2525,7 @@
                                     "uuid": "dd012721-9b95-5e5e-8f71-fff100a82fb2",
                                     "id": "TF104",
                                     "outdated": false,
-                                    "question": "Ein Empf\u00e4nger hat eine ZF von 10,7 MHz und ist auf 28,5 MHz abgestimmt. Der Oszillator des Empf\u00e4ngers schwingt oberhalb der Empfangsfrequenz. Welche Frequenz hat die Spielfrequenz?",
+                                    "question": "Ein Empf\u00e4nger hat eine ZF von 10,7 MHz und ist auf 28,5 MHz abgestimmt. Der Oszillator des Empf\u00e4ngers schwingt oberhalb der Empfangsfrequenz. Welche Frequenz hat die Spiegelfrequenz?",
                                     "answers": [
                                         "49,9 MHz",
                                         "48,9 MHz",
@@ -7603,10 +7603,10 @@
                                     "outdated": false,
                                     "question": "Eine unbelastete Z-Diode soll eine 12 V Betriebsspannung auf 5 V stabilisieren. Dabei soll ein Strom von 25 mA durch die Z-Diode flie\u00dfen.<br><img src=\"technik_a/tc_516_q_1.png\"><br>Berechnen Sie den Vorwiderstand. Die Werte des ben\u00f6tigten Vorwiderstandes betragen",
                                     "answers": [
-                                        "280 \u03a9 / 175 mW.",
-                                        "280 \u03a9 / 300 mW.",
-                                        "480 \u03a9 / 300 mW.",
-                                        "200 \u03a9 / 175 mW."
+                                        "280 \u03a9/175 mW.",
+                                        "280 \u03a9/300 mW.",
+                                        "480 \u03a9/300 mW.",
+                                        "200 \u03a9/175 mW."
                                     ]
                                 },
                                 {
@@ -7639,10 +7639,10 @@
                                     "outdated": false,
                                     "question": "Folgende Schaltung einer Leuchtdiode wird an einer Betriebsspannung von 5,5 V betrieben. Der Strom durch die Leuchtdiode soll 25 mA betragen, wobei die Durchlassspannung 1,75 V betr\u00e4gt. Der notwendige Vorwiderstand muss folgende Werte haben.<br><img src=\"technik_a/tc_519_q_1.png\">",
                                     "answers": [
-                                        "150 Ohm / 0,1 Watt",
-                                        "220 Ohm / 0,25 Watt",
-                                        "70 Ohm / 0,1 Watt",
-                                        "290 Ohm / 0,25 Watt"
+                                        "150 Ohm/0,1 Watt",
+                                        "220 Ohm/0,25 Watt",
+                                        "70 Ohm/0,1 Watt",
+                                        "290 Ohm/0,25 Watt"
                                     ]
                                 },
                                 {
@@ -7769,10 +7769,10 @@
                                     "outdated": false,
                                     "question": "Welche Bezeichnungen f\u00fcr die Bauelemente sind richtig?<br>1:<br><img src=\"technik_a/tc_601_q_1.png\"><br>2:<br><img src=\"technik_a/tc_601_q_2.png\">",
                                     "answers": [
-                                        "1: NPN-Transistor / 2: PNP-Transistor",
-                                        "1: PNP-Transistor / 2: NPN-Transistor",
-                                        "1: N-Kanal-Transistor / 2: P-Kanal-Transistor",
-                                        "1: P-Kanal-Transistor / 2: N-Kanal-Transistor"
+                                        "1: NPN-Transistor; 2: PNP-Transistor",
+                                        "1: PNP-Transistor; 2: NPN-Transistor",
+                                        "1: N-Kanal-Transistor; 2: P-Kanal-Transistor",
+                                        "1: P-Kanal-Transistor; 2: N-Kanal-Transistor"
                                     ]
                                 },
                                 {
@@ -7781,10 +7781,10 @@
                                     "outdated": false,
                                     "question": "Welche Bezeichnungen f\u00fcr die Bauelemente sind richtig?<br>1:<br><img src=\"technik_a/tc_602_q_1.png\"><br>2:<br><img src=\"technik_a/tc_602_q_2.png\">",
                                     "answers": [
-                                        "1: Selbstleitender N-Kanal-Sperrschicht-FET / 2: Selbstleitender P-Kanal-Sperrschicht-FET",
-                                        "1: Selbstsperrender N-Kanal-Sperrschicht-FET / 2: Selbstsperrender P-Kanal-Sperrschicht-FET",
-                                        "1: Selbstleitender P-Kanal-Sperrschicht-FET / 2: Selbstleitender N-Kanal-Sperrschicht-FET",
-                                        "1: Selbstsperrender P-Kanal-Sperrschicht-FET / 2: Selbstsperrender N-Kanal-Sperrschicht-FET"
+                                        "1: Selbstleitender N-Kanal-Sperrschicht-FET; 2: Selbstleitender P-Kanal-Sperrschicht-FET",
+                                        "1: Selbstsperrender N-Kanal-Sperrschicht-FET; 2: Selbstsperrender P-Kanal-Sperrschicht-FET",
+                                        "1: Selbstleitender P-Kanal-Sperrschicht-FET; 2: Selbstleitender N-Kanal-Sperrschicht-FET",
+                                        "1: Selbstsperrender P-Kanal-Sperrschicht-FET; 2: Selbstsperrender N-Kanal-Sperrschicht-FET"
                                     ]
                                 },
                                 {
@@ -10647,10 +10647,10 @@
                                     "outdated": false,
                                     "question": "Welche NF-Zwischentr\u00e4gerfrequenzen werden in der Regel in Packet-Radio bei 1200 Bd benutzt?",
                                     "answers": [
-                                        "1200 / 2200 Hz",
-                                        "500 / 1750 Hz",
-                                        "850 / 1200 kHz",
-                                        "300 / 2700 Hz"
+                                        "1200/2200 Hz",
+                                        "500/1750 Hz",
+                                        "850/1200 kHz",
+                                        "300/2700 Hz"
                                     ]
                                 },
                                 {
@@ -20851,24 +20851,24 @@
                                     "uuid": "b5bed520-fcb8-5892-a340-e21135c524dd",
                                     "id": "BE410",
                                     "outdated": false,
-                                    "question": "Welche Gruppe enth\u00e4lt die richtig dargestellte Bedeutung der nachfolgend genannten Begriffe in der richtigen Reihenfolge?<br>1) Repeater,<br>2) Digipeater,<br>3) Mailbox",
+                                    "question": "Welche Gruppe enth\u00e4lt die richtig dargestellte Bedeutung der nachfolgend genannten Begriffe in der richtigen Reihenfolge?<br>1. Repeater,<br>2. Digipeater,<br>3. Mailbox",
                                     "answers": [
-                                        "1) Fernbediente Amateurfunkstelle, die an einem festen Standort unbesetzt betrieben wird (Relaisfunkstelle)<br>2) Relaisfunkstelle f\u00fcr Packet Radio<br>3) Datenbank mit allgemeinen Zugriff zum Einspeichern und Auslesen von Informationen",
-                                        "1) Automatisch arbeitende Amateurfunkstelle, die an einem festen Standort unbesetzt betrieben wird<br>2) Digitale Multimedia Funkbake<br>3) Datenbank mit allgemeinen Zugriff zum Einspeichern und Auslesen von Informationen",
-                                        "1) Fernbediente Amateurfunkstelle, die an einem festen Standort unbesetzt betrieben wird<br>2) Relaisfunkstelle f\u00fcr digitales Amateurfunkfernsehen<br>3) Einrichtung zur automatischen Antennenanpassung bei Relaisfunkstellen und Funkbaken",
-                                        "1) Automatisch arbeitende Amateurfunkstelle, die an einem festen Standort unbesetzt betrieben wird (Relaisfunkstelle)<br>2) Relaisfunkstelle f\u00fcr digitales Amateurfunkfernsehen<br>3) Einrichtung zur automatischen Antennenanpassung bei Relaisfunkstellen und Funkbaken"
+                                        "1. Fernbediente Amateurfunkstelle, die an einem festen Standort unbesetzt betrieben wird (Relaisfunkstelle)<br>2. Relaisfunkstelle f\u00fcr Packet Radio<br>3. Datenbank mit allgemeinen Zugriff zum Einspeichern und Auslesen von Informationen",
+                                        "1. Automatisch arbeitende Amateurfunkstelle, die an einem festen Standort unbesetzt betrieben wird<br>2. Digitale Multimedia Funkbake<br>3. Datenbank mit allgemeinen Zugriff zum Einspeichern und Auslesen von Informationen",
+                                        "1. Fernbediente Amateurfunkstelle, die an einem festen Standort unbesetzt betrieben wird<br>2. Relaisfunkstelle f\u00fcr digitales Amateurfunkfernsehen<br>3. Einrichtung zur automatischen Antennenanpassung bei Relaisfunkstellen und Funkbaken",
+                                        "1. Automatisch arbeitende Amateurfunkstelle, die an einem festen Standort unbesetzt betrieben wird (Relaisfunkstelle)<br>2. Relaisfunkstelle f\u00fcr digitales Amateurfunkfernsehen<br>3. Einrichtung zur automatischen Antennenanpassung bei Relaisfunkstellen und Funkbaken"
                                     ]
                                 },
                                 {
                                     "uuid": "08197d59-e7de-568e-a0b2-3e5944243094",
                                     "id": "BE411",
                                     "outdated": false,
-                                    "question": "Die Begriffe 1) OSCAR, 2) Uplink, 3) Downlink, 4) Azimut/Elevation bedeuten in der angegebenen Reihenfolge:",
+                                    "question": "Die Begriffe 1. OSCAR, 2. Uplink, 3. Downlink, 4. Azimut/Elevation bedeuten in der angegebenen Reihenfolge:",
                                     "answers": [
-                                        "1) Umlaufender Satellit, der Amateurfunktechnik beinhaltet<br>2) Senderichtung von der Erde zum Satelliten<br>3) Senderichtung vom Satelliten zur Erde<br>4) Horizontale / vertikale Winkelangaben",
-                                        "1) Umlaufender Satellit, der Amateurfunktechnik beinhaltet<br>2) Senderichtung vom Satelliten zur Erde<br>3) Senderichtung von der Erde zum Satelliten<br>4) Horizontale / vertikale Entfernungsangaben",
-                                        "1) Ortsfester Satellit der Amateurfunktechnik beinhaltet<br>2) Senderichtung vom Satelliten zur Erde<br>3) Senderichtung von der Erde zum Satelliten<br>4) Horizontale / vertikale Winkelangaben",
-                                        "1) Ortsfester Satellit, der Amateurfunktechnik beinhaltet<br>2) Senderichtung von der Erde zum Satelliten<br>3) Senderichtung vom Satelliten zur Erde<br>4) Horizontale / vertikale L\u00e4ngenangaben zur Berechnung der Laufzeiten"
+                                        "1. Umlaufender Satellit, der Amateurfunktechnik beinhaltet<br>2. Senderichtung von der Erde zum Satelliten<br>3. Senderichtung vom Satelliten zur Erde<br>4. Horizontale/vertikale Winkelangaben",
+                                        "1. Umlaufender Satellit, der Amateurfunktechnik beinhaltet<br>2. Senderichtung vom Satelliten zur Erde<br>3. Senderichtung von der Erde zum Satelliten<br>4. Horizontale/vertikale Entfernungsangaben",
+                                        "1. Ortsfester Satellit der Amateurfunktechnik beinhaltet<br>2. Senderichtung vom Satelliten zur Erde<br>3. Senderichtung von der Erde zum Satelliten<br>4. Horizontale/vertikale Winkelangaben",
+                                        "1. Ortsfester Satellit, der Amateurfunktechnik beinhaltet<br>2. Senderichtung von der Erde zum Satelliten<br>3. Senderichtung vom Satelliten zur Erde<br>4. Horizontale/vertikale L\u00e4ngenangaben zur Berechnung der Laufzeiten"
                                     ]
                                 }
                             ]
@@ -24458,7 +24458,7 @@
                         {
                             "uuid": "42006730-c71a-56a0-b5ed-605d88c10c7d",
                             "id": "3.3.7",
-                            "name": "EMVU (elektromagnetische Umweltvertr\u00e4glichkeit) / BEMFV (Verordnung \u00fcber das Nachweisverfahren zur Begrenzung elektromagnetischer Felder",
+                            "name": "EMVU (elektromagnetische Umweltvertr\u00e4glichkeit)/BEMFV (Verordnung \u00fcber das Nachweisverfahren zur Begrenzung elektromagnetischer Felder)",
                             "shortname": null,
                             "prefix": "VI",
                             "children": [],
