@@ -36,7 +36,8 @@ class CreateRoom extends React.Component {
                            onChange={this.handleNewRoomPassword.bind(this)}/>
                     <p>Passwortfeld frei lassen, um Passwortschutz zu deaktivieren.</p><br/>
 
-                    <Button color={this.props.color} fluid size="large" type="submit" onClick={() => {
+                    <Button color={this.props.color} fluid size="large" type="submit" onClick={(e) => {
+                        if (e) e.preventDefault();
                         const action = createRoom(this.state.createRoomName, this.state.createRoomPassword);
                         this.props.appState.actionHandler(action)
                     }}>

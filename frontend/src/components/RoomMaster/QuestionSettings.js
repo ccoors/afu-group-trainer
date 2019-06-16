@@ -43,13 +43,17 @@ class QuestionSettings extends React.Component {
 
                 <Button.Group>
                     <Button color="red" icon labelPosition="left"
-                            onClick={() => this.props.appState.actionHandler(backToIdle())}>
+                            onClick={(e) => {
+                                if (e) e.preventDefault();
+                                this.props.appState.actionHandler(backToIdle());
+                            }}>
                         <Button.Content visible>Zurück</Button.Content>
                         <Icon name="chevron left"/>
                     </Button>
                     <Button color="green" icon labelPosition="right"
-                            onClick={() => {
-                                this.props.onOk(this.state.shuffle, this.state.outdated)
+                            onClick={(e) => {
+                                if (e) e.preventDefault();
+                                this.props.onOk(this.state.shuffle, this.state.outdated);
                             }}>
                         <Button.Content visible>Starten</Button.Content>
                         <Icon name="play"/>

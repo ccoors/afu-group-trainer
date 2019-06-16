@@ -126,7 +126,8 @@ class RoomID extends React.Component {
                         <Input fluid icon="key" iconPosition="left" placeholder={'Passwort'} type="password"
                                onChange={this.handleNewPasswordMessage.bind(this)}/><br/>
 
-                        <Button color={this.props.color} fluid size="large" type="submit" onClick={() => {
+                        <Button color={this.props.color} fluid size="large" type="submit" onClick={(e) => {
+                            if (e) e.preventDefault();
                             let action = login(this.state.username, this.state.password);
                             this.props.appState.actionHandler(action);
                         }}>
