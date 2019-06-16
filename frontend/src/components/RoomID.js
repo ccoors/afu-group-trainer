@@ -85,12 +85,15 @@ class RoomID extends React.Component {
         }
 
         let joinRoomUUID = this.state.joinRoomUUID;
+        let roomRequiresPassword = this.state.roomRequiresPassword;
         const existingRoom = this.props.appState.rooms.find(r => r.uuid === joinRoomUUID);
         if (!existingRoom) {
             joinRoomUUID = '';
+            roomRequiresPassword = false;
         }
         if (joinRoomUUID === '' && hasRooms) {
             joinRoomUUID = this.props.appState.rooms[0].uuid;
+            roomRequiresPassword = this.props.appState.rooms[0].password_required;
         }
 
         let tabPanes = [
@@ -100,7 +103,7 @@ class RoomID extends React.Component {
                     <Dropdown placeholder="Raum auswählen" fluid selection options={room_options}
                               value={joinRoomUUID} onChange={this.handleJoinRoomChange.bind(this)}/>
                     <br/>
-                    <RenderPasswordBox show={this.state.roomRequiresPassword && joinRoomUUID !== ''}
+                    <RenderPasswordBox show={roomRequiresPassword && joinRoomUUID !== ''}
                                        onChange={this.handleNewRoomPasswordMessage.bind(this)}/>
 
                     <Button disabled={joinRoomUUID === ''} color={this.props.color} fluid size="large"
