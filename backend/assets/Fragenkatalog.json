@@ -2,28 +2,26 @@
     "uuid": null,
     "id": null,
     "name": null,
-    "shortname": null,
     "prefix": null,
     "children": [
         {
             "uuid": "4b620722-9578-51ac-9956-ed26c5003215",
             "id": "1",
             "name": "Pr\u00fcfungsfragen im Pr\u00fcfungsteil \u201eTechnische Kenntnisse\u201c der Klasse E",
-            "shortname": "Technik E",
             "prefix": null,
+            "shortname": "Technik E",
+            "solution_url": "lichtblicke/E/$ID$.pdf",
             "children": [
                 {
                     "uuid": "57071f6f-c581-5159-ba34-0f92368e5bb7",
                     "id": "1.1",
                     "name": "Allgemeine mathematische Grundkenntnisse und Gr\u00f6\u00dfen",
-                    "shortname": null,
                     "prefix": "TA",
                     "children": [
                         {
                             "uuid": "26bef8e6-da14-52da-8962-009cab1ac41d",
                             "id": "1.1.1",
                             "name": "Allgemeine mathematische Grundkenntnisse",
-                            "shortname": null,
                             "prefix": "TA",
                             "children": [],
                             "questions": [
@@ -81,7 +79,6 @@
                             "uuid": "bc30967c-0f78-5943-a1af-25f6bf7037ed",
                             "id": "1.1.2",
                             "name": "Gr\u00f6\u00dfen und Einheiten",
-                            "shortname": null,
                             "prefix": "TA",
                             "children": [],
                             "questions": [
@@ -190,14 +187,12 @@
                     "uuid": "47c92201-6b95-5656-97b7-2bf1952b7c15",
                     "id": "1.2",
                     "name": "Elektrizit\u00e4ts-, Elektromagnetismus- und Funktheorie",
-                    "shortname": null,
                     "prefix": "TB",
                     "children": [
                         {
                             "uuid": "e4b5e17e-b9ce-51e7-bf5e-2c648091e7b3",
                             "id": "1.2.1",
                             "name": "Leiter, Halbleiter und Isolator",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -267,7 +262,6 @@
                             "uuid": "1cd56aa3-23f8-52fb-ace2-05490d823019",
                             "id": "1.2.2",
                             "name": "Strom- und Spannungsquellen",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -337,7 +331,6 @@
                             "uuid": "c24f4d57-071a-50f7-8986-25dc6526102c",
                             "id": "1.2.3",
                             "name": "Elektrisches Feld",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -383,7 +376,6 @@
                             "uuid": "53723e2a-7963-54af-956e-b59073dbde6e",
                             "id": "1.2.4",
                             "name": "Magnetisches Feld",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -453,7 +445,6 @@
                             "uuid": "ef435cdd-5445-530e-a5bc-d6495d47d4d4",
                             "id": "1.2.5",
                             "name": "Elektromagnetisches Feld",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -523,7 +514,6 @@
                             "uuid": "5c1c3507-206a-588e-be6a-caa4cfebdd30",
                             "id": "1.2.6",
                             "name": "Sinusf\u00f6rmige Signale",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -689,7 +679,6 @@
                             "uuid": "fe1c2f54-f42d-5c33-8a4e-9acc8c7aa447",
                             "id": "1.2.7",
                             "name": "Nichtsinusf\u00f6rmige Signale",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -723,7 +712,6 @@
                             "uuid": "2a7ddaaf-6d72-5529-9d5e-ef194b9eeaa3",
                             "id": "1.2.8",
                             "name": "Modulierte Signale",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -805,7 +793,6 @@
                             "uuid": "969126b4-4989-5f8f-88f4-f41352ae07fa",
                             "id": "1.2.9",
                             "name": "Ohmsches Gesetz, Leistung und Energie",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -950,14 +937,12 @@
                     "uuid": "dbc8a9f8-1741-5cf5-b035-445d0e466130",
                     "id": "1.3",
                     "name": "Elektrische und elektronische Bauteile",
-                    "shortname": null,
                     "prefix": "TC",
                     "children": [
                         {
                             "uuid": "f9ff14ef-c45e-5973-bf46-7ec0ff6a642e",
                             "id": "1.3.1",
                             "name": "Widerstand",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -1099,7 +1084,6 @@
                             "uuid": "fa392710-e295-593c-ac5e-4eb8b49515f9",
                             "id": "1.3.2",
                             "name": "Kondensator",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -1205,7 +1189,6 @@
                             "uuid": "79823f57-d72e-5ad3-8beb-f04f9adac690",
                             "id": "1.3.3",
                             "name": "Spule",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -1287,7 +1270,6 @@
                             "uuid": "665103f9-c353-5be5-aef8-997c4d860320",
                             "id": "1.3.4",
                             "name": "\u00dcbertrager und Transformatoren",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -1333,7 +1315,6 @@
                             "uuid": "ade63546-9902-5765-ac49-f1a76f646d60",
                             "id": "1.3.5",
                             "name": "Diode",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -1451,7 +1432,6 @@
                             "uuid": "e4bcd09b-d196-51ca-9efb-cfecfd5dd143",
                             "id": "1.3.6",
                             "name": "Transistor",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -1608,14 +1588,12 @@
                     "uuid": "f9d4e21c-8c46-5eb5-854c-0b8550ccebc5",
                     "id": "1.4",
                     "name": "Elektronische Schaltungen und deren Merkmale",
-                    "shortname": null,
                     "prefix": "TD",
                     "children": [
                         {
                             "uuid": "8a0d341f-486f-55d7-b777-feb590cef6d1",
                             "id": "1.4.1",
                             "name": "Serien- und Parallelschaltung von Widerst\u00e4nden, Spulen und Kondensatoren",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -1745,7 +1723,6 @@
                             "uuid": "32b5fa9f-3fe3-5f37-b973-6b0bfce8f867",
                             "id": "1.4.2",
                             "name": "Schwingkreise und Filter",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -1875,7 +1852,6 @@
                             "uuid": "dfa96c8e-764c-5f58-839c-86b1b65daa6a",
                             "id": "1.4.3",
                             "name": "Stromversorgung",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -1957,7 +1933,6 @@
                             "uuid": "a12c904c-9bb3-52be-80ee-656cfb06f980",
                             "id": "1.4.4",
                             "name": "Verst\u00e4rker",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -2027,7 +2002,6 @@
                             "uuid": "4d63c9b9-a32e-51a2-9144-3bff54ef875a",
                             "id": "1.4.5",
                             "name": "Modulator/Demodulator",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -2085,7 +2059,6 @@
                             "uuid": "c37dd3b7-bb05-5bb0-88a8-ccc2ebd3a34f",
                             "id": "1.4.6",
                             "name": "Oszillator",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -2170,14 +2143,12 @@
                     "uuid": "0fa0a4a9-1d69-5da3-a83c-8694e2eded7b",
                     "id": "1.5",
                     "name": "Analoge und digitale Modulationsverfahren",
-                    "shortname": null,
                     "prefix": "TE",
                     "children": [
                         {
                             "uuid": "5910ae37-5b83-544d-bb95-ca65e35fea6b",
                             "id": "1.5.1",
                             "name": "Amplitudenmodulation AM, SSB",
-                            "shortname": null,
                             "prefix": "TE",
                             "children": [],
                             "questions": [
@@ -2259,7 +2230,6 @@
                             "uuid": "feb4a0d6-d07c-5536-8388-532dd9221bd1",
                             "id": "1.5.2",
                             "name": "Frequenzmodulation",
-                            "shortname": null,
                             "prefix": "TE",
                             "children": [],
                             "questions": [
@@ -2317,7 +2287,6 @@
                             "uuid": "8ee85b58-def2-5653-be99-1adf74952b75",
                             "id": "1.5.3",
                             "name": "Text-, Daten- und Bild\u00fcbertragung",
-                            "shortname": null,
                             "prefix": "TE",
                             "children": [],
                             "questions": [
@@ -2474,14 +2443,12 @@
                     "uuid": "07523e8a-7e01-57e7-ade1-91e65066642c",
                     "id": "1.6",
                     "name": "Funk-Empf\u00e4nger",
-                    "shortname": null,
                     "prefix": "TF",
                     "children": [
                         {
                             "uuid": "8b71d3fe-440e-5857-96ea-388092148fb9",
                             "id": "1.6.1",
                             "name": "Einfach- und Doppel\u00fcberlagerungsempf\u00e4nger",
-                            "shortname": null,
                             "prefix": "TF",
                             "children": [],
                             "questions": [
@@ -2611,7 +2578,6 @@
                             "uuid": "262f7016-11df-54b2-8c00-021d8da06046",
                             "id": "1.6.2",
                             "name": "Blockschaltbilder",
-                            "shortname": null,
                             "prefix": "TF",
                             "children": [],
                             "questions": [
@@ -2681,7 +2647,6 @@
                             "uuid": "36c30975-1092-512c-ab10-0da0d344d53b",
                             "id": "1.6.3",
                             "name": "Betrieb und Funktionsweise einzelner Stufen",
-                            "shortname": null,
                             "prefix": "TF",
                             "children": [],
                             "questions": [
@@ -2727,7 +2692,6 @@
                             "uuid": "f95a7f33-c452-5cf9-8743-b33fd5804193",
                             "id": "1.6.4",
                             "name": "Empf\u00e4ngermerkmale",
-                            "shortname": null,
                             "prefix": "TF",
                             "children": [],
                             "questions": [
@@ -2848,14 +2812,12 @@
                     "uuid": "641d0246-2cb9-5efe-8920-1a08ca8fbcb5",
                     "id": "1.7",
                     "name": "Funksender",
-                    "shortname": null,
                     "prefix": "TG",
                     "children": [
                         {
                             "uuid": "0f56440f-a6ed-533a-8098-281ad3790e07",
                             "id": "1.7.1",
                             "name": "Blockschaltbilder",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -2925,7 +2887,6 @@
                             "uuid": "50f57f36-7fe8-5efd-ac37-e3ad5b742e8a",
                             "id": "1.7.2",
                             "name": "Betrieb und Funktionsweise einzelner Stufen",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -2971,7 +2932,6 @@
                             "uuid": "7fc683cb-74c4-5f03-9487-66da6ab8b631",
                             "id": "1.7.3",
                             "name": "Betrieb und Funktionsweise von HF-Leistungsverst\u00e4rkern",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -3065,7 +3025,6 @@
                             "uuid": "f5edfc26-48eb-5f48-a3e3-8887520109a1",
                             "id": "1.7.4",
                             "name": "Betrieb und Funktionsweise von HF-Transceivern",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -3135,7 +3094,6 @@
                             "uuid": "c9aaba2a-f676-58ae-ad09-6e1f536b5513",
                             "id": "1.7.5",
                             "name": "Unerw\u00fcnschte Aussendungen",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -3220,14 +3178,12 @@
                     "uuid": "91c6529b-6007-5eb9-ac90-a468ee33a617",
                     "id": "1.8",
                     "name": "Antennen und \u00dcbertragungsleitungen",
-                    "shortname": null,
                     "prefix": "TH",
                     "children": [
                         {
                             "uuid": "1d59c526-bb72-5e60-bad0-2b436447ab15",
                             "id": "1.8.1",
                             "name": "Antennen",
-                            "shortname": null,
                             "prefix": "TH",
                             "children": [],
                             "questions": [
@@ -3393,7 +3349,6 @@
                             "uuid": "743f0bf6-2b8b-5b0a-9699-e2169a023acd",
                             "id": "1.8.2",
                             "name": "Antennenmerkmale",
-                            "shortname": null,
                             "prefix": "TH",
                             "children": [],
                             "questions": [
@@ -3523,7 +3478,6 @@
                             "uuid": "e307a461-42dd-5e39-b623-c6d5783b46be",
                             "id": "1.8.3",
                             "name": "\u00dcbertragungsleitungen",
-                            "shortname": null,
                             "prefix": "TH",
                             "children": [],
                             "questions": [
@@ -3677,7 +3631,6 @@
                             "uuid": "a8ebeb27-37d4-596b-bc87-3660ae0a4ba3",
                             "id": "1.8.4",
                             "name": "Anpassung, Transformation und Symmetrierung",
-                            "shortname": null,
                             "prefix": "TH",
                             "children": [],
                             "questions": [
@@ -3762,14 +3715,12 @@
                     "uuid": "028cd932-9481-5b06-9d15-fdd65be8cdcc",
                     "id": "1.9",
                     "name": "Wellenausbreitung und Ionosph\u00e4re",
-                    "shortname": null,
                     "prefix": "TI",
                     "children": [
                         {
                             "uuid": "b746d777-6dcd-5c74-b756-1cfeba7e657a",
                             "id": "1.9.1",
                             "name": "Ionosph\u00e4re",
-                            "shortname": null,
                             "prefix": "TI",
                             "children": [],
                             "questions": [
@@ -3863,7 +3814,6 @@
                             "uuid": "a26b155f-9126-556f-98d8-2964f7e777a0",
                             "id": "1.9.2",
                             "name": "Kurzwellenausbreitung",
-                            "shortname": null,
                             "prefix": "TI",
                             "children": [],
                             "questions": [
@@ -4029,7 +3979,6 @@
                             "uuid": "60015063-9b17-5ba6-80d4-9ee814774370",
                             "id": "1.9.3",
                             "name": "Wellenausbreitung oberhalb 30 MHz",
-                            "shortname": null,
                             "prefix": "TI",
                             "children": [],
                             "questions": [
@@ -4162,14 +4111,12 @@
                     "uuid": "6a77c787-640c-54d9-b2f9-d1799dbd464c",
                     "id": "1.10",
                     "name": "Messungen und Messinstrumente",
-                    "shortname": null,
                     "prefix": "TJ",
                     "children": [
                         {
                             "uuid": "09bb8399-dcdb-5717-b350-9e34e97dc10a",
                             "id": "1.10.1",
                             "name": "Messinstrumente",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -4299,7 +4246,6 @@
                             "uuid": "03f164f7-f339-55e8-a944-1636ca08722a",
                             "id": "1.10.2",
                             "name": "Durchf\u00fchrung von Messungen",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -4444,14 +4390,12 @@
                     "uuid": "e129bee3-bb26-515a-9588-6e3081a777cd",
                     "id": "1.11",
                     "name": "St\u00f6remissionen, St\u00f6rfestigkeit, Schutzanforderungen, Ursachen, Abhilfe",
-                    "shortname": null,
                     "prefix": "TK",
                     "children": [
                         {
                             "uuid": "d2a34fd2-030e-5f63-b43a-e80aef97ea6a",
                             "id": "1.11.1",
                             "name": "St\u00f6rungen elektronischer Ger\u00e4te",
-                            "shortname": null,
                             "prefix": "TK",
                             "children": [],
                             "questions": [
@@ -4545,7 +4489,6 @@
                             "uuid": "e227b865-d387-5048-b008-3a0fbd63ed38",
                             "id": "1.11.2",
                             "name": "Ursachen f\u00fcr St\u00f6rungen",
-                            "shortname": null,
                             "prefix": "TK",
                             "children": [],
                             "questions": [
@@ -4603,7 +4546,6 @@
                             "uuid": "e1f8ed05-ca6a-5354-9ab0-01ee26c9192f",
                             "id": "1.11.3",
                             "name": "Ma\u00dfnahmen zur St\u00f6rungsbeseitigung",
-                            "shortname": null,
                             "prefix": "TK",
                             "children": [],
                             "questions": [
@@ -4844,14 +4786,12 @@
                     "uuid": "b06af855-45ae-57ac-8b80-4ba9eae4de56",
                     "id": "1.12",
                     "name": "Elektromagnetische Vertr\u00e4glichkeit, Anwendung, Personen- und Sachschutz",
-                    "shortname": null,
                     "prefix": "TL",
                     "children": [
                         {
                             "uuid": "c0e756c1-4560-5e4c-8bd9-60a073607bbb",
                             "id": "1.12.1",
                             "name": "St\u00f6rfestigkeit",
-                            "shortname": null,
                             "prefix": "TL",
                             "children": [],
                             "questions": [
@@ -4873,7 +4813,6 @@
                             "uuid": "e198e9ac-815d-5acb-9138-62c75ba3bae7",
                             "id": "1.12.2",
                             "name": "Schutz von Personen",
-                            "shortname": null,
                             "prefix": "TL",
                             "children": [],
                             "questions": [
@@ -5051,7 +4990,6 @@
                             "uuid": "b99ec138-bb89-5c21-8888-4dc511299956",
                             "id": "1.12.3",
                             "name": "Sicherheit",
-                            "shortname": null,
                             "prefix": "TL",
                             "children": [],
                             "questions": [
@@ -5163,21 +5101,20 @@
             "uuid": "5929d106-4d52-5cc1-9cf1-d2d3b3f8ad03",
             "id": "1",
             "name": "Pr\u00fcfungsfragen im Pr\u00fcfungsteil \u201eTechnische Kenntnisse\u201c der Klasse A",
-            "shortname": "Technik A",
             "prefix": null,
+            "shortname": "Technik A",
+            "solution_url": "lichtblicke/A/$ID$.pdf",
             "children": [
                 {
                     "uuid": "1cc1a1a8-b39c-5138-9f14-b005c93c13c6",
                     "id": "1.1",
                     "name": "Allgemeine mathematische Grundkenntnisse und Gr\u00f6\u00dfen",
-                    "shortname": null,
                     "prefix": "TA",
                     "children": [
                         {
                             "uuid": "19f61483-d83f-5281-b7b7-8b4df6f79414",
                             "id": "1.1.2",
                             "name": "Gr\u00f6\u00dfen und Einheiten",
-                            "shortname": null,
                             "prefix": "TA",
                             "children": [],
                             "questions": [
@@ -5490,14 +5427,12 @@
                     "uuid": "377a26c7-4689-59e8-a938-634c393e1c6b",
                     "id": "1.2",
                     "name": "Elektrizit\u00e4ts-, Elektromagnetismus- und Funktheorie",
-                    "shortname": null,
                     "prefix": "TB",
                     "children": [
                         {
                             "uuid": "1761125a-d4fe-5798-8154-b521b34484a8",
                             "id": "1.2.1",
                             "name": "Leiter, Halbleiter und Isolator",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -5651,7 +5586,6 @@
                             "uuid": "b93e4c4f-515c-5283-ab88-3aa9e689dce2",
                             "id": "1.2.2",
                             "name": "Strom- und Spannungsquellen",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -5781,7 +5715,6 @@
                             "uuid": "954e2c12-6d73-50ee-b812-2c3343deb8a0",
                             "id": "1.2.3",
                             "name": "Elektrisches Feld",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -5863,7 +5796,6 @@
                             "uuid": "9b3e344d-2f86-5561-a0b3-03c8c21b882c",
                             "id": "1.2.4",
                             "name": "Magnetisches Feld",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -5969,7 +5901,6 @@
                             "uuid": "8c66d4a6-3fb9-5ece-9b58-06628d36a075",
                             "id": "1.2.5",
                             "name": "Elektromagnetisches Feld",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -6123,7 +6054,6 @@
                             "uuid": "a2a771f9-ffe7-582f-930d-f53296b53732",
                             "id": "1.2.6",
                             "name": "Sinusf\u00f6rmige Signale",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -6277,7 +6207,6 @@
                             "uuid": "cffce420-7fbf-5dbc-b6ff-c719f6988c8e",
                             "id": "1.2.7",
                             "name": "Nichtsinusf\u00f6rmige Signale",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -6383,7 +6312,6 @@
                             "uuid": "cc6ab7e7-aad8-55b6-8c02-2515eb10a7a7",
                             "id": "1.2.8",
                             "name": "Modulierte Signale",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -6465,7 +6393,6 @@
                             "uuid": "050b1580-4220-5234-ae35-29e1f438116b",
                             "id": "1.2.9",
                             "name": "Leistung und Energie",
-                            "shortname": null,
                             "prefix": "TB",
                             "children": [],
                             "questions": [
@@ -6766,14 +6693,12 @@
                     "uuid": "927a6f78-995c-5139-9fdc-e5cfdcf54f0c",
                     "id": "1.3",
                     "name": "Elektrische und elektronische Bauteile",
-                    "shortname": null,
                     "prefix": "TC",
                     "children": [
                         {
                             "uuid": "9ca92696-fbeb-54bc-b6ec-5c5de6d0960d",
                             "id": "1.3.1",
                             "name": "Widerstand",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -6963,7 +6888,6 @@
                             "uuid": "421009eb-9b3e-555d-904d-2daafdc7d1bf",
                             "id": "1.3.2",
                             "name": "Kondensator",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -7081,7 +7005,6 @@
                             "uuid": "332cde3e-aef3-5e3c-a75e-9022c5c2d18c",
                             "id": "1.3.3",
                             "name": "Spule",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -7319,7 +7242,6 @@
                             "uuid": "cc9aac36-1a74-50e1-a761-b7e9d04fc72b",
                             "id": "1.3.4",
                             "name": "\u00dcbertrager und Transformatoren",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -7413,7 +7335,6 @@
                             "uuid": "74565570-5fc3-539b-97cf-677330018b8e",
                             "id": "1.3.5",
                             "name": "Diode",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -7759,7 +7680,6 @@
                             "uuid": "8233ae5f-93af-52d3-8b67-0e3ff8e89f87",
                             "id": "1.3.6",
                             "name": "Transistor",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -8081,7 +8001,6 @@
                             "uuid": "59ab8260-c918-586b-b3e9-4f68cd4beee8",
                             "id": "1.3.7",
                             "name": "Einfache digitale und analoge Schaltkreise und sonstige Bauelemente",
-                            "shortname": null,
                             "prefix": "TC",
                             "children": [],
                             "questions": [
@@ -8358,14 +8277,12 @@
                     "uuid": "39deb271-0d70-5558-8ac2-d75c44f91765",
                     "id": "1.4",
                     "name": "Elektronische Schaltungen und deren Merkmale",
-                    "shortname": null,
                     "prefix": "TD",
                     "children": [
                         {
                             "uuid": "8b2c3d6c-b9bf-593f-b931-d3a6f397516a",
                             "id": "1.4.1",
                             "name": "Reihen- und Parallelschaltung von Widerst\u00e4nden, Spulen und Kondensatoren",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -8663,7 +8580,6 @@
                             "uuid": "6561c923-1fca-5792-96a7-1ce8b00e967a",
                             "id": "1.4.2",
                             "name": "Schwingkreise und Filter",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -9081,7 +8997,6 @@
                             "uuid": "4e8947f2-557e-5e78-b820-2fa7a4bfba88",
                             "id": "1.4.3",
                             "name": "Stromversorgung",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -9355,7 +9270,6 @@
                             "uuid": "f7e831e4-3bad-56b5-92d8-5b1d7fa66a47",
                             "id": "1.4.4",
                             "name": "Verst\u00e4rker",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -9749,7 +9663,6 @@
                             "uuid": "3ebd133b-099e-516a-ad77-b19716078ab7",
                             "id": "1.4.5",
                             "name": "Modulator/Demodulator",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -9939,7 +9852,6 @@
                             "uuid": "1df35097-4d6a-5ca3-9eb4-9865857de474",
                             "id": "1.4.6",
                             "name": "Oszillator",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -10129,7 +10041,6 @@
                             "uuid": "48fabdee-0d83-5e00-b565-2532b05a1ee2",
                             "id": "1.4.7",
                             "name": "Phasenregelkreise",
-                            "shortname": null,
                             "prefix": "TD",
                             "children": [],
                             "questions": [
@@ -10226,14 +10137,12 @@
                     "uuid": "b24db199-e0ea-5c94-99be-37d800fbfb1e",
                     "id": "1.5",
                     "name": "Analoge und digitale Modulationsverfahren",
-                    "shortname": null,
                     "prefix": "TE",
                     "children": [
                         {
                             "uuid": "e4fed290-c2b8-5b73-9f21-5cf9fe1c6771",
                             "id": "1.5.1",
                             "name": "Amplitudenmodulation",
-                            "shortname": null,
                             "prefix": "TE",
                             "children": [],
                             "questions": [
@@ -10399,7 +10308,6 @@
                             "uuid": "55ed473e-8d1a-5418-83ca-57ac6706234c",
                             "id": "1.5.2",
                             "name": "Frequenzmodulation",
-                            "shortname": null,
                             "prefix": "TE",
                             "children": [],
                             "questions": [
@@ -10613,7 +10521,6 @@
                             "uuid": "82ace8c1-4be1-5220-8a56-2d80a6c5a678",
                             "id": "1.5.3",
                             "name": "Text- und Daten- und Bild\u00fcbertragung",
-                            "shortname": null,
                             "prefix": "TE",
                             "children": [],
                             "questions": [
@@ -10986,14 +10893,12 @@
                     "uuid": "dbdd66d5-96eb-57e0-8a16-27f09f291fbf",
                     "id": "1.6",
                     "name": "Funk-Empf\u00e4nger",
-                    "shortname": null,
                     "prefix": "TF",
                     "children": [
                         {
                             "uuid": "11c30b30-47d8-5a54-9098-aa626b2b3b79",
                             "id": "1.6.1",
                             "name": "Einfach- und Doppelsuperhet-Empf\u00e4nger",
-                            "shortname": null,
                             "prefix": "TF",
                             "children": [],
                             "questions": [
@@ -11087,7 +10992,6 @@
                             "uuid": "42cd5441-eb45-5064-8e97-6cc1763d8260",
                             "id": "1.6.2",
                             "name": "Blockschaltbilder",
-                            "shortname": null,
                             "prefix": "TF",
                             "children": [],
                             "questions": [
@@ -11265,7 +11169,6 @@
                             "uuid": "060371d3-4f81-5527-9e42-50385c572f37",
                             "id": "1.6.3",
                             "name": "Betrieb und Funktionsweise einzelner Stufen",
-                            "shortname": null,
                             "prefix": "TF",
                             "children": [],
                             "questions": [
@@ -11635,7 +11538,6 @@
                             "uuid": "1933e7aa-de8f-55dd-9dbf-0a33d3cc877c",
                             "id": "1.6.4",
                             "name": "Empf\u00e4ngermerkmale",
-                            "shortname": null,
                             "prefix": "TF",
                             "children": [],
                             "questions": [
@@ -12149,7 +12051,6 @@
                             "uuid": "021b6597-e152-5f8a-869f-50a9b30798fb",
                             "id": "1.6.5",
                             "name": "Digitale Signalverarbeitung",
-                            "shortname": null,
                             "prefix": "TF",
                             "children": [],
                             "questions": [
@@ -12234,14 +12135,12 @@
                     "uuid": "a70da106-5bc3-5128-80bb-8f902bd72c85",
                     "id": "1.7",
                     "name": "Sender",
-                    "shortname": null,
                     "prefix": "TG",
                     "children": [
                         {
                             "uuid": "557f2eb4-cd0b-5951-ae11-6ad6d640e53a",
                             "id": "1.7.1",
                             "name": "Blockschaltbilder",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -12383,7 +12282,6 @@
                             "uuid": "b0ff23a9-762d-5de0-958b-4bc665d8e3a0",
                             "id": "1.7.2",
                             "name": "Betrieb und Funktionsweise einzelner Stufen",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -12873,7 +12771,6 @@
                             "uuid": "110fab64-1d8d-5212-8b61-3ff200ee68f5",
                             "id": "1.7.3",
                             "name": "Betrieb und Funktionsweise von HF-Leistungsverst\u00e4rkern",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -13099,7 +12996,6 @@
                             "uuid": "076f1027-eae5-5abb-bfcb-7cba24de332f",
                             "id": "1.7.4",
                             "name": "Betrieb und Funktionsweise von HF-Transceivern",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -13181,7 +13077,6 @@
                             "uuid": "9226c594-3868-5b2a-a180-2d8d81cb6476",
                             "id": "1.7.5",
                             "name": "Unerw\u00fcnschte Aussendungen",
-                            "shortname": null,
                             "prefix": "TG",
                             "children": [],
                             "questions": [
@@ -13494,14 +13389,12 @@
                     "uuid": "eb949a96-1a09-5a71-b795-25050eece8a3",
                     "id": "1.8",
                     "name": "Antennen und \u00dcbertragungsleitungen",
-                    "shortname": null,
                     "prefix": "TH",
                     "children": [
                         {
                             "uuid": "f33b4e54-988f-5aeb-8273-a3b2b922925a",
                             "id": "1.8.1",
                             "name": "Antennen",
-                            "shortname": null,
                             "prefix": "TH",
                             "children": [],
                             "questions": [
@@ -14231,7 +14124,6 @@
                             "uuid": "a0c4937f-578c-50a4-940e-34b5f75ded0a",
                             "id": "1.8.2",
                             "name": "Antennenmerkmale",
-                            "shortname": null,
                             "prefix": "TH",
                             "children": [],
                             "questions": [
@@ -14625,7 +14517,6 @@
                             "uuid": "7c32c571-00ad-51dc-b5fd-17f8000d1172",
                             "id": "1.8.3",
                             "name": "\u00dcbertragungsleitungen",
-                            "shortname": null,
                             "prefix": "TH",
                             "children": [],
                             "questions": [
@@ -15007,7 +14898,6 @@
                             "uuid": "ce3bd196-5160-5e2f-a6b0-af3e82189df3",
                             "id": "1.8.4",
                             "name": "Anpassung, Transformation und Symmetrierung",
-                            "shortname": null,
                             "prefix": "TH",
                             "children": [],
                             "questions": [
@@ -15296,14 +15186,12 @@
                     "uuid": "a9efd1ac-1704-5ff1-8ba2-c0d2e25cd3fa",
                     "id": "1.9",
                     "name": "Wellenausbreitung, Ionosph\u00e4re",
-                    "shortname": null,
                     "prefix": "TI",
                     "children": [
                         {
                             "uuid": "f4485fd8-da46-5b41-9bf2-f77f72eed7e7",
                             "id": "1.9.1",
                             "name": "Ionosph\u00e4re",
-                            "shortname": null,
                             "prefix": "TI",
                             "children": [],
                             "questions": [
@@ -15493,7 +15381,6 @@
                             "uuid": "c29699d8-0015-50b4-aa2b-72aa3c68940a",
                             "id": "1.9.2",
                             "name": "Kurzwellenausbreitung",
-                            "shortname": null,
                             "prefix": "TI",
                             "children": [],
                             "questions": [
@@ -15971,7 +15858,6 @@
                             "uuid": "26cf2bde-b98a-5ad7-a93c-00b651079f1c",
                             "id": "1.9.3",
                             "name": "Wellenausbreitung oberhalb 30 MHz",
-                            "shortname": null,
                             "prefix": "TI",
                             "children": [],
                             "questions": [
@@ -16188,14 +16074,12 @@
                     "uuid": "2b2554dc-9ffc-5c54-abec-1bac01d24a6e",
                     "id": "1.10",
                     "name": "Messungen und Messinstrumente",
-                    "shortname": null,
                     "prefix": "TJ",
                     "children": [
                         {
                             "uuid": "edd21362-514f-5539-896a-d0e4d034a989",
                             "id": "1.10.1",
                             "name": "Strom- und Spannungsmesser",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -16409,7 +16293,6 @@
                             "uuid": "2fd2b8b2-86a5-5d1e-a38f-cfce9380d932",
                             "id": "1.10.2",
                             "name": "Dipmeter",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -16551,7 +16434,6 @@
                             "uuid": "8ea1eb48-f530-584a-9a0c-c26cd70db35a",
                             "id": "1.10.3",
                             "name": "Oszilloskop",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -16621,7 +16503,6 @@
                             "uuid": "15e36bb2-aeb8-5bf5-8f41-2e88d396cfc9",
                             "id": "1.10.4",
                             "name": "Stehwellenmessger\u00e4t",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -16703,7 +16584,6 @@
                             "uuid": "50e9648a-10b2-5b1e-bcf4-733bdb1542e2",
                             "id": "1.10.5",
                             "name": "Frequenzz\u00e4hler",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -16833,7 +16713,6 @@
                             "uuid": "e8c009ec-8548-5d52-ad50-d1380ff7ade4",
                             "id": "1.10.6",
                             "name": "Absorptionsfrequenzmesser",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -16915,7 +16794,6 @@
                             "uuid": "99339c66-d955-5dea-92b5-09f12245b8dd",
                             "id": "1.10.7",
                             "name": "Sonstige Messger\u00e4te und Messmittel",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -17021,7 +16899,6 @@
                             "uuid": "e381a820-6e8f-513f-afcf-df9c1a64b5d2",
                             "id": "1.10.8",
                             "name": "Durchf\u00fchrung von Messungen",
-                            "shortname": null,
                             "prefix": "TJ",
                             "children": [],
                             "questions": [
@@ -17466,14 +17343,12 @@
                     "uuid": "15b865aa-0418-5232-a971-f991a38f2b6c",
                     "id": "1.11",
                     "name": "St\u00f6remissionen, St\u00f6rfestigkeit, Schutzanforderungen, Ursachen, Abhilfe",
-                    "shortname": null,
                     "prefix": "TK",
                     "children": [
                         {
                             "uuid": "50424c9e-ae60-5e27-8a6b-af9377009bea",
                             "id": "1.11.1",
                             "name": "St\u00f6rungen elektronischer Ger\u00e4te",
-                            "shortname": null,
                             "prefix": "TK",
                             "children": [],
                             "questions": [
@@ -17723,7 +17598,6 @@
                             "uuid": "78661c6e-12e4-5237-9813-b0f88e8c133e",
                             "id": "1.11.2",
                             "name": "Ursachen f\u00fcr St\u00f6rungen und st\u00f6rende Beeinflussungen",
-                            "shortname": null,
                             "prefix": "TK",
                             "children": [],
                             "questions": [
@@ -17997,7 +17871,6 @@
                             "uuid": "34bdb671-af99-5693-af7a-c7e8515487d9",
                             "id": "1.11.3",
                             "name": "Ma\u00dfnahmen gegen St\u00f6rungen und st\u00f6rende Beeinflussungen",
-                            "shortname": null,
                             "prefix": "TK",
                             "children": [],
                             "questions": [
@@ -18226,14 +18099,12 @@
                     "uuid": "aea90388-fde7-56c5-85ca-c9b6736062b6",
                     "id": "1.12",
                     "name": "Elektromagnetische Vertr\u00e4glichkeit und deren Anwendung, Personen- und Sachschutz",
-                    "shortname": null,
                     "prefix": "TL",
                     "children": [
                         {
                             "uuid": "8573fc3e-bcc5-5028-9544-141c3a2adf73",
                             "id": "1.12.1",
                             "name": "St\u00f6rfestigkeit",
-                            "shortname": null,
                             "prefix": "TL",
                             "children": [],
                             "questions": [
@@ -18279,7 +18150,6 @@
                             "uuid": "f7f1fffb-d9f8-59fe-a41a-f765dead94aa",
                             "id": "1.12.2",
                             "name": "Schutz von Personen",
-                            "shortname": null,
                             "prefix": "TL",
                             "children": [],
                             "questions": [
@@ -18505,7 +18375,6 @@
                             "uuid": "1f0bd116-50d1-5353-be47-c18958ff8224",
                             "id": "1.12.3",
                             "name": "Sicherheit",
-                            "shortname": null,
                             "prefix": "TL",
                             "children": [],
                             "questions": [
@@ -18605,14 +18474,13 @@
             "uuid": "bf36148f-24d6-5b41-8a17-d4be3ee83c12",
             "id": "2",
             "name": "Pr\u00fcfungsfragen im Pr\u00fcfungsteil \u201eBetriebliche Kenntnisse\u201c",
-            "shortname": "Betriebstechnik",
             "prefix": null,
+            "shortname": "Betriebstechnik",
             "children": [
                 {
                     "uuid": "fa3b8498-85d3-5320-8578-b06621b6395d",
                     "id": "2.1",
                     "name": "Internationales Buchstabieralphabet",
-                    "shortname": null,
                     "prefix": "BA",
                     "children": [],
                     "questions": [
@@ -18754,14 +18622,12 @@
                     "uuid": "0e05c62a-f9e1-5d15-831f-eae6210ea92a",
                     "id": "2.2",
                     "name": "Betriebliche Abk\u00fcrzungen, Q-Schl\u00fcssel, Signalbeurteilung, Sendearten",
-                    "shortname": null,
                     "prefix": "BB",
                     "children": [
                         {
                             "uuid": "253ca922-f837-5e58-be26-48ef3f2dd8b6",
                             "id": "2.2.1",
                             "name": "Betriebliche Abk\u00fcrzungen",
-                            "shortname": null,
                             "prefix": "BB",
                             "children": [],
                             "questions": [
@@ -18903,7 +18769,6 @@
                             "uuid": "c47b9ff6-614a-5375-a103-007d4810f61a",
                             "id": "2.2.2",
                             "name": "Q-Schl\u00fcssel",
-                            "shortname": null,
                             "prefix": "BB",
                             "children": [],
                             "questions": [
@@ -19021,7 +18886,6 @@
                             "uuid": "bcfe3b34-e0ac-502f-9d03-af2bd0f6618a",
                             "id": "2.2.3",
                             "name": "Signalbeurteilung",
-                            "shortname": null,
                             "prefix": "BB",
                             "children": [],
                             "questions": [
@@ -19175,7 +19039,6 @@
                             "uuid": "dbbdbf08-7bd5-5fd3-b8e7-7b52d6134909",
                             "id": "2.2.4",
                             "name": "Bezeichnung der Aussendungen (Sendearten)",
-                            "shortname": null,
                             "prefix": "BB",
                             "children": [],
                             "questions": [
@@ -19272,14 +19135,12 @@
                     "uuid": "d64be708-d666-51f9-ab6b-8d107cedca90",
                     "id": "2.3",
                     "name": "Frequenzbereiche und IARU-Bandpl\u00e4ne",
-                    "shortname": null,
                     "prefix": "BC",
                     "children": [
                         {
                             "uuid": "de52098f-a95d-5c97-87a5-4dfbd61e6775",
                             "id": "2.3.1",
                             "name": "Frequenzbereiche des Amateurfunkdienstes",
-                            "shortname": null,
                             "prefix": "BC",
                             "children": [],
                             "questions": [
@@ -19457,7 +19318,6 @@
                             "uuid": "ffb9e47a-e7b1-53d2-91e2-eac0accbca91",
                             "id": "2.3.2",
                             "name": "IARU-Bandpl\u00e4ne",
-                            "shortname": null,
                             "prefix": "BC",
                             "children": [],
                             "questions": [
@@ -19710,14 +19570,12 @@
                     "uuid": "c4724e8c-fdcf-5bbe-8f35-5941256f9556",
                     "id": "2.4",
                     "name": "Rufzeichen, Landeskenner",
-                    "shortname": null,
                     "prefix": "BD",
                     "children": [
                         {
                             "uuid": "a4f5ba40-0f47-5609-9375-1925621f51bb",
                             "id": "2.4.1",
                             "name": "Deutsche Rufzeichen",
-                            "shortname": null,
                             "prefix": "BD",
                             "children": [],
                             "questions": [
@@ -19907,7 +19765,6 @@
                             "uuid": "bdd39ef4-1d82-5704-8845-1a128caa31f5",
                             "id": "2.4.2",
                             "name": "Europ\u00e4ische Landeskenner",
-                            "shortname": null,
                             "prefix": "BD",
                             "children": [],
                             "questions": [
@@ -20037,7 +19894,6 @@
                             "uuid": "f76a5e92-8853-5d03-80cc-a4e9def4e674",
                             "id": "2.4.3",
                             "name": "Internationale Landeskenner",
-                            "shortname": null,
                             "prefix": "BD",
                             "children": [],
                             "questions": [
@@ -20158,14 +20014,12 @@
                     "uuid": "cd7f1f09-6187-5d7b-8f1a-348c39f8b995",
                     "id": "2.5",
                     "name": "Abwicklung des Amateurfunkverkehrs",
-                    "shortname": null,
                     "prefix": "BE",
                     "children": [
                         {
                             "uuid": "f5c86250-f924-5de2-ad00-739b2d4d0869",
                             "id": "2.5.1",
                             "name": "Betriebsabwicklung, allgemein",
-                            "shortname": null,
                             "prefix": "BE",
                             "children": [],
                             "questions": [
@@ -20403,7 +20257,6 @@
                             "uuid": "07d463af-4acb-5bdf-a858-9ab32274d899",
                             "id": "2.5.2",
                             "name": "Betriebsabwicklung, speziell",
-                            "shortname": null,
                             "prefix": "BE",
                             "children": [],
                             "questions": [
@@ -20605,7 +20458,6 @@
                             "uuid": "b0b7584c-dd0d-5190-91c6-8492154c2396",
                             "id": "2.5.3",
                             "name": "Betriebsabwicklung bei besonderen Betriebsarten",
-                            "shortname": null,
                             "prefix": "BE",
                             "children": [],
                             "questions": [
@@ -20735,7 +20587,6 @@
                             "uuid": "79de1efe-51fd-535e-ad8d-b8778c21c79b",
                             "id": "2.5.4",
                             "name": "Relaisfunkstellen, Transponder, Satelliten,",
-                            "shortname": null,
                             "prefix": "BE",
                             "children": [],
                             "questions": [
@@ -20880,7 +20731,6 @@
                     "uuid": "56e93aac-03d6-55e1-9891-b32dfb4eebaa",
                     "id": "2.6",
                     "name": "Notfunkverkehr und Nachrichtenverkehr bei Naturkatastrophen",
-                    "shortname": null,
                     "prefix": "BF",
                     "children": [],
                     "questions": [
@@ -21010,7 +20860,6 @@
                     "uuid": "2dd324ad-2642-5b00-985f-a282ca929ab3",
                     "id": "2.7",
                     "name": "Stationstagebuch, QSL-Karte",
-                    "shortname": null,
                     "prefix": "BG",
                     "children": [],
                     "questions": [
@@ -21203,21 +21052,19 @@
             "uuid": "67e4e95f-4da4-5836-af4d-87adfd5fbe63",
             "id": "3",
             "name": "Pr\u00fcfungsfragen im Pr\u00fcfungsteil \u201eKenntnisse von Vorschriften\u201c",
-            "shortname": "Vorschriften",
             "prefix": null,
+            "shortname": "Vorschriften",
             "children": [
                 {
                     "uuid": "21fab0f6-8e17-5316-aad9-c6edee25babe",
                     "id": "3.1",
                     "name": "Vollzugsordnung f\u00fcr den Funkdienst der Internationalen Fernmeldeunion (ITU)",
-                    "shortname": null,
                     "prefix": "VA",
                     "children": [
                         {
                             "uuid": "e25e7ca2-c920-5d43-8e99-37bcfc67eec3",
                             "id": "3.1.1",
                             "name": "Definition des Amateurfunkdienstes und des Amateurfunkdienstes \u00fcber Satelliten",
-                            "shortname": null,
                             "prefix": "VA",
                             "children": [],
                             "questions": [
@@ -21275,7 +21122,6 @@
                             "uuid": "248f6ac0-62e3-585c-85a5-1c4a7dab8a87",
                             "id": "3.1.2",
                             "name": "Definition der Amateurfunkstelle",
-                            "shortname": null,
                             "prefix": "VA",
                             "children": [],
                             "questions": [
@@ -21345,7 +21191,6 @@
                             "uuid": "f4ae9b88-4ec7-5b06-92a1-f8e8d00029a7",
                             "id": "3.1.3",
                             "name": "Artikel 25",
-                            "shortname": null,
                             "prefix": "VA",
                             "children": [],
                             "questions": [
@@ -21403,7 +21248,6 @@
                             "uuid": "d6d171a4-fdc4-59e6-a781-ce50b84db032",
                             "id": "3.1.4",
                             "name": "Weitere Regelungen",
-                            "shortname": null,
                             "prefix": "VA",
                             "children": [],
                             "questions": [
@@ -21524,7 +21368,6 @@
                     "uuid": "80d514f7-8d90-55b1-9c0c-40ac68808dac",
                     "id": "3.2",
                     "name": "Regelungen der CEPT (Europ\u00e4ische Konferenz der Verwaltungen f\u00fcr Post und Telekommunikation)",
-                    "shortname": null,
                     "prefix": "VB",
                     "children": [],
                     "questions": [
@@ -21834,14 +21677,12 @@
                     "uuid": "440f0a34-235f-539f-85f7-511a83e16c16",
                     "id": "3.3",
                     "name": "Nationale Gesetze, Vorschriften und Bestimmungen",
-                    "shortname": null,
                     "prefix": null,
                     "children": [
                         {
                             "uuid": "9d2dac2a-d0ce-5560-8f75-c6e16922a58e",
                             "id": "3.3.1",
                             "name": "Amateurfunkgesetz (AFuG)",
-                            "shortname": null,
                             "prefix": "VC",
                             "children": [],
                             "questions": [
@@ -22403,14 +22244,12 @@
                             "uuid": "7cf7e494-61ca-529d-b6d4-49be9c547cc6",
                             "id": "3.3.2",
                             "name": "Amateurfunkverordnung (AFuV)",
-                            "shortname": null,
                             "prefix": "VD",
                             "children": [
                                 {
                                     "uuid": "b5b22e61-46a7-55d4-b717-20cfc91077ee",
                                     "id": "3.3.2.1",
                                     "name": "Allgemeines",
-                                    "shortname": null,
                                     "prefix": "VD",
                                     "children": [],
                                     "questions": [
@@ -22768,7 +22607,6 @@
                                     "uuid": "bc597b35-8f7f-5dcf-9725-7a8f6dc6aaad",
                                     "id": "3.3.2.2",
                                     "name": "Rufzeichen, Rufzeichenanwendung",
-                                    "shortname": null,
                                     "prefix": "VD",
                                     "children": [],
                                     "questions": [
@@ -23054,7 +22892,6 @@
                                     "uuid": "2b1f8ac6-268d-5928-8740-025f019fb195",
                                     "id": "3.3.2.3",
                                     "name": "Ausbildungsfunkbetrieb",
-                                    "shortname": null,
                                     "prefix": "VD",
                                     "children": [],
                                     "questions": [
@@ -23172,7 +23009,6 @@
                                     "uuid": "7e25eb1d-5a67-5afd-8492-3ee23acb1cec",
                                     "id": "3.3.2.4",
                                     "name": "Klubstationen",
-                                    "shortname": null,
                                     "prefix": "VD",
                                     "children": [],
                                     "questions": [
@@ -23314,7 +23150,6 @@
                                     "uuid": "d808921a-c81b-5b19-8aa0-36c64f8fe97f",
                                     "id": "3.3.2.5",
                                     "name": "Relaisfunkstellen und Funkbaken",
-                                    "shortname": null,
                                     "prefix": "VD",
                                     "children": [],
                                     "questions": [
@@ -23459,7 +23294,6 @@
                             "uuid": "f2135776-e64d-59b1-a34a-7a9a13133399",
                             "id": "3.3.3",
                             "name": "Frequenzbereiche und Frequenznutzungsparameter f\u00fcr den Amateurfunk",
-                            "shortname": null,
                             "prefix": "VE",
                             "children": [],
                             "questions": [
@@ -24105,7 +23939,6 @@
                             "uuid": "38975e50-a397-5274-8f52-5e96ade037ab",
                             "id": "3.3.4",
                             "name": "Telekommunikationsgesetz (TKG)",
-                            "shortname": null,
                             "prefix": "VF",
                             "children": [],
                             "questions": [
@@ -24223,7 +24056,6 @@
                             "uuid": "b9d5105c-e4ee-5eb1-92de-a96c98a56e97",
                             "id": "3.3.5",
                             "name": "Gesetz \u00fcber die elektromagnetische Vertr\u00e4glichkeit von Ger\u00e4ten (EMVG), St\u00f6rf\u00e4lle",
-                            "shortname": null,
                             "prefix": "VG",
                             "children": [],
                             "questions": [
@@ -24389,7 +24221,6 @@
                             "uuid": "37f145b0-cda4-5cfd-8334-667240f862f6",
                             "id": "3.3.6",
                             "name": "Gesetz \u00fcber Funkanlagen und Telekommunikationsendeinrichtungen (FTEG)",
-                            "shortname": null,
                             "prefix": "VH",
                             "children": [],
                             "questions": [
@@ -24459,7 +24290,6 @@
                             "uuid": "42006730-c71a-56a0-b5ed-605d88c10c7d",
                             "id": "3.3.7",
                             "name": "EMVU (elektromagnetische Umweltvertr\u00e4glichkeit)/BEMFV (Verordnung \u00fcber das Nachweisverfahren zur Begrenzung elektromagnetischer Felder)",
-                            "shortname": null,
                             "prefix": "VI",
                             "children": [],
                             "questions": [
@@ -24745,7 +24575,6 @@
                             "uuid": "1c2472a3-7d7b-5c34-83cf-54ef088f9150",
                             "id": "3.3.8",
                             "name": "Sicherheitsvorschriften",
-                            "shortname": null,
                             "prefix": "VJ",
                             "children": [],
                             "questions": [
@@ -24791,7 +24620,6 @@
                             "uuid": "ba387d37-48ba-5493-860b-f64b885f9bc8",
                             "id": "3.3.9",
                             "name": "Sonstiges",
-                            "shortname": null,
                             "prefix": "VK",
                             "children": [],
                             "questions": [

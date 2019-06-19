@@ -24,20 +24,13 @@ describe("QuestionManager test", function () {
 
     it("Load questions", function () {
         let qm = new question_manager.QuestionManager();
-        qm.readQuestions("assets/TechnikE.json");
-        let questionCount = qm.countAllQuestions();
-        expect(questionCount).to.not.equal(2);
-        expect(qm.getDatabase().length).to.not.equal(0);
-        qm.readQuestions("assets/BetriebstechnikVorschriften.json");
-        expect(qm.countAllQuestions() > questionCount).to.equal(true);
+        qm.readQuestions("assets/Fragenkatalog.json");
+        expect(qm.countAllQuestions() > 100).to.equal(true);
     });
 
     it("Unique UUIDs", function () {
         let qm = new question_manager.QuestionManager();
-        qm.readQuestions("assets/TechnikE.json");
-        expect(qm.countAllQuestions()).to.equal(377);
-        qm.readQuestions("assets/BetriebstechnikVorschriften.json");
-        expect(qm.countAllQuestions()).to.equal(863);
+        qm.readQuestions("assets/Fragenkatalog.json");
         let database = qm.getDatabase();
         let all_uuids = getUUIDs(database);
         let found_uuids = [];
@@ -49,12 +42,23 @@ describe("QuestionManager test", function () {
 
     it("Find question lists", function () {
         let qm = new question_manager.QuestionManager();
-        qm.readQuestions("assets/TechnikE.json");
-        qm.readQuestions("assets/BetriebstechnikVorschriften.json");
+        qm.readQuestions("assets/Fragenkatalog.json");
 
         expect(qm.getQuestionList("FooBar")).to.equal(null);
         // expect(qm.getQuestionList("a240057a-83a1-5aef-ad10-2ad669385706").length).to.equal(1);
         // expect(qm.getQuestionList("1dc54820-1387-5203-825f-96540614bbb9").length).to.equal(11);
-        expect(qm.getQuestionList("").length).to.equal(863);
+        // expect(qm.getQuestionList("").length).to.equal(863);
+    });
+
+    it("Get solution URL", function() {
+        const qm = new question_manager.QuestionManager();
+        qm.readQuestions("assets/Fragenkatalog.json");
+
+        const questions = qm.getQuestionList("f05caa00-97b7-571c-9ec2-40b3c3f701ef")
+        expect(questions.length).to.equal(1);
+
+        const question = questions[0];
+        const url = qm.getSolutionLink(question.uuid);
+        expect(url).to.equal('lichtblicke/E/TA202.pdf');
     });
 });
