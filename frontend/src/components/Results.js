@@ -98,7 +98,7 @@ class Results extends React.Component {
                 <Button as='a' primary icon labelPosition="left"
                         href={this.props.appState.roomState.solutionURL} target='_blank'
                         rel="noopener noreferrer">
-                    <Button.Content visible>Link zur Lösung</Button.Content>
+                    <Button.Content visible>Lichtblicke zur Frage</Button.Content>
                     <Icon name="lightbulb outline"/>
                 </Button>
             </React.Fragment>}
