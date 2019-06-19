@@ -164,12 +164,17 @@ ServerManager.prototype.sendRoomStatus = function (room) {
             });
             break;
         case rm.ROOM_STATE.RESULTS:
+            let solutionURL = null;
+            if (room.currentQuestion) {
+                solutionURL = this.questionManager.getSolutionLink(room.currentQuestion.uuid);
+            }
             msg = JSON.stringify({
                 RoomState: {
                     state: room.state,
                     remainingQuestions: remainingQuestions,
                     initialQuestionLength: room.initialQueueLength,
                     question: room.currentQuestion,
+                    solutionURL: solutionURL,
                     results: {
                         totalUsers: room.members.length - 1,
                         correctAnswer: room.correctAnswer,

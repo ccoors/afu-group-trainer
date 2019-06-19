@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Chart from 'react-apexcharts';
 
-import {Header, Icon} from 'semantic-ui-react';
+import {Button, Header, Icon} from 'semantic-ui-react';
 import QuestionRORenderer from './QuestionRenderer/QuestionRORenderer';
 
 class Results extends React.Component {
@@ -90,10 +90,18 @@ class Results extends React.Component {
                 height="300"
             />
             {this.props.question && this.props.question.uuid &&
-            <div><p>Die Frage lautete:</p>
+            <React.Fragment><p>Die Frage lautete:</p>
                 <QuestionRORenderer question={this.props.question}
                                     selectedAnswer={this.props.selectedAnswer}
-                                    correctAnswer={results.correctAnswer}/></div>}
+                                    correctAnswer={results.correctAnswer}/></React.Fragment>}
+            {this.props.appState.roomState.solutionURL && <React.Fragment>
+                <Button as='a' primary icon labelPosition="left"
+                        href={this.props.appState.roomState.solutionURL} target='_blank'
+                        rel="noopener noreferrer">
+                    <Button.Content visible>Link zur Lösung</Button.Content>
+                    <Icon name="lightbulb outline"/>
+                </Button>
+            </React.Fragment>}
         </div>;
     }
 }

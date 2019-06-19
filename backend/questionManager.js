@@ -46,6 +46,43 @@ QuestionManager.prototype.getQuestions = function (category) {
     return questions;
 };
 
+QuestionManager.prototype.getParent = function (root, uuid) {
+    if (root.questions) {
+        const question = root.questions.find(c => c.uuid === uuid);
+        if (question) {
+            return root;
+        }
+    }
+
+    if (root.children) {
+        const child = root.children.find(c => c.uuid === uuid);
+        if (child) {
+            return root;
+        }
+
+        const results = root.children.map(c => this.getParent(c, uuid)).filter(c => c);
+        if (results.length > 0) {
+            return results[0];
+        }
+    }
+
+    return null;
+};
+
+QuestionManager.prototype.getSolutionLink = function (question_uuid) {
+    const question = this.findByUUID(null, question_uuid);
+    if (!question) return null;
+    let parent = this.getParent(this.getDatabase(), question_uuid);
+    while (parent && !parent.hasOwnProperty('solution_url')) {
+        parent = this.getParent(this.getDatabase(), parent.uuid);
+    }
+
+    if (parent && parent.hasOwnProperty('solution_url')) {
+        return parent.solution_url.replace("$ID$", question.id);
+    }
+    return null;
+};
+
 QuestionManager.prototype.findByUUID = function (node, uuid) {
     if (!node) {
         node = this.root_node;
