@@ -14,6 +14,7 @@ Public versions
 - Fix a bug that makes the Edge browser reload the page on various occasions
 - Fix a bug that prevents the password box from being shown on certain occasions
 - Solutions for technical questions can now be shown on results page
+- New logo
 
 0.5.0 (2019-06-08)
 ------------------
