@@ -19,7 +19,7 @@ class App extends Component {
 
                 <MainContent {...this.props}/>
                 <div className='fillContent'/>
-                <AppFooter version="0.5.0" footerLink={this.props.footerLink}/>
+                <AppFooter version="0.5.1" footerLink={this.props.footerLink}/>
             </MathJax.Provider>
         );
     }
