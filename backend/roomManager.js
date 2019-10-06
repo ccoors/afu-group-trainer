@@ -51,6 +51,7 @@ RoomManager.prototype.addRoom = function (roomName, user, password) {
         currentQuestion: null,
         correctAnswer: -1,
         results: [],
+        previousQuestions: [],
     };
 
     this.rooms.push(newRoom);
@@ -68,6 +69,7 @@ RoomManager.prototype.startQuestions = function (room, questions) {
     }
     room.currentQuestion = null;
     room.correctAnswer = -1;
+    room.previousQuestions = [];
     this.nextQuestion(room);
 };
 
@@ -92,6 +94,11 @@ RoomManager.prototype.nextQuestion = function (room) {
     });
     if (Array.isArray(room.queue)) {
         if (room.queue.length > 0) {
+            if (room.currentQuestion) {
+                room.previousQuestions.push(Object.assign({
+                    correctAnswer: room.correctAnswer
+                }, room.currentQuestion));
+            }
             room.currentQuestion = room.queue.shift();
             let correctAnswer = room.currentQuestion.answers[0];
             util.shuffle(room.currentQuestion.answers);

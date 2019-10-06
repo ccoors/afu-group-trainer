@@ -85,6 +85,9 @@ Vom Server
             outdated: Bool
             answers: Array<String>[4]
         }
+        previousQuestions: Array<Question + {
+            correctAnswer: Int (0 - 3)
+        }>[?]
         userState: {
             selected: Int
             total: Int

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {Button, Container, Header, Icon, Segment} from 'semantic-ui-react';
+import {Button, Container, Header, Icon, Modal, Segment} from 'semantic-ui-react';
 
 import {endQuestions, leaveRoom, nextQuestion, questionSettings, showResults, startQuestions} from '../../util/actions';
 import {generateEmptyQuestion, scrollToTop} from '../../util/util';
@@ -12,6 +12,7 @@ import QuestionRORenderer from '../QuestionRenderer/QuestionRORenderer'
 import Results from '../Results';
 import QuestionSettings from './QuestionSettings';
 import QuestionTree from './QuestionTree';
+import {PreviousQuestionListRenderer} from "../LoggedIn/QuestionListRenderer";
 
 class RoomMaster extends React.Component {
     constructor(props) {
@@ -24,12 +25,15 @@ class RoomMaster extends React.Component {
             single: false,
 
             selectedTab: 0,
+            previousQuestionsOpen: false,
         };
 
         this.endQuestions = this.endQuestions.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
         this.showResults = this.showResults.bind(this);
         this.startABCDQuestions = this.startABCDQuestions.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.openModal = this.openModal.bind(this);
     }
 
     goToSettings(uuid, single) {
@@ -75,6 +79,18 @@ class RoomMaster extends React.Component {
         this.quickStartQuestions('');
     }
 
+    closeModal() {
+        this.setState({
+            previousQuestionsOpen: false
+        });
+    }
+
+    openModal() {
+        this.setState({
+            previousQuestionsOpen: true
+        });
+    }
+
     selectTab = (e, target) => this.setState({selectedTab: target.activeIndex});
 
     render() {
@@ -84,6 +100,7 @@ class RoomMaster extends React.Component {
         let emptyQuestion = true;
         let question = generateEmptyQuestion();
         let textMode = true;
+        let previousQuestionDisplay = null;
 
         if (this.props.appState.roomState) {
             if (this.props.appState.roomState.question &&
@@ -91,6 +108,36 @@ class RoomMaster extends React.Component {
                 question = this.props.appState.roomState.question;
                 emptyQuestion = false;
                 hasNextQuestion = this.props.appState.roomState.remainingQuestions > 0;
+            }
+            const prevQuestions = this.props.appState.roomState.previousQuestions;
+            if (prevQuestions && prevQuestions.length > 0) {
+                previousQuestionDisplay = (
+                    <React.Fragment>
+                        <Modal open={this.state.previousQuestionsOpen}
+                               onClose={this.closeModal}
+                               size='small'
+                               closeIcon
+                               closeOnEscape={true}
+                               closeOnDimmerClick={true}>
+                            <Modal.Header>Letzte Fragen</Modal.Header>
+                            <Modal.Content scrolling>
+                                <PreviousQuestionListRenderer list={prevQuestions}/>
+                                <div style={{height: '10em'}}/>
+                            </Modal.Content>
+                            <Modal.Actions>
+                                <Button onClick={this.closeModal} positive>
+                                    Schließen
+                                </Button>
+                            </Modal.Actions>
+                        </Modal>
+                        <Button color="grey" icon labelPosition="left"
+                                onClick={this.openModal}>
+                            <Button.Content visible>Letzte Fragen</Button.Content>
+                            <Icon name="history"/>
+                        </Button>
+                        <div style={{height: '1em'}}/>
+                    </React.Fragment>
+                );
             }
         }
 
@@ -108,6 +155,7 @@ class RoomMaster extends React.Component {
                     question={question}
                     correctAnswer={-1}/>
 
+                {previousQuestionDisplay}
                 <Button.Group fluid>
                     <Button color="red" size="small" icon labelPosition="left"
                             onClick={this.endQuestions}>
@@ -130,6 +178,7 @@ class RoomMaster extends React.Component {
         } else if (this.props.appState.roomMasterMode === RoomMasterModes.RESULTS) {
             content = <div>
                 <Results {...this.props} selectedAnswer={-1} question={question}/><br/>
+                {previousQuestionDisplay}
                 {hasNextQuestion && <Button.Group fluid>
                     <Button color="red" size="small" icon labelPosition="left"
                             onClick={this.endQuestions}>

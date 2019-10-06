@@ -156,6 +156,7 @@ ServerManager.prototype.sendRoomStatus = function (room) {
                     remainingQuestions: remainingQuestions,
                     initialQuestionLength: room.initialQueueLength,
                     question: room.currentQuestion,
+                    previousQuestions: room.previousQuestions,
                     userState: {
                         selected: users_selected,
                         total: total_users,
@@ -174,6 +175,7 @@ ServerManager.prototype.sendRoomStatus = function (room) {
                     remainingQuestions: remainingQuestions,
                     initialQuestionLength: room.initialQueueLength,
                     question: room.currentQuestion,
+                    previousQuestions: room.previousQuestions,
                     solutionURL: solutionURL,
                     results: {
                         totalUsers: room.members.length - 1,
