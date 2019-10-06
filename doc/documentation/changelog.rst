@@ -4,7 +4,7 @@ Changelog
 Public versions
 ===============
 
-0.5.1 (Unreleased)
+0.5.1 (2019-10-06)
 ------------------
 - Increase width of a few views for room masters
 - Add polyfills for older browsers
