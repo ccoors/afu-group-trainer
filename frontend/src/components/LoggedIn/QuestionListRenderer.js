@@ -270,7 +270,7 @@ export default QuestionListRenderer;
 
 class PreviousQuestionListRenderer extends React.Component {
     render() {
-        return this.props.list.reverse().map(q => {
+        return this.props.list.slice().reverse().map(q => {
             return <CompactQuestionRenderer question={q} key={q.uuid}/>;
         })
     }

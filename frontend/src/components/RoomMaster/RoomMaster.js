@@ -122,7 +122,7 @@ class RoomMaster extends React.Component {
                             <Modal.Header>Letzte Fragen</Modal.Header>
                             <Modal.Content scrolling>
                                 <PreviousQuestionListRenderer list={prevQuestions}/>
-                                <div style={{height: '10em'}}/>
+                                <div style={{height: '5em'}}/>
                             </Modal.Content>
                             <Modal.Actions>
                                 <Button onClick={this.closeModal} positive>
