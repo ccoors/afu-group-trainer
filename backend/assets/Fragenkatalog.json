@@ -5464,7 +5464,7 @@
                                     "uuid": "679597ac-169d-5c6a-8e39-73af2665f7f4",
                                     "id": "TB103",
                                     "outdated": false,
-                                    "question": "Zwischen den Enden eines Kupferdrahtes mit einem Querschnitt von 0,5 mm messen Sie einen Widerstand von 1,5 Ohm. Wie lang ist der Draht?",
+                                    "question": "Zwischen den Enden eines Kupferdrahtes mit einem Querschnitt von 0,5 mm\u00b2 messen Sie einen Widerstand von 1,5 Ohm. Wie lang ist der Draht?",
                                     "answers": [
                                         "42,1 m",
                                         "25,3 m",
