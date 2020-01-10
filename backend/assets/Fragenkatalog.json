@@ -6512,7 +6512,7 @@
                                     "answers": [
                                         "$\\text{P}_{\\text{EIRP}} = (\\text{P}_{\\text{Sender}}-\\text{P}_{\\text{Verluste}})\\cdot\\text{G}_{\\text{Antenne}}$ bezogen auf einen isotropen Kugelstrahler",
                                         "$\\text{P}_{\\text{EIRP}} = (\\text{P}_{\\text{Sender}}\\cdot\\text{G}_{\\text{Antenne}}-\\text{P}_{\\text{Verluste}})$ bezogen auf einen Halbwellendipol",
-                                        "$\\text{P}_{\\text{EIRP}} = (\\text{P}_{\\text{Sender}}+\\text{P}_{\\text{Verluste}})\\cdot\\text{G}_{\\text{Antenne}}$ bezogen auf den isotropen Kugelstrahlereinen Halbwellendipol",
+                                        "$\\text{P}_{\\text{EIRP}} = (\\text{P}_{\\text{Sender}}+\\text{P}_{\\text{Verluste}})\\cdot\\text{G}_{\\text{Antenne}}$ bezogen auf den isotropen Kugelstrahler",
                                         "$\\text{P}_{\\text{EIRP}} = \\text{P}_{\\text{Sender}}+\\text{P}_{\\text{Verluste}}+\\text{G}_{\\text{Antenne}}$ bezogen auf den Halbwellendipol"
                                     ]
                                 },
@@ -12946,7 +12946,7 @@
                                     "uuid": "1fae216a-9e44-5130-a505-1d2220a75d0a",
                                     "id": "TG315",
                                     "outdated": false,
-                                    "question": "Das folgende Bild zeigt eine HF-Endstufe.<br><img src=\"technik_a/tg_315_q_1.png\"><br>Welche Bedeutung und Funktion haben C1, C2 und L1 ? Wie sind die Bedienkn\u00f6pfe der beiden Kondensatoren an einer Endstufe wahrscheinlich beschriftet?",
+                                    "question": "Das folgende Bild zeigt eine HF-Endstufe.<br><img src=\"technik_a/tg_315_q_1.png\"><br>Welche Bedeutung und Funktion haben C$_1$, C$_2$ und L$_1$? Wie sind die Bedienkn\u00f6pfe der beiden Kondensatoren an einer Endstufe wahrscheinlich beschriftet?",
                                     "answers": [
                                         "An dem Drehknopf f\u00fcr C$_1$ steht \u201eC$_\\text{Plate}$\u201c oder \u201ePlate\u201c, an dem f\u00fcr C$_2$ steht \u201eC$_\\text{Load}$\u201c oder \u201eLoad\u201c. Die drei Bauelemente C$_1$, C$_2$ und L$_1$ bilden zusammen einen so genannten Pi-Tankkreis zur Anpassung der Ausgangsimpedanz der R\u00f6hre an die Antennenimpedanz.",
                                         "An dem Drehknopf f\u00fcr C$_1$ steht \u201eC$_\\text{Load}$\u201c oder \u201eLoad\u201c, an dem f\u00fcr C$_2$ steht \u201eC$_\\text{Plate}$\u201c oder \u201ePlate\u201c. Die drei Bauelemente C$_1$, C$_2$ und L$_1$ bilden zusammen ein abstimmbaren Sperrkreis zur Unterdr\u00fcckung von Harmonischen.",
