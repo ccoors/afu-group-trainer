@@ -157,6 +157,7 @@ ServerManager.prototype.sendRoomStatus = function (room) {
                     initialQuestionLength: room.initialQueueLength,
                     question: room.currentQuestion,
                     previousQuestions: room.previousQuestions,
+                    countdown: (room.countdownInterval ? room.countdown : null),
                     userState: {
                         selected: users_selected,
                         total: total_users,
@@ -317,6 +318,17 @@ ServerManager.prototype.onClientMessage = function (client, data, debug) {
             let room = this.roomManager.getRoomByUser(client);
             if (room) {
                 this.sendRoomStatus(room);
+            }
+        } else if (json.StartCountdown) {
+            let adminRoom = this.roomManager.getRoomByUserAdmin(client);
+            if (client.loggedIn && adminRoom) {
+                this.roomManager.startCountdown(adminRoom, json.StartCountdown.time);
+            }
+        } else if (json === "StopCountdown" || json.StopCountdown) {
+            let adminRoom = this.roomManager.getRoomByUserAdmin(client);
+            if (client.loggedIn && adminRoom) {
+                this.roomManager.resetCountdown(adminRoom);
+                this.sendRoomStatus(adminRoom);
             }
         } else if (json.CreateQuestionList) {
             if (!client.loggedIn) {

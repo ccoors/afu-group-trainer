@@ -1,59 +1,60 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {Segment} from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
-import {questionTitle, stringToJSX} from '../../util/util';
+import { questionTitle, stringToJSX } from '../../util/util';
 import AnswerOption from './AnswerOption';
 import OutdatedQuestionLabel from './OutdatedQuestionLabel';
 
 class QuestionRORenderer extends React.Component {
-    renderSegment(nr) {
-        const letter = ['A', 'B', 'C', 'D'][nr];
-        const answer = this.props.question.answers[nr];
-        const selected = nr === this.props.selectedAnswer;
-        const correct = this.props.correctAnswer === nr;
-        const wrong = selected && !(this.props.correctAnswer === -1) && !correct;
+  renderSegment(nr) {
+    const letter = ['A', 'B', 'C', 'D'][nr];
+    const answer = this.props.question.answers[nr];
+    const selected = nr === this.props.selectedAnswer;
+    const correct = this.props.correctAnswer === nr;
+    const wrong = selected && !(this.props.correctAnswer === -1) && !correct;
 
-        let attributes = {};
-        let letterStyle = {};
+    let attributes = {};
+    let letterStyle = {};
 
-        const color = correct ? 'green' : wrong ? 'red' : '';
-        if (color) {
-            attributes.color = color;
-            attributes.inverted = true;
-            letterStyle.color = 'white';
-        }
-
-        return <AnswerOption key={'answer' + nr} letter={letter} text={answer} attributes={attributes}
-                             letterStyle={letterStyle}/>;
+    const color = correct ? 'green' : wrong ? 'red' : '';
+    if (color) {
+      attributes.color = color;
+      attributes.inverted = true;
+      letterStyle.color = 'white';
     }
 
-    render() {
-        const segments = [...Array(4).keys()].map(n => this.renderSegment(n));
+    return <AnswerOption key={'answer' + nr} letter={letter} text={answer} attributes={attributes}
+                         letterStyle={letterStyle} />;
+  }
 
-        return <Segment.Group>
-            <Segment>
-                {this.props.question.outdated &&
-                <OutdatedQuestionLabel/>}
-                <strong>{questionTitle(this.props.question)}:</strong>&nbsp;
-                {stringToJSX(this.props.question.question)}
-            </Segment>
-            {segments}
-        </Segment.Group>;
-    }
+  render() {
+    const segments = [...Array(4)
+      .keys()].map(n => this.renderSegment(n));
+
+    return <Segment.Group>
+      <Segment>
+        {this.props.question.outdated &&
+        <OutdatedQuestionLabel />}
+        <strong>{questionTitle(this.props.question)}:</strong>&nbsp;
+        {stringToJSX(this.props.question.question)}
+      </Segment>
+      {segments}
+    </Segment.Group>;
+  }
 }
 
 QuestionRORenderer.propTypes = {
-    question: PropTypes.object.isRequired,
-    correctAnswer: PropTypes.number.isRequired,
-    selectedAnswer: PropTypes.number,
-    compact: PropTypes.bool,
+  question: PropTypes.object.isRequired,
+  correctAnswer: PropTypes.number.isRequired,
+  selectedAnswer: PropTypes.number,
+  compact: PropTypes.bool,
 };
 
 QuestionRORenderer.defaultProps = {
-    compact: false,
-    selectedAnswer: -1,
+  compact: false,
+  selectedAnswer: -1,
 };
 
 export default QuestionRORenderer;

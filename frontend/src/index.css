@@ -32,6 +32,10 @@ footer {
     float: right;
 }
 
+#onlineStatus .label {
+    margin-left: 0.5rem;
+}
+
 .fillContent {
     flex-grow: 1;
     min-height: 5em;

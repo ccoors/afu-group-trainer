@@ -52,12 +52,40 @@ RoomManager.prototype.addRoom = function (roomName, user, password) {
         correctAnswer: -1,
         results: [],
         previousQuestions: [],
+        countdown: 0,
+        countdownInterval: null,
     };
 
     this.rooms.push(newRoom);
     this.callback();
 
     return newRoom;
+};
+
+RoomManager.prototype.resetCountdown = function(room) {
+    if (room.countdownInterval) {
+        clearInterval(room.countdownInterval);
+        room.countdownInterval = null;
+    }
+    room.countdown = 0;
+};
+
+RoomManager.prototype.startCountdown = function (room, countdown) {
+    if (room.state !== ROOM_STATE.QUESTION) {
+        return;
+    }
+    this.resetCountdown(room);
+
+    room.countdown = countdown;
+    room.countdownInterval = setInterval(() => {
+        room.countdown--;
+        this.roomCallback(room);
+        if (room.countdown === 0) {
+            clearInterval(room.countdownInterval);
+            this.showResults(room);
+        }
+    }, 1000);
+    this.roomCallback(room);
 };
 
 RoomManager.prototype.startQuestions = function (room, questions) {
@@ -74,6 +102,7 @@ RoomManager.prototype.startQuestions = function (room, questions) {
 };
 
 RoomManager.prototype.showResults = function (room) {
+    this.resetCountdown(room);
     if (room.state !== ROOM_STATE.QUESTION) {
         return;
     }
@@ -88,6 +117,7 @@ RoomManager.prototype.showResults = function (room) {
 };
 
 RoomManager.prototype.nextQuestion = function (room) {
+    this.resetCountdown(room);
     room.state = ROOM_STATE.QUESTION;
     room.members.forEach(function (m) {
         m.selectedAnswer = -1;
@@ -111,6 +141,7 @@ RoomManager.prototype.nextQuestion = function (room) {
 };
 
 RoomManager.prototype.endQuestions = function (room) {
+    this.resetCountdown(room);
     room.state = ROOM_STATE.IDLE;
     room.queue = [];
     room.currentQuestion = null;

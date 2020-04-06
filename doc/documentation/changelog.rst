@@ -4,6 +4,11 @@ Changelog
 Public versions
 ===============
 
+0.5.2 (2020-04-06)
+------------------
+- Fix various questions
+- Add countdown feature
+
 0.5.1 (2019-10-06)
 ------------------
 - Increase width of a few views for room masters

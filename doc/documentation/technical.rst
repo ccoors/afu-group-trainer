@@ -8,7 +8,7 @@ Die Software ist absichtlich sehr datensparsam designt: Alle Teilnehmer sind nic
 
 Performance
 ===========
-Ein erster Lasttest unter Laborbedingungen verlief positiv. Realistisch können auf durchschnittlichen Systemen einige 100 Teilnehmer das System parallel benutzen, ohne dass es zu besonders störenden Performanceproblemen kommt. Die Ergebnisse sind erwartungskonform da über den WebSocket bis auf ein Mal die Fragendatenbank für den Dozenten nur sehr kleine Nachrichten verschickt werden und das Backend keine besonders rechenintensiven Aufgaben durchführt. 
+Ein erster Lasttest unter Laborbedingungen verlief positiv. Realistisch können auf durchschnittlichen Systemen einige 100 Teilnehmer das System parallel benutzen, ohne dass es zu besonders störenden Performanceproblemen kommt. Die Ergebnisse sind erwartungskonform da über den WebSocket bis auf ein Mal die Fragendatenbank für den Dozenten nur sehr kleine Nachrichten verschickt werden und das Backend keine besonders rechenintensiven Aufgaben durchführt.
 
 API Dokumentation
 =================
@@ -28,24 +28,24 @@ Vom Server
             users: Int
             password_required: Bool
         }>[?]
-    
+
     LoginResult:
         Bool
-    
+
     JoinRoomResult:
         Bool
-    
+
     CreateRoomResult:
         success: Bool
         uuid: String
-    
+
     CreateQuestionListResult:
         success: Bool
         uuid: String
-    
+
     UpdateQuestionListResult:
         success: Bool
-        
+
     QuestionDatabase:
         Category {
             uuid: String
@@ -61,7 +61,7 @@ Vom Server
                 answers: Array<String>[4]
             }>[?]
         }
-        
+
     PublicQuestionLists:
         Array<QuestionList {
             uuid: String,
@@ -70,10 +70,10 @@ Vom Server
             is_public: Bool,
             questions: Array<String>[?]
         }>[?]
-    
+
     UserQuestionLists:
         Array<QuestionList>[?]
-    
+
     RoomState:
         state: Int (0: Waiting | 1: Question | 2: Results)
         remainingQuestions: Int
@@ -88,6 +88,7 @@ Vom Server
         previousQuestions: Array<Question + {
             correctAnswer: Int (0 - 3)
         }>[?]
+        countdown: Int | null
         userState: {
             selected: Int
             total: Int
@@ -97,13 +98,13 @@ Vom Server
             correctAnswer: Int
             selected: Array<Int>[4]
         }
-    
+
     LeaveRoom:
         /
-        
+
     Error:
         message: String
-    
+
     KeepAlive:
         next: Int
 
@@ -115,46 +116,52 @@ Vom Client
     Login:
         username: String
         password: String
-    
+
     CreateRoom:
         room_name: String
         password: String
-    
+
     CreateQuestionList:
         list_name: String
-    
+
     UpdateQuestionList:
         list_uuid: String
         list_name: String
         is_public: Bool
         questions: Array<String>[?] (UUIDs)
-    
+
     DeleteQuestionList:
         list_uuid: String
-    
+
     StartQuestions:
         mode: String (plain | uuid)
      => Only when starting with UUID:
         start_uuid: String
         shuffle: Bool (only respected when starting multiple questions)
         ignore_outdated: Bool (only respected when starting multiple questions)
-    
+
     ShowResults:
         /
-    
+
     NextQuestion:
         /
-    
+
     EndQuestions:
+        /
+
+    StartCountdown:
+        time: Int
+
+    StopCountdown:
         /
 
     JoinRoom:
         room_uuid: String
         password: String
-    
+
     AnswerQuestion:
         id: Int
-    
+
     LeaveRoom:
         /
 
