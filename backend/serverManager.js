@@ -8,6 +8,8 @@ const rm = require("./roomManager");
 const qlm = require("./questionListManager");
 const util = require("./util");
 
+const Influx = require('influx');
+
 function noop() {
 }
 
@@ -17,6 +19,13 @@ function heartbeat() {
 
 let ServerManager = function (config) {
     this.users = config.users;
+    this.influx_config = Object.assign({}, {
+        enabled: false,
+        field_prefix: "agt_",
+        interval: 60
+    }, config.influx);
+    this.influx = null;
+
     if (!Array.isArray(this.users) || this.users.length === 0) {
         throw "No users configured!";
     }
@@ -83,6 +92,47 @@ let ServerManager = function (config) {
     this.questionListManager.sync();
 
     config.questions.forEach(file => this.loadQuestions(file));
+
+    if (this.influx_config.enabled) {
+      this.influx = new Influx.InfluxDB(Object.assign({}, this.influx_config.config, {
+        schema: [
+          {
+            measurement: this.influx_config.field_prefix + 'stats',
+            fields: {
+              room_count: Influx.FieldType.INTEGER,
+              user_count: Influx.FieldType.INTEGER,
+            },
+            tags: []
+          }
+        ]
+      }));
+
+      this.influx.getDatabaseNames()
+        .then(names => {
+          if (!names.includes(this.influx_config.config.database)) {
+            return this.influx.createDatabase(this.influx_config.config.database);
+          }
+        })
+        .catch(error => console.log({ error }));
+
+      setInterval(() => {
+        this.influx.writePoints([
+          {
+            measurement: this.influx_config.field_prefix + 'stats',
+            fields: {
+              room_count: this.roomManager.getRoomCount(),
+              user_count: this.wss.clients.size,
+            },
+          }
+        ], {
+          database: this.influx_config.config.database,
+          precision: 's',
+        })
+          .catch(error => {
+            console.error(`Error saving data to InfluxDB! ${error.stack}`)
+          });
+      }, this.influx_config.interval)
+    }
 };
 
 ServerManager.prototype.broadcast = function (data, requireLogin) {

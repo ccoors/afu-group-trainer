@@ -1,4 +1,4 @@
-const uuidv4 = require("uuid/v4");
+const { v4: uuidv4 } = require('uuid');
 const util = require("./util");
 
 const ROOM_STATE = Object.freeze({
@@ -177,6 +177,10 @@ RoomManager.prototype.getRoomList = function () {
             password_required: r.password !== "",
         }
     })
+};
+
+RoomManager.prototype.getRoomCount = function () {
+    return this.rooms.length;
 };
 
 RoomManager.prototype.cleanUpRooms = function () {

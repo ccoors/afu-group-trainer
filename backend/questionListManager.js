@@ -1,5 +1,5 @@
 const fs = require("fs");
-const uuidv4 = require("uuid/v4");
+const { v4: uuidv4 } = require('uuid');
 
 let QuestionListManager = function (database, callback, userCallback) {
     this.callback = callback;

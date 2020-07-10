@@ -17,5 +17,17 @@ config.debug = false;
 config.questions = [
     "assets/Fragenkatalog.json"
 ];
+config.influx = {
+    enabled: false,
+    field_prefix: 'agt_',
+    interval: 30,
+    config: {
+        host: 'localhost',
+        port: 8086,
+        database: 'default',
+        username: '',
+        password: '',
+    }
+}
 
 module.exports = config;

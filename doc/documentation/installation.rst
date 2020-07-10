@@ -16,8 +16,17 @@ Im Ordner ``backend`` muss die ``config.js``-Datei angepasst werden. Hier könne
 - ``config.pingTest``: Der Intervall in Millisekunden, in denen über den WebSocket ein Ping-Paket geschickt wird. Wird verwendet, um kaputte Verbindungen zuverlässig zu trennen. Empfohlen wird ein Wert von 20 Sekunden (20000), maximal sollten 60 Sekunden (60000) eingetragen werden. Ein zu kleiner Wert führt zu Problemen! Hier sollten als absolute Untergrenze 10 Sekunden (10000) eingetragen werden.
 - ``config.debug``: Aktiviert Debugausgaben. Im Produktivsystem i.d.R. nicht erforderlich.
 - ``config.questions``: Die Fragenkataloge, die geladen werden sollen. I.d.R. ist eine Anpassung nicht erforderlich.
+- ``config.influx``: Die Konfiguration für eine InfluxDB, siehe nächster Abschnitt.
 
 Anschließend im Ordner ``backend`` ``npm install`` ausführen, was die notwendigen Dependencies installiert. Das Backend kann dann mit ``npm run backend`` gestartet werden. Es sollte auf dem Server als Dienst eingerichtet werden.
+
+InfluxDB
+--------
+Der AGT kann optional Daten in eine InfluxDB speichern, um ein (einfaches) Monitoring (z.B. mit Grafana) durchzuführen. Dazu dient ``config.influx``. Die Werte sind im Grunde selbsterklärend. Wenn die Datenbank nicht existiert, wird sie angelegt.
+
+In der InfluxDB werden aktuell nur die Anzahl der Benutzer und die Anzahl der Räume gespeichert. Dabei handelt es sich nicht um personenbezogene Daten.
+
+Es wird empfohlen, eine sinnvolle retention policy in der InfluxDB zu setzen.
 
 Frontend
 ========
