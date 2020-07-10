@@ -20,7 +20,7 @@ config.questions = [
 config.influx = {
     enabled: false,
     field_prefix: 'agt_',
-    interval: 30,
+    interval: 60000,
     config: {
         host: 'localhost',
         port: 8086,
