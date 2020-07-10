@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'AFU Group Trainer'
-copyright = '2019, Christian Friedrich Coors (DL5LQ)'
+copyright = '2019-2020, Christian Friedrich Coors (DL5LQ)'
 author = 'Christian Friedrich Coors (DL5LQ)'
 
 # The full version, including alpha/beta/rc tags
-release = '0.5.2'
+release = '0.5.3'
 
 
 # -- General configuration ---------------------------------------------------

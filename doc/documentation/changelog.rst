@@ -4,6 +4,11 @@ Changelog
 Public versions
 ===============
 
+0.5.3 (2020-07-10)
+------------------
+- Add InfluxDB support
+- Update dependencies
+
 0.5.2 (2020-04-06)
 ------------------
 - Fix various questions
