@@ -28,6 +28,6 @@ config.influx = {
         username: '',
         password: '',
     }
-}
+};
 
 module.exports = config;
