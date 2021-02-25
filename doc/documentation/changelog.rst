@@ -4,6 +4,11 @@ Changelog
 Public versions
 ===============
 
+0.5.4 (2021-02-25)
+------------------
+- Add ability to restrict catalog selection when editing question lists
+- Update dependencies
+
 0.5.3 (2020-07-10)
 ------------------
 - Add InfluxDB support

@@ -126,7 +126,7 @@ class ListEditor extends React.Component {
         }} />
 
         <div style={{ height: '1em' }} />
-        <p>Frage hinzufügen:</p>
+        <Header as="h2" content="Frage hinzufügen" />
         <QuestionSearch questionDatabase={this.props.questionDatabase} onSelect={(uuid) => {
           this.handleQuestionAppend(uuid);
         }} />

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Search } from 'semantic-ui-react';
+import { Button, Search } from 'semantic-ui-react';
 import { findQuestions, questionTitle } from '../../util/util';
 
 const resultRenderer = (e) => {
@@ -26,16 +26,28 @@ class QuestionSearch extends React.Component {
 
     this.state = {
       results: [],
-      value: ''
+      value: '',
+      selectedCatalog: null,
+      selectedCatalogName: '',
     };
+
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.triggerSearch = this.triggerSearch.bind(this);
   }
 
   handleSearchChange(e, data) {
     const searchTerm = data.value.toLowerCase();
+    this.triggerSearch(searchTerm);
+  }
+
+  triggerSearch(searchTerm = null) {
+    if (searchTerm === null) {
+      searchTerm = this.state.value;
+    }
     let matches = [];
 
     if (searchTerm.length > 1) {
-      matches = findQuestions(this.props.questionDatabase, searchTerm);
+      matches = findQuestions(this.state.selectedCatalog || this.props.questionDatabase, searchTerm);
       matches = matches.map(m => {
         return {
           title: m.uuid,
@@ -53,21 +65,45 @@ class QuestionSearch extends React.Component {
 
   render() {
     return (
-      <Search
-        fluid
-        loading={false}
-        onResultSelect={(e, { result }) => {
-          this.setState({
-            results: [],
-            value: ''
-          });
-          this.props.onSelect(result.uuid);
-        }}
-        onSearchChange={this.handleSearchChange.bind(this)}
-        results={this.state.results}
-        value={this.state.value}
-        resultRenderer={resultRenderer}
-      />
+      <React.Fragment>
+        <p>Beschränken auf Katalog:</p>
+        <Button.Group>
+          <Button toggle active={this.state.selectedCatalog === null}
+                  onClick={() => this.setState({
+            selectedCatalog: null,
+            selectedCatalogName: ''
+          }, () => {
+            this.triggerSearch();
+          })}>Alle</Button>
+          {this.props.questionDatabase.children.map(c => (
+            <Button toggle active={this.state.selectedCatalogName === c.shortname}
+                    onClick={() => {
+              this.setState({
+                selectedCatalog: c,
+                selectedCatalogName: c.shortname
+              }, () => {
+                this.triggerSearch();
+              });
+            }}>{c.shortname}</Button>
+          ))}
+        </Button.Group>
+        <div style={{ height: '5px' }} />
+        <Search
+          fluid
+          loading={false}
+          onResultSelect={(e, { result }) => {
+            this.setState({
+              results: [],
+              value: ''
+            });
+            this.props.onSelect(result.uuid);
+          }}
+          onSearchChange={this.handleSearchChange}
+          results={this.state.results}
+          value={this.state.value}
+          resultRenderer={resultRenderer}
+        />
+      </React.Fragment>
     );
   }
 }
